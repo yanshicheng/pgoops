@@ -1,0 +1,15 @@
+---
+- name: this is a  hello world example
+  hosts: all
+  tasks:
+    - name: print hello world
+      debug:
+        msg: helllo {{ inventory_hostname }}
+
+    - name: add to txt
+      shell: echo "111" > helloworld-txt.txt
+
+    - name: echo
+      shell: env
+      tags:
+        - test

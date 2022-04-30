@@ -1,0 +1,12 @@
+[WARNING]: Unable to parse
+/Users/devops/data/project/python/pgoops/upload/iac/test/project/127.0.0.1 as
+an inventory source
+[WARNING]: No inventory was parsed, only implicit localhost is available
+[WARNING]: provided hosts list is empty, only localhost is available. Note that
+the implicit localhost does not match 'all'
+
+PLAY [this is a  hello world example] ******************************************
+skipping: no hosts matched
+
+PLAY RECAP *********************************************************************
+

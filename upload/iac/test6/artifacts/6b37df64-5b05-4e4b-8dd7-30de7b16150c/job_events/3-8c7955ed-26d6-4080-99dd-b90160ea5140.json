@@ -1,0 +1,1 @@
+{"event": "verbose", "uuid": "8c7955ed-26d6-4080-99dd-b90160ea5140", "counter": 3, "stdout": "yaml plugin: YAML inventory has invalid structure, it should be a dictionary,", "start_line": 2, "end_line": 3, "runner_ident": "6b37df64-5b05-4e4b-8dd7-30de7b16150c", "created": "2022-04-21T17:38:19.077267"}

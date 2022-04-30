@@ -1,0 +1,1 @@
+{"event": "verbose", "uuid": "6f9d4580-9db8-42c4-adbe-e05951bf7e54", "counter": 106, "stdout": "                        specify extra arguments to pass to ssh only (e.g. -R)", "start_line": 105, "end_line": 106, "runner_ident": "4f572546-77fd-4e98-a9ed-c1d3f263c6df", "created": "2022-04-21T17:59:17.503268"}

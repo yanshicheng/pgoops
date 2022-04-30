@@ -1,0 +1,1 @@
+{"event": "verbose", "uuid": "00dc3e81-5eea-4c40-aa70-3047185fe33b", "counter": 126, "stdout": "ERROR! Invalid extra vars data supplied. '@/Users/devops/data/project/python/pgoops/upload/iac/test6/env/extravars' could not be made into a dictionary", "start_line": 125, "end_line": 126, "runner_ident": "1be30f21-d97b-4fb7-b5b5-a5687f1c4fc7", "created": "2022-04-21T17:31:16.435018"}

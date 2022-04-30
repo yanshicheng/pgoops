@@ -1,0 +1,32 @@
+[Unit]
+Description=PgoOps Celery Beat Service.
+After=network.target
+
+[Service]
+Type=forking
+User=pgoops
+Group=pgoops
+Restart=always
+EnvironmentFile=/data/ops/pgoops/config/pgoops_celery_env
+WorkingDirectory=/data/ops/pgoops/
+
+ExecStart=/bin/sh -c '${PYTHON_BIN} ${CELERY_BIN} multi start beat \
+   -A ${CELERY_APP} \
+  --pidfile=${CELERY_BEAT_PID_FILE} \
+  --logfile=${CELERY_BEAT_LOG_FILE} \
+  --loglevel=${CELERY_BEAT_LOG_LEVEL} \
+   --scheduler=django_celery_beat.schedulers:DatabaseScheduler'
+
+ExecStop=/bin/sh -c '${PYTHON_BIN} ${CELERY_BIN} multi stopwait beat \
+  --pidfile=${CELERY_BEAT_PID_FILE}'
+
+ExecReload=/bin/sh -c '${CELERY_BIN} multi restart ${CELERYD_NODES} \
+  -A ${CELERY_APP} \
+  --pidfile=${CELERY_BEAT_PID_FILE} \
+  --logfile=${CELERY_BEAT_LOG_FILE} \
+  --loglevel=${CELERY_BEAT_LOG_LEVEL} \
+  --scheduler=django_celery_beat.schedulers:DatabaseScheduler'
+
+[Install]
+WantedBy=multi-user.target
+

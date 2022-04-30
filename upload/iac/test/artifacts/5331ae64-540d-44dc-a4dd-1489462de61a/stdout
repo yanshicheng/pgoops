@@ -1,0 +1,20 @@
+
+PLAY [this is a  hello world example] ******************************************
+
+TASK [Gathering Facts] *********************************************************
+[0;32mok: [localhost][0m
+
+TASK [print hello world] *******************************************************
+[0;32mok: [localhost] => {[0m
+[0;32m    "msg": "helllo localhost"[0m
+[0;32m}[0m
+
+TASK [add to txt] **************************************************************
+[0;33mchanged: [localhost][0m
+
+TASK [echo] ********************************************************************
+[0;33mchanged: [localhost][0m
+
+PLAY RECAP *********************************************************************
+[0;33mlocalhost[0m                  : [0;32mok=4   [0m [0;33mchanged=2   [0m unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

@@ -1,0 +1,12 @@
+[1;35m[WARNING]: Unable to parse[0m
+[1;35m/Users/devops/data/project/python/pgoops/upload/iac/hell1/project/localhost as[0m
+[1;35man inventory source[0m
+[1;35m[WARNING]: No inventory was parsed, only implicit localhost is available[0m
+[1;35m[WARNING]: provided hosts list is empty, only localhost is available. Note that[0m
+[1;35mthe implicit localhost does not match 'all'[0m
+
+PLAY [this is a  hello world example] ******************************************
+[0;36mskipping: no hosts matched[0m
+
+PLAY RECAP *********************************************************************
+

@@ -1,0 +1,1 @@
+{"event": "verbose", "uuid": "10c04599-1688-4f31-b4ff-61de1654b030", "counter": 31, "stdout": "usage: ansible-playbook [-h] [--version] [-v] [--private-key PRIVATE_KEY_FILE]", "start_line": 30, "end_line": 31, "runner_ident": "d5fc0b8f-0c6e-4ea4-9de3-19ef8d70da54", "created": "2022-04-21T17:36:11.610012"}

@@ -1,0 +1,1 @@
+{"event": "verbose", "uuid": "5422a2e9-36af-4000-8ca7-9e6c3805a6ec", "counter": 5, "stdout": "\u001b[1;35mcould not be made into a dictionary\u001b[0m", "start_line": 4, "end_line": 5, "runner_ident": "f479754a-f324-4e35-9edb-13d537ceef7d", "created": "2022-04-21T17:25:44.531505"}

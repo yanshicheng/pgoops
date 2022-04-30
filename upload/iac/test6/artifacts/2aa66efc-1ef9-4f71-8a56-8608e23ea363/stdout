@@ -1,0 +1,22 @@
+
+PLAY [this is a  hello world example] ******************************************
+
+TASK [Gathering Facts] *********************************************************
+[0;32mok: [127.0.0.1][0m
+[1;31mfatal: [192.168.1.1]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ssh: connect to host 192.168.1.1 port 22: Operation timed out", "unreachable": true}[0m
+
+TASK [print hello world] *******************************************************
+[0;32mok: [127.0.0.1] => {[0m
+[0;32m    "msg": "helllo 127.0.0.1"[0m
+[0;32m}[0m
+
+TASK [add to txt] **************************************************************
+[0;33mchanged: [127.0.0.1][0m
+
+TASK [echo] ********************************************************************
+[0;33mchanged: [127.0.0.1][0m
+
+PLAY RECAP *********************************************************************
+[0;33m127.0.0.1[0m                  : [0;32mok=4   [0m [0;33mchanged=2   [0m unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+[0;31m192.168.1.1[0m                : ok=0    changed=0    [1;31munreachable=1   [0m failed=0    skipped=0    rescued=0    ignored=0   
+

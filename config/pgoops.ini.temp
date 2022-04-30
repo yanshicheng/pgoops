@@ -1,0 +1,52 @@
+[DEFAULT]
+mode = dev
+debug = false
+
+[pgoops]
+allowed_hosts = ['*']
+static_url = static/
+jwt_expiration_delta = 3600
+media_root = upload/
+iac_work_dir = iac
+
+
+[db.mysql.prod]
+host = 127.0.0.1
+port = 3306
+name = pgoops
+user = pgoops
+password = 123456
+options = {"charset": "utf8mb4"}
+
+[db.mysql.dev]
+host = 127.0.0.1
+port = 3306
+name = pgoops
+user = pgoops
+password = 123456
+options = {"charset": "utf8mb4"}
+
+[db.redis.prod]
+host = 127.0.0.1
+port = 6379
+password = 123456
+
+[db.redis.dev]
+host = 127.0.0.1
+port = 6379
+password = 123456
+
+[alert.provider.dingtok]
+webhook = https://oapi.dingtalk.com/robot/send?access_token=7cb703263bf4d1403dXXXXXXXXXX898d8ada713c87d85a8c0
+secret = SECbe53060bed5581c0db6b7f31304934XXXXXXXXX8fdce6ace1d8678
+
+[alert.provider.wechat]
+webhook = https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=6d446448-XXXXXXXdf38f21533c1
+
+[alert.provider.email]
+host = smtp.163.com
+port = 465
+msg_from = pgoops@163.com
+secret = WMEXXXXXXXVLPB
+title = pgoops
+domain_name = www.pgoops.com

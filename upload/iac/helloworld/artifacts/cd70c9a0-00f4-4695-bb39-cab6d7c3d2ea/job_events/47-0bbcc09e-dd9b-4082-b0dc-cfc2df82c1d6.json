@@ -1,0 +1,1 @@
+{"event": "verbose", "uuid": "0bbcc09e-dd9b-4082-b0dc-cfc2df82c1d6", "counter": 47, "stdout": "  --list-hosts          outputs a list of matching hosts; does not execute", "start_line": 46, "end_line": 47, "runner_ident": "cd70c9a0-00f4-4695-bb39-cab6d7c3d2ea", "created": "2022-04-21T17:59:07.446792"}

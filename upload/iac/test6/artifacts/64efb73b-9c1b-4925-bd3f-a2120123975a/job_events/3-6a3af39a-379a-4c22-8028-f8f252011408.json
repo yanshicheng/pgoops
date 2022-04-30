@@ -1,0 +1,1 @@
+{"event": "verbose", "uuid": "6a3af39a-379a-4c22-8028-f8f252011408", "counter": 3, "stdout": "yaml plugin: Invalid extra vars data supplied.", "start_line": 2, "end_line": 3, "runner_ident": "64efb73b-9c1b-4925-bd3f-a2120123975a", "created": "2022-04-21T17:36:35.185274"}

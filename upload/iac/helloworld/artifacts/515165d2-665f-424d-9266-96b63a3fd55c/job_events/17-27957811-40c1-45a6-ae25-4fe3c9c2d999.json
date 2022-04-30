@@ -1,0 +1,1 @@
+{"event": "verbose", "uuid": "27957811-40c1-45a6-ae25-4fe3c9c2d999", "counter": 17, "stdout": "                        [-l SUBSET] [-e EXTRA_VARS] [--vault-id VAULT_IDS]", "start_line": 16, "end_line": 17, "runner_ident": "515165d2-665f-424d-9266-96b63a3fd55c", "created": "2022-04-21T16:01:16.398786"}

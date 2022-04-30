@@ -1,0 +1,1 @@
+{"event": "verbose", "uuid": "6b0a77ce-9ba6-4d35-a3e5-18b6d332db30", "counter": 14, "stdout": "\u001b[1;35mis not a valid YAML inventory plugin config file\u001b[0m", "start_line": 13, "end_line": 14, "runner_ident": "50caa126-7c4d-474b-9711-0a353c8b242c", "created": "2022-04-21T15:33:10.762236"}

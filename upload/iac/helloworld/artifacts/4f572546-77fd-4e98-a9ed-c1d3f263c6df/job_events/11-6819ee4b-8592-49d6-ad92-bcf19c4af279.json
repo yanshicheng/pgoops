@@ -1,0 +1,1 @@
+{"event": "verbose", "uuid": "6819ee4b-8592-49d6-ad92-bcf19c4af279", "counter": 11, "stdout": "\u001b[1;35m[WARNING]: Unable to parse /Users/devops/data/project/python/pgoops/upload/iac/\u001b[0m", "start_line": 10, "end_line": 11, "runner_ident": "4f572546-77fd-4e98-a9ed-c1d3f263c6df", "created": "2022-04-21T17:59:17.323945"}

@@ -1,0 +1,17 @@
+[Unit]
+Description=PgoOps HTTP Interface Server
+After=syslog.target
+
+[Service]
+Type=notify
+User=pgoops
+Group=pgoops
+Restart=always
+WorkingDirectory=/data/ops/pgoops/
+ExecStart=/bin/sh -c '.venv/bin/gunicorn pgoops.asgi:application -k uvicorn.workers.UvicornWorker -c config/pgoops.py'
+KillSignal=SIGQUIT
+StandardError=syslog
+NotifyAccess=all
+
+[Install]
+WantedBy=multi-user.target

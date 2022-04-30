@@ -1,0 +1,31 @@
+[WARNING]: A duplicate localhost-like entry was found (127.0.0.1). First found
+localhost was localhost
+
+PLAY [this is a  hello world example] ******************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [localhost]
+ok: [127.0.0.1]
+fatal: [192.168.1.1]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ssh: connect to host 192.168.1.1 port 22: Operation timed out", "unreachable": true}
+
+TASK [print hello world] *******************************************************
+ok: [localhost] => {
+    "msg": "helllo localhost"
+}
+ok: [127.0.0.1] => {
+    "msg": "helllo 127.0.0.1"
+}
+
+TASK [add to txt] **************************************************************
+changed: [localhost]
+changed: [127.0.0.1]
+
+TASK [echo] ********************************************************************
+changed: [localhost]
+changed: [127.0.0.1]
+
+PLAY RECAP *********************************************************************
+127.0.0.1                  : ok=4    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+192.168.1.1                : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+localhost                  : ok=4    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
