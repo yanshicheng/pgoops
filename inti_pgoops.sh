@@ -58,26 +58,26 @@ editFile() {
         echo "edit file error file_path: ${BASE_DIR}/config/pgoops.py"
         errorMsg "3. edit the file"
     fi
-    sed -i "s@^EnvironmentFile=.*@EnvironmentFile=${BASE_DIR}/config/pgoops_celery_env@g" ${BASE_DIR}/script/services/celery-beta.service
-    sed -i "s@^Environment=.*@Environment=\"PATH=${BASE_DIR}/.venv/bin/:\$PATH\"@g" ${BASE_DIR}/script/services/celery-beta.service
+    sed -i "s@^EnvironmentFile=.*@EnvironmentFile=${BASE_DIR}/config/pgoops_celery_env@g" ${BASE_DIR}/script/services/pgoops-celery-beta.service
+    sed -i "s@^Environment=.*@Environment=\"PATH=${BASE_DIR}/.venv/bin/:\$PATH\"@g" ${BASE_DIR}/script/services/pgoops-celery-beta.service
     if [ $? -ne 0 ] ;then
-        echo "edit file error file_path: ${BASE_DIR}/script/services/celery-beta.service 1"
+        echo "edit file error file_path: ${BASE_DIR}/script/services/pgoops-celery-beta.service 1"
         errorMsg "3. edit the file"
     fi
-    sed -i "s@^WorkingDirectory=.*@WorkingDirectory=${BASE_DIR}@g" ${BASE_DIR}/script/services/celery-beta.service
+    sed -i "s@^WorkingDirectory=.*@WorkingDirectory=${BASE_DIR}@g" ${BASE_DIR}/script/services/pgoops-celery-beta.service
     if [ $? -ne 0 ] ;then
-        echo "edit file error file_path: ${BASE_DIR}/script/services/celery-beta.service 2"
+        echo "edit file error file_path: ${BASE_DIR}/script/services/pgoops-celery-beta.service 2"
         errorMsg "3. edit the file"
     fi
-    sed -i "s@^EnvironmentFile=.*@EnvironmentFile=${BASE_DIR}/config/pgoops_celery_env@g" ${BASE_DIR}/script/services/celery-server.service
-    sed -i "s@^Environment=.*@Environment=\"PATH=${BASE_DIR}/.venv/bin/:\$PATH\"@g" ${BASE_DIR}/script/services/celery-server.service
+    sed -i "s@^EnvironmentFile=.*@EnvironmentFile=${BASE_DIR}/config/pgoops_celery_env@g" ${BASE_DIR}/script/services/pgoops-celery-server.service
+    sed -i "s@^Environment=.*@Environment=\"PATH=${BASE_DIR}/.venv/bin/:\$PATH\"@g" ${BASE_DIR}/script/services/pgoops-celery-server.service
     if [ $? -ne 0 ] ;then
-        echo "edit file error file_path: ${BASE_DIR}/script/services/celery-server.service 1"
+        echo "edit file error file_path: ${BASE_DIR}/script/services/pgoops-celery-server.service 1"
         errorMsg "3. edit the file"
     fi
-    sed -i "s@^WorkingDirectory=.*@WorkingDirectory=${BASE_DIR}@g" ${BASE_DIR}/script/services/celery-server.service
+    sed -i "s@^WorkingDirectory=.*@WorkingDirectory=${BASE_DIR}@g" ${BASE_DIR}/script/services/pgoops-celery-server.service
     if [ $? -ne 0 ] ;then
-        echo "edit file error file_path: ${BASE_DIR}/script/services/celery-server.service 2"
+        echo "edit file error file_path: ${BASE_DIR}/script/services/pgoops-celery-server.service 2"
         errorMsg "3. edit the file"
     fi
         sed -i "s@^WorkingDirectory=.*@WorkingDirectory=${BASE_DIR}@g" ${BASE_DIR}/script/services/pgoops-server.service
@@ -92,10 +92,10 @@ copyFile () {
     echo "4. cp service file"
     rm -rf /usr/lib/systemd/system/pgoops-server.service
     rm -rf /usr/lib/systemd/system/celery-beat.service
-    rm -rf /usr/lib/systemd/system/celery-server.service
+    rm -rf /usr/lib/systemd/system/pgoops-celery-server.service
     cp ${BASE_DIR}/script/services/pgoops-server.service /usr/lib/systemd/system/pgoops-server.service
-    cp ${BASE_DIR}/script/services/celery-server.service /usr/lib/systemd/system/celery-server.service
-    cp ${BASE_DIR}/script/services/celery-beta.service /usr/lib/systemd/system/celery-beat.service
+    cp ${BASE_DIR}/script/services/pgoops-celery-server.service /usr/lib/systemd/system/pgoops-celery-server.service
+    cp ${BASE_DIR}/script/services/pgoops-celery-beta.service /usr/lib/systemd/system/celery-beat.service
     successMsg "4. cp service file"
 }
 
@@ -128,20 +128,20 @@ startService() {
         errorMsg "7. start pgoops-server.service error"
     fi
     echo ">>>>>> pgoops-server 启动              [成功]"
-    systemctl restart celery-server.service
+    systemctl restart pgoops-celery-server.service
     if [ $? -ne 0 ] ;then
-        errorMsg "7. start celery-server.service error"
+        errorMsg "7. start pgoops-celery-server.service error"
     fi
-    echo ">>>>>> celery-server 启动              [成功]"
+    echo ">>>>>> pgoops-celery-server 启动              [成功]"
     systemctl restart celery-beat.service
     if [ $? -ne 0 ] ;then
-        errorMsg "7. start celery-beat.service error"
+        errorMsg "7. start pgoops-celery-beat.service error"
     fi
-    echo ">>>>>> celery-beat 启动              [成功]"
+    echo ">>>>>> pgoops-celery-beat 启动                [成功]"
     systemctl enable pgoops-server.service
-    systemctl enable celery-server.service
+    systemctl enable pgoops-celery-server.service
     systemctl enable celery-beat.service
-    echo ">>>>>> all service 开机自启           [成功]"
+    echo ">>>>>> pgoops all service 开机自启           [成功]"
     successMsg  "7. start & enable service"
 
 }

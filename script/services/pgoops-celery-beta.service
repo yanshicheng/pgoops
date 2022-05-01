@@ -1,0 +1,23 @@
+[Unit]
+Description=PgoOps Celery Beat Service.
+After=network.target
+
+[Service]
+Type=simple
+User=pgoops
+Group=pgoops
+Restart=always
+Environment="PATH=/data/ops/pgoops/.venv/bin/:$PATH"
+EnvironmentFile=/data/ops/pgoops/config/pgoops_celery_env
+WorkingDirectory=/data/ops/pgoops
+
+ExecStart=/bin/sh -c '${CELERY_BIN}  \
+   -A ${CELERY_APP}  beat \
+  --pidfile=${CELERY_BEAT_PID_FILE} \
+  --logfile=${CELERY_BEAT_LOG_FILE} \
+  --loglevel=${CELERY_BEAT_LOG_LEVEL} \
+   --scheduler=django_celery_beat.schedulers:DatabaseScheduler'
+
+
+[Install]
+WantedBy=multi-user.target
