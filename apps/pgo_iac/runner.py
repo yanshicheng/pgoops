@@ -198,7 +198,7 @@ class EventHandler(BaseEventHandler):
             start=datetime.fromisoformat(data['start']),
             end=datetime.fromisoformat(data['end']),
             duration=data['duration'],
-            changed=data['res'].get('changed') if data['res'].get('changed') else data['res']['msg'],
+            changed=data['res'].get('changed') if 'changed' in data['res'] else data['res']['_ansible_no_log'],
             detail=data['res']
         )
 

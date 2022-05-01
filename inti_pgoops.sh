@@ -59,7 +59,7 @@ editFile() {
         errorMsg "3. edit the file"
     fi
     sed -i "s@^EnvironmentFile=.*@EnvironmentFile=${BASE_DIR}/config/pgoops_celery_env@g" ${BASE_DIR}/script/services/celery-beta.service
-    sed -i "s@^Environment=.*@PATH=${BASE_DIR}/.venv/bin/:$PATH@g" ${BASE_DIR}/script/services/celery-beta.service
+    sed -i "s@^Environment=.*@Environment=\"PATH=${BASE_DIR}/.venv/bin/:\$PATH\"@g" /lib/systemd/system/celery-beta.service
     if [ $? -ne 0 ] ;then
         echo "edit file error file_path: ${BASE_DIR}/script/services/celery-beta.service 1"
         errorMsg "3. edit the file"
@@ -70,7 +70,7 @@ editFile() {
         errorMsg "3. edit the file"
     fi
     sed -i "s@^EnvironmentFile=.*@EnvironmentFile=${BASE_DIR}/config/pgoops_celery_env@g" ${BASE_DIR}/script/services/celery-server.service
-        sed -i "s@^Environment=.*@PATH=${BASE_DIR}/.venv/bin/:$PATH@g" ${BASE_DIR}/script/services/celery-server.service
+    sed -i "s@^Environment=.*@Environment=\"PATH=${BASE_DIR}/.venv/bin/:\$PATH\"@g" /lib/systemd/system/celery-server.service
     if [ $? -ne 0 ] ;then
         echo "edit file error file_path: ${BASE_DIR}/script/services/celery-server.service 1"
         errorMsg "3. edit the file"
