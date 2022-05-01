@@ -10,3 +10,6 @@ poetry.lock
 .idea
 __pycache__
 .venv
+upload/iac/*/artifacts/*
+logs/*/*.log
+logs/*.log
