@@ -187,6 +187,7 @@ class BaseEventHandler:
 class EventHandler(BaseEventHandler):
     def _save_event(self, data: dict, state: EventState):
         host = data.get('remote_addr', data['host'])
+
         TaskEvent.objects.create(
             task_record=self.Task,
             state=state,
@@ -197,7 +198,7 @@ class EventHandler(BaseEventHandler):
             start=datetime.fromisoformat(data['start']),
             end=datetime.fromisoformat(data['end']),
             duration=data['duration'],
-            changed=data['res']['changed'],
+            changed=data['res'].get('changed') if data['res'].get('changed') else data['res']['msg'],
             detail=data['res']
         )
 

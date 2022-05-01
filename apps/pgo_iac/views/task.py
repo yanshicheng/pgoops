@@ -30,7 +30,7 @@ class TaskModelViewSet(StandardModelViewSet):
         celery_task = rsync_task.delay(instance.id, 'socket')
         instance.celery_id = celery_task.id
         instance.save()
-        ws_url = f'ws://{get_addr(request)}:{request.META["SERVER_PORT"]}/ws/iac/task/{instance.id}/'
+        ws_url = f'ws://{request.META["HTTP_HOST"]}:{request.META["SERVER_PORT"]}/ws/iac/task/{instance.id}/'
         return api_ok_response({'ws_url': ws_url})
 
     def retrieve(self, request, *args, **kwargs):

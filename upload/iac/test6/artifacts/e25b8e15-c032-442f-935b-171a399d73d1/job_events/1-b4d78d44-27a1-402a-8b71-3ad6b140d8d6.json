@@ -1,1 +1,0 @@
-{"event": "verbose", "uuid": "b4d78d44-27a1-402a-8b71-3ad6b140d8d6", "counter": 1, "stdout": "\u001b[0;31mERROR! the playbook: upload/iac/test6/project/main.json could not be found\u001b[0m", "start_line": 0, "end_line": 1, "runner_ident": "e25b8e15-c032-442f-935b-171a399d73d1", "created": "2022-04-21T15:52:43.791265"}

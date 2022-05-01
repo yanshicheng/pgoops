@@ -1,1 +1,0 @@
-{"event": "verbose", "uuid": "3e34a330-4298-4fa8-93da-6a8292040bf1", "counter": 7, "stdout": "\u001b[1;35mac/helloworld/tmp_inventory/10\u79d2\u6267\u884c\u4e00\u6b21 with ini plugin: Invalid extra vars data\u001b[0m", "start_line": 6, "end_line": 7, "runner_ident": "cd70c9a0-00f4-4695-bb39-cab6d7c3d2ea", "created": "2022-04-21T17:59:07.385624"}

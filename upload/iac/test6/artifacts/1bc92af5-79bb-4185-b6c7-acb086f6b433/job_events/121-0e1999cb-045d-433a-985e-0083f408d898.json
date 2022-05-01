@@ -1,1 +1,0 @@
-{"event": "verbose", "uuid": "0e1999cb-045d-433a-985e-0083f408d898", "counter": 121, "stdout": "                        `ansible-doc -t become -l` to list valid choices.", "start_line": 120, "end_line": 121, "runner_ident": "1bc92af5-79bb-4185-b6c7-acb086f6b433", "created": "2022-04-21T17:30:21.983249"}

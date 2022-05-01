@@ -1,1 +1,0 @@
-{"event": "verbose", "uuid": "4cfd845d-4361-4ba7-b0f9-5347dc6769d0", "counter": 1, "stdout": "[WARNING]: log file at /var/log/ansible.log is not writeable and we cannot create it, aborting", "start_line": 0, "end_line": 1, "runner_ident": "c9acaa2f-8e68-4e16-bf47-873504e8395e", "created": "2022-04-09T12:56:26.879819"}

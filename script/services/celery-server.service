@@ -7,16 +7,17 @@ Type=forking
 User=pgoops
 Group=pgoops
 Restart=always
+Environment="PATH=/data/ops/pgoops/.venv/bin/:$PATH"
 EnvironmentFile=/data/ops/pgoops/config/pgoops_celery_env
 WorkingDirectory=/data/ops/pgoops/
 
-ExecStart=/bin/sh -c '${PYTHON_BIN} ${CELERY_BIN} multi start ${CELERYD_NODES} \
+ExecStart=/bin/sh -c '${CELERY_BIN} multi start ${CELERYD_NODES} \
    -A ${CELERY_APP} \
    --loglevel=${CELERYD_LOG_LEVEL} \
    --logfile=${CELERYD_LOG_FILE} \
    --pidfile=${CELERYD_PID_FILE}\
    ${CELERYD_OPTS}'
-ExecStop=/bin/sh -c '${PYTHON_BIN} ${CELERY_BIN} multi stopwait ${CELERYD_NODES} \
+ExecStop=/bin/sh -c '${CELERY_BIN} multi stopwait ${CELERYD_NODES} \
   --pidfile=${CELERYD_PID_FILE}'
 ExecReload=/bin/sh -c '${CELERY_BIN} multi restart ${CELERYD_NODES} \
   -A ${CELERY_APP} \

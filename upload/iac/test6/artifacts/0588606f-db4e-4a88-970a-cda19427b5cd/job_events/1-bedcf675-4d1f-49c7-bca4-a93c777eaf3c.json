@@ -1,1 +1,0 @@
-{"event": "verbose", "uuid": "bedcf675-4d1f-49c7-bca4-a93c777eaf3c", "counter": 1, "stdout": "[WARNING]: A duplicate localhost-like entry was found (127.0.0.1). First found", "start_line": 0, "end_line": 1, "runner_ident": "0588606f-db4e-4a88-970a-cda19427b5cd", "created": "2022-04-21T17:39:17.277253"}

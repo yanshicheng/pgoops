@@ -1,1 +1,0 @@
-{"event": "verbose", "uuid": "ee1823d0-ca82-4027-ba8f-b76e1ecf09dc", "counter": 4, "stdout": "got: <class 'ansible.parsing.yaml.objects.AnsibleSequence'>", "start_line": 3, "end_line": 4, "runner_ident": "19e3caf4-402f-492b-beee-c5917dd606ba", "created": "2022-04-21T17:37:14.433703"}

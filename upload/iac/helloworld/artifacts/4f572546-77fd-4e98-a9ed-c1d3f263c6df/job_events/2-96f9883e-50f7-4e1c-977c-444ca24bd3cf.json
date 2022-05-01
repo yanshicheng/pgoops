@@ -1,1 +1,0 @@
-{"event": "verbose", "uuid": "96f9883e-50f7-4e1c-977c-444ca24bd3cf", "counter": 2, "stdout": "\u001b[1;35mac/helloworld/tmp_inventory/10\u79d2\u6267\u884c\u4e00\u6b21 with yaml plugin: Invalid extra vars data\u001b[0m", "start_line": 1, "end_line": 2, "runner_ident": "4f572546-77fd-4e98-a9ed-c1d3f263c6df", "created": "2022-04-21T17:59:17.310395"}

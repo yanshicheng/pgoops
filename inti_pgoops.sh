@@ -59,6 +59,7 @@ editFile() {
         errorMsg "3. edit the file"
     fi
     sed -i "s@^EnvironmentFile=.*@EnvironmentFile=${BASE_DIR}/config/pgoops_celery_env@g" ${BASE_DIR}/script/services/celery-beta.service
+    sed -i "s@^Environment=.*@PATH=${BASE_DIR}/.venv/bin/:$PATH@g" ${BASE_DIR}/script/services/celery-beta.service
     if [ $? -ne 0 ] ;then
         echo "edit file error file_path: ${BASE_DIR}/script/services/celery-beta.service 1"
         errorMsg "3. edit the file"
@@ -69,6 +70,7 @@ editFile() {
         errorMsg "3. edit the file"
     fi
     sed -i "s@^EnvironmentFile=.*@EnvironmentFile=${BASE_DIR}/config/pgoops_celery_env@g" ${BASE_DIR}/script/services/celery-server.service
+        sed -i "s@^Environment=.*@PATH=${BASE_DIR}/.venv/bin/:$PATH@g" ${BASE_DIR}/script/services/celery-server.service
     if [ $? -ne 0 ] ;then
         echo "edit file error file_path: ${BASE_DIR}/script/services/celery-server.service 1"
         errorMsg "3. edit the file"
@@ -125,17 +127,21 @@ startService() {
     if [ $? -ne 0 ] ;then
         errorMsg "7. start pgoops-server.service error"
     fi
+    echo ">>>>>> pgoops-server 启动              [成功]"
     systemctl restart celery-server.service
     if [ $? -ne 0 ] ;then
         errorMsg "7. start celery-server.service error"
     fi
+    echo ">>>>>> celery-server 启动              [成功]"
     systemctl restart celery-beat.service
     if [ $? -ne 0 ] ;then
         errorMsg "7. start celery-beat.service error"
     fi
+    echo ">>>>>> celery-beat 启动              [成功]"
     systemctl enable pgoops-server.service
     systemctl enable celery-server.service
     systemctl enable celery-beat.service
+    echo ">>>>>> all service 开机自启           [成功]"
     successMsg  "7. start & enable service"
 
 }

@@ -7,6 +7,7 @@ Type=forking
 User=pgoops
 Group=pgoops
 Restart=always
+Environment="PATH=/data/ops/pgoops/.venv/bin/:$PATH"
 EnvironmentFile=/data/ops/pgoops/config/pgoops_celery_env
 WorkingDirectory=/data/ops/pgoops/
 
