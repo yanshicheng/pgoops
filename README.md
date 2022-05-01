@@ -1,173 +1,140 @@
-# Super 运维平台
+# PgoOPS 运维平台
 
 [![python](https://img.shields.io/badge/Python-3.10+-green.svg)](https://github.com/yanshicheng/super_ops)
 [![django](https://img.shields.io/badge/Django-3.2+-green.svg)](https://github.com/yanshicheng/super_ops)
 [![django](https://img.shields.io/badge/django_rest_framework-Latest-green.svg)](https://github.com/yanshicheng/super_ops)
 [![mysql](https://img.shields.io/badge/Mysql-5.7+-green.svg)](https://github.com/yanshicheng/super_ops)
 
-## 简介
+# 简介 
 
-​	Super 开源运维平台, 主要针对复杂的, 需求不一的业务环境, 构建一套兼容性比较强的运维自动化平台.
+PgoOps 运维平台, 主要针对复杂的, 需求不一的业务环境, 构建一套兼容性比较强的运维自动化平台，目前平台正在逐步开发阶段。详细信息可以看后面的核心功能简介。
 
 ​	平台后端使用:`django + drf`, 平台前端使用:`vue-element-admin` 进行二次开发.
 
-## 演示地址
+- [演示地址](http://www.pgoops.com)
+- [部署文档](https://www.cnblogs.com/yanshicheng/p/16214938.html)
 
-- **地址:** http://demo.superops.top/
-- 用户名 & 密码
+## 仓库地址
 
-```bash
-普通用户
-	edit & edit
-管理员
-	super & super
-```
+- [ 🌐 码云仓库后端地址](https://gitee.com/pgoops/pgoops)
+- [ 🌐 码云仓库前端地址](https://gitee.com/pgoops/pgoops_web)
 
-## 地址
-
-- [ 🌐 码云仓库后端地址](https://gitee.com/super-ops/super_ops)
-- [ 🌐 码云仓库前端地址](https://gitee.com/super-ops/super_ops_web)
-
-- [ 🌐 github仓库后端地址](https://github.com/yanshicheng/super_ops)
-- [ 🌐 github仓库前端地址](https://github.com/yanshicheng/super_ops_web)
+- [ 🌐 github仓库后端地址](https://github.com/yanshicheng/pgoops)
+- [ 🌐 github仓库前端地址](https://github.com/yanshicheng/pgoops_web)
 
 ## 模块说明
 
-- [x] 用户管理
-- [x] 权限系统
-  - [x] API 权限(`采用Casbin`)
-  - [x] 动态菜单
-- [x] 服务树
+- [x] **用户管理**: 通过 Django 原生的用户管理系统进行扩展。
+
+- [x] **权限系统**
+
+  - [x] API 权限: 基于casbin的RBAC权限控制
+  - [x] 动态菜单: 采用了 element admin 的动态菜单，通过 django 控制对应角色返回的菜单。
+
+- [x] **服务树**
+
   - [ ] 陆续优化
-- [x] CMDB
-  - [x] 前端 + 后端
-  - [x] 日志记录
-  - [x] Agent API
-  - [ ] Agent
-- [ ] 作业平台 
-  - [ ] 已完成`ansible`版本正在重构.
-- [ ] 消息中心
-- [ ] 调度平台
+
+- [x] **数据字典**: 数据字典主要用于实现字段变化频繁或者对存储性能比较高的，可以自定义后端存储目前采用 Mysql。 
+
+  - [x] CMDB: 基于数据字典实现。
+      - [x] 前端 + 后端
+      - [x] 日志记录
+      - [x] Agent API
+      - [x] Agent
+
+- [x] **代码平台(ansible版本)** : 基于ansible 的即时代码平台，通过 celery 解决性能问题。
+
+- [x] **消息中心**: 告警通知中心，通过 celery 解决性能问题。
+
+    - 支持的通告媒介
+        - [x] 邮件
+        - [x] 钉钉
+        - [x] 飞书
+        - [ ] 短信(正在测试)
+        - [ ] 语音电话
+
+    - 支持接入的第三方平台
+        - [x] prometheus
+        - [ ] zabbix
+        - [ ] jenkins
+
+- [x] **调度平台**: 基于 django-celery-beat 实现
+
 - [ ] 发布平台
+
 - [ ] 监控配置中心
 
-## 项目部署
+- [ ] 工单系统
 
-- 项目代码克隆
+## 项目界面展示
 
-```bash
-~]# cd /opt/
-~]# git clone git@gitee.com:super-ops/super_ops.git
-```
+登陆页面
 
-- 虚拟环境准备
+<p align="center">
+  <img width="900" src="https://images.cnblogs.com/cnblogs_com/yanshicheng/2153942/o_220501191206_WechatIMG3599.png">
+</p>
 
-```bash
-~]# mkdir -pv /data/venv/
-~]# cd /data/venv/
-~]# python3 -m venv super_ops
-~]# pip install --upgrade pip -i http://pypi.douban.com/simple/
-~]# pip install -r /opt/super_ops/requirements.txt  -i http://pypi.douban.com/simple/
-```
+个人中心
 
-- uwsgi文件修改
+<p align="center">
+  <img width="900" src="https://images.cnblogs.com/cnblogs_com/yanshicheng/2153942/o_220501190344_iShot_2022-05-02_03.01.41.png">
+</p>
 
-```bash
-~]# cd /opt/super_ops/
-~]# cat uwsgi.ini 
-[uwsgi]
-chdir           = /opt/super_ops				# 项目目录路径
-module          = super_ops.wsgi
-home            = /data/venv/super-ops			# 虚拟环境目录
-master          = true
-processes       = 4
-threads         = 2
-socket          = 0.0.0.0:9000
-vacuum          = true
-pidfile         = ./run/super_ops.pid
-daemonize       = ./logs/uwsgi.log
-max-requests    = 5000
-touch-reload    = .git/index
-```
+数据字典
 
-- MYSQL地址修改
+<p align="center">
+  <img width="900" src="https://images.cnblogs.com/cnblogs_com/yanshicheng/2153942/o_220501190324_iShot_2022-05-02_03.00.14.png">
+</p>
 
-```bash
-~]# cat config/config.ini
-[DEFAULT]
+<p align="center">
+  <img width="900" src="https://images.cnblogs.com/cnblogs_com/yanshicheng/2153942/o_220501190336_iShot_2022-05-02_03.00.28.png">
+</p>
 
+服务树
 
-[mysql.prod]
-MYSQL_HOST = 127.0.0.1			# mysql 地址
-MYSQL_PORT = 3306				# mysql 端口号
-MYSQL_DB = super_ops			# msyql 数据库
-MYSQL_USER = root				# mysql 用户名
-MYSQL_PASSWORD = 123456			# mysql 用户密码
-MYSQL_CHARSET = utf8mb4			# 字符集
-MYSQL_UNIX_SOCKET = ""			# unix_socket 方式连接 mysql
-```
+<p align="center">
+  <img width="900" src="https://images.cnblogs.com/cnblogs_com/yanshicheng/2153942/o_220501185014_image.png">
+</p>
 
-- SQL 导入
+代码平台
 
-**方式1**
+<p align="center">
+  <img width="900" src="https://images.cnblogs.com/cnblogs_com/yanshicheng/2153942/o_220501185217_image.png">
+</p>
 
-​	导入现有 msyql 数据, 现有sql录入了一些数据,包括URL, 菜单权限等
+<p align="center">
+  <img width="900" src="https://images.cnblogs.com/cnblogs_com/yanshicheng/2153942/o_220501185420_image.png">
+</p>
 
-```bash
-mysqldump -uroot -p123456 super_ops < /ops/super_ops/super_ops.sql 
-```
+<p align="center">
+  <img width="900" src="https://images.cnblogs.com/cnblogs_com/yanshicheng/2153942/o_220501190220_iShot_2022-05-02_02.57.59.png">
+</p>
 
-**方式2**
+<p align="center">
+  <img width="900" src="https://images.cnblogs.com/cnblogs_com/yanshicheng/2153942/o_220501190210_iShot_2022-05-02_02.57.35.png">
+</p>
 
-​	也可直接初始化, 但是要手动录入, 权限URL, 动态菜单等数据.
+权限系统
 
-```bash
-make migrate 
-```
+<p align="center">
+  <img width="900" src="https://images.cnblogs.com/cnblogs_com/yanshicheng/2153942/o_220501190310_iShot_2022-05-02_02.59.48.png">
+</p>
 
-- 创建管理员
+消息中心
 
-```bash
-python manage.py createsuperuser
-```
-
-- 修改API超级管理员
-
-  修改 `r.sub == "devops"` 为: `r.sub == "用户名"`
-
-  多个超级用户可以使用 `||` 在文件末尾进行追加.
-
-```bash
-~]# cat config/prem_model.conf 
-[request_definition]
-r = sub, obj, act
-
-[policy_definition]
-p = sub, obj, act
-
-[role_definition]
-g = _, _
-
-[policy_effect]
-e = some(where (p.eft == allow))
-
-[matchers]
-m =  g(r.sub, p.sub) && keyMatch2(r.obj, p.obj) && ( p.act == "*" || regexMatch(r.act, p.act)) || r.sub == "devops"
-```
-
-- 启动项目
-
-  默认访问端口: `0.0.0.0:9999`
-
-```bash
-bash start.sh
-```
+<p align="center">
+  <img width="900" src="https://images.cnblogs.com/cnblogs_com/yanshicheng/2153942/o_220501190230_iShot_2022-05-02_02.58.42.png">
+</p>
 
 ## 鸣谢
 
 | 项目 |
 | -------------------------------------------------- |
-| [vue](https://github.com/vuejs/vue) |
+| [django](https://code.djangoproject.com/)                    |
+| [django-rest-framework](https://www.django-rest-framework.org/) |
+| [celery](https://docs.celeryq.dev/en/stable/)                |
+| [vue](https://github.com/vuejs/vue)                          |
 | [element-ui](https://github.com/ElemeFE/element) |
 | [vue-element-admin](https://panjiachen.github.io/vue-element-admin-site/zh/) |
 | [axios](https://github.com/axios/axios) |
