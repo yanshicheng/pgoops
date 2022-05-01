@@ -1,17 +1,22 @@
 from django.conf import settings
-
+from apps.pgo_user.models import UserProfile
 
 def get_user(request):
     if settings.DEBUG:
-        if hasattr(request, 'user'):
+        try:
             return request.user
-        else:
+        except Exception:
             return None
+
     else:
-        if hasattr(request, 'user'):
-            return request.user
-        else:
+        try:
+            u_id = request.user.id
+            return UserProfile.objects.filter(id=u_id).first()
+        except Exception as e:
+            print(e)
             raise Exception("无法获取用户地址，请先登录")
+
+
 def get_user_name(request):
     if settings.DEBUG:
         if request.user:
@@ -23,6 +28,7 @@ def get_user_name(request):
             return request.user.name
         else:
             raise Exception("无法获取用户地址，请先登录")
+
 
 def get_addr(request):
     if "HTTP_X_FORWARDED_FOR" in request.META:

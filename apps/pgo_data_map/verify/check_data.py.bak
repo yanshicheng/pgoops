@@ -59,5 +59,4 @@ class CheckData:
 
 
 def check_data(data, instance):
-    print(data)
     return CheckData(data, instance).run()

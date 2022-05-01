@@ -14,23 +14,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.conf import settings
+from django.views import static
 from django.contrib import admin
 from django.urls import path, include, re_path
 from django.views.static import serve
 from rest_framework_jwt.views import obtain_jwt_token
 
-# from common.jwt_json_web_token import obtain_jwt_token
-# from common.jwt_json_web_token import refresh_jwt_token
-# from common.jwt_json_web_token import verify_jwt_token
-
-
 urlpatterns = [
     re_path(r'media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+    re_path(r'^static/(?P<path>.*)$', static.serve,
+            {'document_root': settings.STATIC_ROOT}, name='static'),
     path('admin/', admin.site.urls),
     path("api/v1/user/login/", obtain_jwt_token),
-    # path("api/v1/token-refresh/", refresh_jwt_token),
-    # path("api/v1/token-verify/", verify_jwt_token),
-
     path('api/', include('apps.pgo_user.urls')),
     path('api/', include('apps.pgo_permission.urls')),
     path('api/', include('apps.pgo_data_map.urls')),

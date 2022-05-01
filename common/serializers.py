@@ -51,10 +51,11 @@ class StandardModelSerializer(serializers.ModelSerializer):
                 many_to_many[field_name] = validated_data.pop(field_name)
 
         try:
-            if hasattr(ModelClass, 'created_by'):
-                validated_data['created_by'] = get_user(request)
-            if hasattr(ModelClass, 'updated_by'):
-                validated_data['updated_by'] = get_user(request)
+            if request:
+                if hasattr(ModelClass, 'created_by'):
+                    validated_data['created_by'] = get_user(request)
+                if hasattr(ModelClass, 'updated_by'):
+                    validated_data['updated_by'] = get_user(request)
             instance = ModelClass._default_manager.create(**validated_data)
         except TypeError:
             tb = traceback.format_exc()
@@ -86,8 +87,9 @@ class StandardModelSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         request = validated_data.pop('request', False)
-        if hasattr(instance, 'updated_by'):
-            validated_data['updated_by'] = get_user(request)
+        if request:
+            if hasattr(instance, 'updated_by'):
+                validated_data['updated_by'] = get_user(request)
 
         raise_errors_on_nested_writes('update', self, validated_data)
         info = model_meta.get_field_info(instance)

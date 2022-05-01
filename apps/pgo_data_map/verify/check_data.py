@@ -162,9 +162,7 @@ class Choices(BaseType):
 
 
 def check_data(data, instance):
-    print(data, instance)
     data_filed_obj = OperateInstance.get_classify_field(data["classify"])
-    print(data_filed_obj)
     field_rule = data_filed_obj.rules
     for field, rule in field_rule.items():
         rule["field"] = field

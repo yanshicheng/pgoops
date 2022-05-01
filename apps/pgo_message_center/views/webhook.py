@@ -5,12 +5,12 @@ from rest_framework import serializers
 from rest_framework.response import Response
 from rest_framework.status import HTTP_502_BAD_GATEWAY, HTTP_200_OK
 from common.response import api_ok_response
-from common.views import StandardOpenApiView
+from common.views import StandardOpenApiView,StandardApiView
 from ..models import History, Level, Types
 from ..tasks import parse_alertmanager
 
 
-class WebHookBaseOpenApiView(StandardOpenApiView):
+class WebHookBaseOpenApiView(StandardApiView):
     history_model = History
     level_model = Level
 
@@ -62,7 +62,6 @@ class WebHookPromeOpenApiView(WebHookBaseOpenApiView):
             parse_alertmanager.delay(request.data.get('alerts', []))
             return Response(data={"status": "success"}, status=HTTP_200_OK)
         except Exception as e:
-            print(e)
             return Response(data='ok', status=HTTP_502_BAD_GATEWAY)
 
     def parse(self, data_list):

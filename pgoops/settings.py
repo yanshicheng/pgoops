@@ -10,18 +10,19 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import datetime
+
 import os
+
 from pathlib import Path
 
 from kombu import Exchange, Queue
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 from common.config_dispose import ConfigDispose
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # BASE_DIR = Path(__file__).resolve().parent.parent
-
+os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -127,7 +128,7 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = ConfigDispose.get_default('static_url')
-
+STATIC_ROOT = "static"
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -212,7 +213,6 @@ JWT_AUTH = {
     'JWT_RESPONSE_PAYLOAD_HANDLER': 'common.jwt_json_web_token.jwt_response_payload_handler',
 }
 
-
 # 注意此处不要写成列表或元组的形式
 MEDIA_ROOT = ConfigDispose.get_default('media_root')
 IAC_WORK_DIR = ConfigDispose.get_default('iac_work_dir')
@@ -257,7 +257,8 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [f'redis://:{ConfigDispose.get_redis("password")}@{ConfigDispose.get_redis("host")}:{ConfigDispose.get_redis("port")}/1'],
+            "hosts": [
+                f'redis://:{ConfigDispose.get_redis("password")}@{ConfigDispose.get_redis("host")}:{ConfigDispose.get_redis("port")}/1'],
         },
     },
 }

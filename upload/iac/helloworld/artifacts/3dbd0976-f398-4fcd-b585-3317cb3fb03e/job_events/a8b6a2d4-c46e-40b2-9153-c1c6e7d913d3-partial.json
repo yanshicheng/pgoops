@@ -1,0 +1,1 @@
+{"event": "playbook_on_start", "pid": 85071, "uuid": "a8b6a2d4-c46e-40b2-9153-c1c6e7d913d3", "created": "2022-04-30T19:49:51.179965", "event_data": {"playbook": "deploy.yaml", "playbook_uuid": "a8b6a2d4-c46e-40b2-9153-c1c6e7d913d3", "uuid": "a8b6a2d4-c46e-40b2-9153-c1c6e7d913d3"}}

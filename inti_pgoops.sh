@@ -140,7 +140,14 @@ startService() {
 
 }
 
-
+downMessage() {
+  echo ">>>>>>>>>>>>>>>>> pgoops项目初始化    [成功]  >>>>>>>>>>>>>>>>>"
+  echo "             >>>> 后端     地址: http://ip_addr/admin/"
+  echo "             >>>> 超级管理员用户: pgoops     密码: 123456"
+  echo "             >>>> 普通管理员用户: super     密码: 123456"
+  echo "             >>>> 普通     用户: edit     密码: 123456"
+  echo "             >>>> 官网     地址: http://www.pgoops.com"
+}
 
 main() {
     checkEnv
@@ -150,6 +157,6 @@ main() {
     loadSql
     chownFunc
     startService
-
+    downMessage
 }
 main

@@ -12,7 +12,6 @@ WorkingDirectory=/data/ops/pgoops/
 
 ExecStart=/bin/sh -c '${PYTHON_BIN} ${CELERY_BIN} multi start ${CELERYD_NODES} \
    -A ${CELERY_APP} \
-   -P ${CELERYD_EVENT} \
    --loglevel=${CELERYD_LOG_LEVEL} \
    --logfile=${CELERYD_LOG_FILE} \
    --pidfile=${CELERYD_PID_FILE}\
@@ -21,7 +20,6 @@ ExecStop=/bin/sh -c '${PYTHON_BIN} ${CELERY_BIN} multi stopwait ${CELERYD_NODES}
   --pidfile=${CELERYD_PID_FILE}'
 ExecReload=/bin/sh -c '${CELERY_BIN} multi restart ${CELERYD_NODES} \
   -A ${CELERY_APP} \
-  -P ${CELERYD_EVENT} \
   --pidfile=${CELERYD_PID_FILE} \
   --logfile=${CELERYD_LOG_FILE} \
   --loglevel=${CELERYD_LOG_LEVEL} \

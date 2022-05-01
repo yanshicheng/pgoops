@@ -2,8 +2,8 @@ from django.utils import timezone
 from rest_framework.decorators import action
 
 from common.file import File
-from common.request_info import get_user
-from common.viewsets import StandardOpenModelViewSet
+from common.request_info import get_user, get_addr
+from common.viewsets import StandardModelViewSet
 from common.response import api_ok_response, api_error_response
 from ..filters import TaskFilter
 from ..models import Task, Repository
@@ -11,7 +11,7 @@ from ..serializers import TaskSerializer, TaskInfoSerializer
 from ..tasks import rsync_task
 
 
-class TaskModelViewSet(StandardOpenModelViewSet):
+class TaskModelViewSet(StandardModelViewSet):
     queryset = Task.objects.filter().order_by("-id")
     serializer_class = TaskSerializer
     ordering_fields = ("id",)
@@ -19,17 +19,19 @@ class TaskModelViewSet(StandardOpenModelViewSet):
     search_fields = ("name",)
 
     def create(self, request, *args, **kwargs):
+        user = get_user(request)
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         repository_obj = Repository.objects.filter(id=request.data.get('repository')).first()
         if not File.if_file_exists(repository_obj.get_main_file()):
             return api_error_response('指定的仓库文件已经找不到，请重新确认。')
-        instance = serializer.save(created_by=get_user(request), updated_by=get_user(request))
+        instance = serializer.save(created_by=user, updated_by=user)
         # TaskRunner(instance).execute()
         celery_task = rsync_task.delay(instance.id, 'socket')
         instance.celery_id = celery_task.id
         instance.save()
-        return api_ok_response(TaskSerializer(instance).data)
+        ws_url = f'ws://{get_addr(request)}:{request.META["SERVER_PORT"]}/ws/iac/task/{instance.id}/'
+        return api_ok_response({'ws_url': ws_url})
 
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()

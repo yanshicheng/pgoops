@@ -14,10 +14,8 @@ def get_class(type):
 
 
 def get_instance(field, type, **option):
-    # print(field, type, option)
     key = ",".join(f"{k}={v}" for k, v in sorted(option.items()))
     key = f"{type}|{key}"
-    print(key)
     obj = instances_cache.get(key)
     if obj:
         return obj
@@ -91,7 +89,6 @@ class IP(BaseType):
 
 class Str(BaseType):
     def stringify(self, value):
-        print(self.__dict__)
         len_num = self.length
         if len_num and len(value) > len_num:
             raise ValueError(
