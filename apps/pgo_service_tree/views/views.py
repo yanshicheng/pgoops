@@ -2,6 +2,7 @@ from django.db.models import Q
 from django.shortcuts import render
 from rest_framework.decorators import action
 
+from apps.pgo_user.models import UserProfile
 from common.models import BulkCreateModelMixin
 from common.response import api_ok_response, api_error_response
 from common.views import StandardApiView
@@ -38,8 +39,12 @@ class ServiceTreeModelViewSet(BulkCreateModelMixin, StandardModelViewSet):
 
     def get_queryset(self):
         queryset = super(ServiceTreeModelViewSet, self).get_queryset()
-        u = self.request.user
-        if u.username in ["admin", "root", "devops"]:
+        u: UserProfile = self.request.user
+        if u.username in ["admin", "root", "devops", "pgoops"] or u.role.name in [
+            "admin",
+            "root",
+            "pgoops",
+        ]:
             return queryset
 
         node_pks = []
@@ -307,9 +312,7 @@ class NodeOperaPermissionModelViewSet(StandardModelViewSet):
         try:
             node = ServiceTree.objects.get(pk=kwargs["pk"])
         except ServiceTree.DoesNotExist:
-            return api_error_response(
-                message=f"node {kwargs['pk']} not found"
-            )
+            return api_error_response(message=f"node {kwargs['pk']} not found")
 
         node.nodelinkoperapermission.read_member.remove(*data.get("read_member", []))
         node.nodelinkoperapermission.write_member.remove(*data.get("write_member", []))
@@ -413,4 +416,4 @@ class ParentNodeInfoApiView(StandardApiView):
         s = ServiceTreeListSerializer(
             node.get_ancestors(ascending=True, include_self=True), many=True
         )
-        return api_ok_response( data=s.data)
+        return api_ok_response(data=s.data)

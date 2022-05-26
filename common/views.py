@@ -9,5 +9,6 @@ class StandardOpenApiView(APIView):
     """
     APIView视图类
     """
+
     authentication_classes = []
     permission_classes = []

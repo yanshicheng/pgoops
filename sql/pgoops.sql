@@ -5,13 +5,13 @@
  Source Server Type    : MySQL
  Source Server Version : 80027
  Source Host           : 127.0.0.1:3306
- Source Schema         : pgoops1
+ Source Schema         : pgoops
 
  Target Server Type    : MySQL
  Target Server Version : 80027
  File Encoding         : 65001
 
- Date: 30/04/2022 21:17:49
+ Date: 27/05/2022 02:31:00
 */
 
 SET NAMES utf8mb4;
@@ -23,7 +23,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `auth_group`;
 CREATE TABLE `auth_group` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `name` varchar(150) COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -61,13 +61,13 @@ COMMIT;
 DROP TABLE IF EXISTS `auth_permission`;
 CREATE TABLE `auth_permission` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `content_type_id` int NOT NULL,
-  `codename` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `codename` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `auth_permission_content_type_id_codename_01ab375a_uniq` (`content_type_id`,`codename`),
   CONSTRAINT `auth_permission_content_type_id_2f476e4b_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=209 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=185 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of auth_permission
@@ -257,30 +257,6 @@ INSERT INTO `auth_permission` VALUES (181, 'Can add 通知历史', 46, 'add_hist
 INSERT INTO `auth_permission` VALUES (182, 'Can change 通知历史', 46, 'change_history');
 INSERT INTO `auth_permission` VALUES (183, 'Can delete 通知历史', 46, 'delete_history');
 INSERT INTO `auth_permission` VALUES (184, 'Can view 通知历史', 46, 'view_history');
-INSERT INTO `auth_permission` VALUES (185, 'Can add 表数据', 47, 'add_asset');
-INSERT INTO `auth_permission` VALUES (186, 'Can change 表数据', 47, 'change_asset');
-INSERT INTO `auth_permission` VALUES (187, 'Can delete 表数据', 47, 'delete_asset');
-INSERT INTO `auth_permission` VALUES (188, 'Can view 表数据', 47, 'view_asset');
-INSERT INTO `auth_permission` VALUES (189, 'Can add 数据关联', 48, 'add_assetbind');
-INSERT INTO `auth_permission` VALUES (190, 'Can change 数据关联', 48, 'change_assetbind');
-INSERT INTO `auth_permission` VALUES (191, 'Can delete 数据关联', 48, 'delete_assetbind');
-INSERT INTO `auth_permission` VALUES (192, 'Can view 数据关联', 48, 'view_assetbind');
-INSERT INTO `auth_permission` VALUES (193, 'Can add 变更记录', 49, 'add_changerecord');
-INSERT INTO `auth_permission` VALUES (194, 'Can change 变更记录', 49, 'change_changerecord');
-INSERT INTO `auth_permission` VALUES (195, 'Can delete 变更记录', 49, 'delete_changerecord');
-INSERT INTO `auth_permission` VALUES (196, 'Can view 变更记录', 49, 'view_changerecord');
-INSERT INTO `auth_permission` VALUES (197, 'Can add 表分类', 50, 'add_classify');
-INSERT INTO `auth_permission` VALUES (198, 'Can change 表分类', 50, 'change_classify');
-INSERT INTO `auth_permission` VALUES (199, 'Can delete 表分类', 50, 'delete_classify');
-INSERT INTO `auth_permission` VALUES (200, 'Can view 表分类', 50, 'view_classify');
-INSERT INTO `auth_permission` VALUES (201, 'Can add 表关联', 51, 'add_classifybind');
-INSERT INTO `auth_permission` VALUES (202, 'Can change 表关联', 51, 'change_classifybind');
-INSERT INTO `auth_permission` VALUES (203, 'Can delete 表关联', 51, 'delete_classifybind');
-INSERT INTO `auth_permission` VALUES (204, 'Can view 表关联', 51, 'view_classifybind');
-INSERT INTO `auth_permission` VALUES (205, 'Can add 表字段', 52, 'add_fields');
-INSERT INTO `auth_permission` VALUES (206, 'Can change 表字段', 52, 'change_fields');
-INSERT INTO `auth_permission` VALUES (207, 'Can delete 表字段', 52, 'delete_fields');
-INSERT INTO `auth_permission` VALUES (208, 'Can view 表字段', 52, 'view_fields');
 COMMIT;
 
 -- ----------------------------
@@ -290,10 +266,10 @@ DROP TABLE IF EXISTS `django_admin_log`;
 CREATE TABLE `django_admin_log` (
   `id` int NOT NULL AUTO_INCREMENT,
   `action_time` datetime(6) NOT NULL,
-  `object_id` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
-  `object_repr` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `object_id` longtext COLLATE utf8mb4_general_ci,
+  `object_repr` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
   `action_flag` smallint unsigned NOT NULL,
-  `change_message` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `change_message` longtext COLLATE utf8mb4_general_ci NOT NULL,
   `content_type_id` int DEFAULT NULL,
   `user_id` bigint NOT NULL,
   PRIMARY KEY (`id`),
@@ -420,12 +396,12 @@ COMMIT;
 DROP TABLE IF EXISTS `django_celery_beat_crontabschedule`;
 CREATE TABLE `django_celery_beat_crontabschedule` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `minute` varchar(240) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `hour` varchar(96) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `day_of_week` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `day_of_month` varchar(124) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `month_of_year` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `timezone` varchar(63) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `minute` varchar(240) COLLATE utf8mb4_general_ci NOT NULL,
+  `hour` varchar(96) COLLATE utf8mb4_general_ci NOT NULL,
+  `day_of_week` varchar(64) COLLATE utf8mb4_general_ci NOT NULL,
+  `day_of_month` varchar(124) COLLATE utf8mb4_general_ci NOT NULL,
+  `month_of_year` varchar(64) COLLATE utf8mb4_general_ci NOT NULL,
+  `timezone` varchar(63) COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -446,7 +422,7 @@ DROP TABLE IF EXISTS `django_celery_beat_intervalschedule`;
 CREATE TABLE `django_celery_beat_intervalschedule` (
   `id` int NOT NULL AUTO_INCREMENT,
   `every` int NOT NULL,
-  `period` varchar(24) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `period` varchar(24) COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -465,26 +441,26 @@ COMMIT;
 DROP TABLE IF EXISTS `django_celery_beat_periodictask`;
 CREATE TABLE `django_celery_beat_periodictask` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `task` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `args` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `kwargs` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `queue` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `exchange` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `routing_key` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `name` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
+  `task` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
+  `args` longtext COLLATE utf8mb4_general_ci NOT NULL,
+  `kwargs` longtext COLLATE utf8mb4_general_ci NOT NULL,
+  `queue` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `exchange` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `routing_key` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `expires` datetime(6) DEFAULT NULL,
   `enabled` tinyint(1) NOT NULL,
   `last_run_at` datetime(6) DEFAULT NULL,
   `total_run_count` int unsigned NOT NULL,
   `date_changed` datetime(6) NOT NULL,
-  `description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `description` longtext COLLATE utf8mb4_general_ci NOT NULL,
   `crontab_id` int DEFAULT NULL,
   `interval_id` int DEFAULT NULL,
   `solar_id` int DEFAULT NULL,
   `one_off` tinyint(1) NOT NULL,
   `start_time` datetime(6) DEFAULT NULL,
   `priority` int unsigned DEFAULT NULL,
-  `headers` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT (_utf8mb4'{}'),
+  `headers` longtext COLLATE utf8mb4_general_ci NOT NULL DEFAULT (_utf8mb4'{}'),
   `clocked_id` int DEFAULT NULL,
   `expire_seconds` int unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -507,7 +483,7 @@ CREATE TABLE `django_celery_beat_periodictask` (
 -- ----------------------------
 BEGIN;
 INSERT INTO `django_celery_beat_periodictask` VALUES (6, '打2算32', 'apps.pgo_iac.tasks.execute_periodic_task', '[2]', '{}', NULL, NULL, NULL, NULL, 0, NULL, 35, '2022-04-21 17:40:22.660269', '', 6, NULL, NULL, 0, NULL, NULL, '{}', NULL, NULL);
-INSERT INTO `django_celery_beat_periodictask` VALUES (8, 'celery.backend_cleanup', 'celery.backend_cleanup', '[]', '{}', NULL, NULL, NULL, NULL, 1, NULL, 0, '2022-04-30 17:46:30.319058', '', 7, NULL, NULL, 0, NULL, NULL, '{}', NULL, 43200);
+INSERT INTO `django_celery_beat_periodictask` VALUES (8, 'celery.backend_cleanup', 'celery.backend_cleanup', '[]', '{}', NULL, NULL, NULL, NULL, 1, NULL, 0, '2022-04-21 14:47:29.948548', '', 7, NULL, NULL, 0, NULL, NULL, '{}', NULL, 43200);
 INSERT INTO `django_celery_beat_periodictask` VALUES (9, '测试定时任务', 'apps.pgo_iac.tasks.execute_periodic_task', '[3]', '{}', NULL, NULL, NULL, NULL, 0, NULL, 16, '2022-04-21 17:40:24.082136', '', 8, NULL, NULL, 0, NULL, NULL, '{}', NULL, NULL);
 INSERT INTO `django_celery_beat_periodictask` VALUES (10, '间隔十分钟执行', 'apps.pgo_iac.tasks.execute_periodic_task', '[4]', '{}', NULL, NULL, NULL, NULL, 0, NULL, 11, '2022-04-21 17:40:04.994838', '', NULL, 3, NULL, 0, NULL, NULL, '{}', NULL, NULL);
 INSERT INTO `django_celery_beat_periodictask` VALUES (11, '小时间隔任务', 'apps.pgo_iac.tasks.execute_periodic_task', '[5]', '{}', NULL, NULL, NULL, NULL, 0, NULL, 0, '2022-04-21 17:40:09.779797', '', NULL, 4, NULL, 0, NULL, NULL, '{}', NULL, NULL);
@@ -529,7 +505,7 @@ CREATE TABLE `django_celery_beat_periodictasks` (
 -- Records of django_celery_beat_periodictasks
 -- ----------------------------
 BEGIN;
-INSERT INTO `django_celery_beat_periodictasks` VALUES (1, '2022-04-30 17:46:30.317626');
+INSERT INTO `django_celery_beat_periodictasks` VALUES (1, '2022-04-22 12:33:26.405458');
 COMMIT;
 
 -- ----------------------------
@@ -538,7 +514,7 @@ COMMIT;
 DROP TABLE IF EXISTS `django_celery_beat_solarschedule`;
 CREATE TABLE `django_celery_beat_solarschedule` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `event` varchar(24) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `event` varchar(24) COLLATE utf8mb4_general_ci NOT NULL,
   `latitude` decimal(9,6) NOT NULL,
   `longitude` decimal(9,6) NOT NULL,
   PRIMARY KEY (`id`),
@@ -557,8 +533,8 @@ COMMIT;
 DROP TABLE IF EXISTS `django_celery_results_chordcounter`;
 CREATE TABLE `django_celery_results_chordcounter` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `group_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `sub_tasks` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `group_id` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `sub_tasks` longtext COLLATE utf8mb4_general_ci NOT NULL,
   `count` int unsigned NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `group_id` (`group_id`),
@@ -577,12 +553,12 @@ COMMIT;
 DROP TABLE IF EXISTS `django_celery_results_groupresult`;
 CREATE TABLE `django_celery_results_groupresult` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `group_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `group_id` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `date_created` datetime(6) NOT NULL,
   `date_done` datetime(6) NOT NULL,
-  `content_type` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `content_encoding` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `result` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `content_type` varchar(128) COLLATE utf8mb4_general_ci NOT NULL,
+  `content_encoding` varchar(64) COLLATE utf8mb4_general_ci NOT NULL,
+  `result` longtext COLLATE utf8mb4_general_ci,
   PRIMARY KEY (`id`),
   UNIQUE KEY `group_id` (`group_id`),
   KEY `django_cele_date_cr_bd6c1d_idx` (`date_created`),
@@ -601,20 +577,20 @@ COMMIT;
 DROP TABLE IF EXISTS `django_celery_results_taskresult`;
 CREATE TABLE `django_celery_results_taskresult` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `task_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `content_type` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `content_encoding` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `result` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `task_id` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `status` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `content_type` varchar(128) COLLATE utf8mb4_general_ci NOT NULL,
+  `content_encoding` varchar(64) COLLATE utf8mb4_general_ci NOT NULL,
+  `result` longtext COLLATE utf8mb4_general_ci,
   `date_done` datetime(6) NOT NULL,
-  `traceback` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
-  `meta` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
-  `task_args` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
-  `task_kwargs` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
-  `task_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `worker` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `traceback` longtext COLLATE utf8mb4_general_ci,
+  `meta` longtext COLLATE utf8mb4_general_ci,
+  `task_args` longtext COLLATE utf8mb4_general_ci,
+  `task_kwargs` longtext COLLATE utf8mb4_general_ci,
+  `task_name` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `worker` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `date_created` datetime(6) NOT NULL,
-  `periodic_task_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `periodic_task_name` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `task_id` (`task_id`),
   KEY `django_cele_task_na_08aec9_idx` (`task_name`),
@@ -705,11 +681,11 @@ COMMIT;
 DROP TABLE IF EXISTS `django_content_type`;
 CREATE TABLE `django_content_type` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `app_label` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `model` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `app_label` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `model` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `django_content_type_app_label_model_76bd3d3b_uniq` (`app_label`,`model`)
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of django_content_type
@@ -738,12 +714,6 @@ INSERT INTO `django_content_type` VALUES (15, 'pgo_cmdb', 'changerecord');
 INSERT INTO `django_content_type` VALUES (12, 'pgo_cmdb', 'classify');
 INSERT INTO `django_content_type` VALUES (14, 'pgo_cmdb', 'classifybind');
 INSERT INTO `django_content_type` VALUES (13, 'pgo_cmdb', 'fields');
-INSERT INTO `django_content_type` VALUES (47, 'pgo_data_map', 'asset');
-INSERT INTO `django_content_type` VALUES (48, 'pgo_data_map', 'assetbind');
-INSERT INTO `django_content_type` VALUES (49, 'pgo_data_map', 'changerecord');
-INSERT INTO `django_content_type` VALUES (50, 'pgo_data_map', 'classify');
-INSERT INTO `django_content_type` VALUES (51, 'pgo_data_map', 'classifybind');
-INSERT INTO `django_content_type` VALUES (52, 'pgo_data_map', 'fields');
 INSERT INTO `django_content_type` VALUES (25, 'pgo_iac', 'event');
 INSERT INTO `django_content_type` VALUES (22, 'pgo_iac', 'repository');
 INSERT INTO `django_content_type` VALUES (24, 'pgo_iac', 'stats');
@@ -775,64 +745,86 @@ COMMIT;
 DROP TABLE IF EXISTS `django_migrations`;
 CREATE TABLE `django_migrations` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `app` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `app` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=116 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of django_migrations
 -- ----------------------------
 BEGIN;
-INSERT INTO `django_migrations` VALUES (1, 'pgo_permission', '0001_initial', '2022-04-29 03:11:09.872908');
-INSERT INTO `django_migrations` VALUES (2, 'contenttypes', '0001_initial', '2022-04-29 03:11:09.912263');
-INSERT INTO `django_migrations` VALUES (3, 'contenttypes', '0002_remove_content_type_name', '2022-04-29 03:11:09.925161');
-INSERT INTO `django_migrations` VALUES (4, 'auth', '0001_initial', '2022-04-29 03:11:09.963669');
-INSERT INTO `django_migrations` VALUES (5, 'auth', '0002_alter_permission_name_max_length', '2022-04-29 03:11:09.973362');
-INSERT INTO `django_migrations` VALUES (6, 'auth', '0003_alter_user_email_max_length', '2022-04-29 03:11:09.975698');
-INSERT INTO `django_migrations` VALUES (7, 'auth', '0004_alter_user_username_opts', '2022-04-29 03:11:09.978028');
-INSERT INTO `django_migrations` VALUES (8, 'auth', '0005_alter_user_last_login_null', '2022-04-29 03:11:09.980206');
-INSERT INTO `django_migrations` VALUES (9, 'auth', '0006_require_contenttypes_0002', '2022-04-29 03:11:09.980899');
-INSERT INTO `django_migrations` VALUES (10, 'auth', '0007_alter_validators_add_error_messages', '2022-04-29 03:11:09.983119');
-INSERT INTO `django_migrations` VALUES (11, 'auth', '0008_alter_user_username_max_length', '2022-04-29 03:11:09.985269');
-INSERT INTO `django_migrations` VALUES (12, 'auth', '0009_alter_user_last_name_max_length', '2022-04-29 03:11:09.987876');
-INSERT INTO `django_migrations` VALUES (13, 'auth', '0010_alter_group_name_max_length', '2022-04-29 03:11:09.994214');
-INSERT INTO `django_migrations` VALUES (14, 'auth', '0011_update_proxy_permissions', '2022-04-29 03:11:09.997876');
-INSERT INTO `django_migrations` VALUES (15, 'auth', '0012_alter_user_first_name_max_length', '2022-04-29 03:11:10.000148');
-INSERT INTO `django_migrations` VALUES (16, 'pgo_user', '0001_initial', '2022-04-29 03:11:10.087724');
-INSERT INTO `django_migrations` VALUES (17, 'admin', '0001_initial', '2022-04-29 03:11:10.122080');
-INSERT INTO `django_migrations` VALUES (18, 'admin', '0002_logentry_remove_auto_add', '2022-04-29 03:11:10.128019');
-INSERT INTO `django_migrations` VALUES (19, 'admin', '0003_logentry_add_action_flag_choices', '2022-04-29 03:11:10.132390');
-INSERT INTO `django_migrations` VALUES (20, 'django_celery_beat', '0001_initial', '2022-04-29 03:11:10.179305');
-INSERT INTO `django_migrations` VALUES (21, 'django_celery_beat', '0002_auto_20161118_0346', '2022-04-29 03:11:10.198949');
-INSERT INTO `django_migrations` VALUES (22, 'django_celery_beat', '0003_auto_20161209_0049', '2022-04-29 03:11:10.207047');
-INSERT INTO `django_migrations` VALUES (23, 'django_celery_beat', '0004_auto_20170221_0000', '2022-04-29 03:11:10.209017');
-INSERT INTO `django_migrations` VALUES (24, 'django_celery_beat', '0005_add_solarschedule_events_choices', '2022-04-29 03:11:10.210874');
-INSERT INTO `django_migrations` VALUES (25, 'django_celery_beat', '0006_auto_20180322_0932', '2022-04-29 03:11:10.237738');
-INSERT INTO `django_migrations` VALUES (26, 'django_celery_beat', '0007_auto_20180521_0826', '2022-04-29 03:11:10.252927');
-INSERT INTO `django_migrations` VALUES (27, 'django_celery_beat', '0008_auto_20180914_1922', '2022-04-29 03:11:10.259457');
-INSERT INTO `django_migrations` VALUES (28, 'django_celery_beat', '0006_auto_20180210_1226', '2022-04-29 03:11:10.264525');
-INSERT INTO `django_migrations` VALUES (29, 'django_celery_beat', '0006_periodictask_priority', '2022-04-29 03:11:10.277362');
-INSERT INTO `django_migrations` VALUES (30, 'django_celery_beat', '0009_periodictask_headers', '2022-04-29 03:11:10.291663');
-INSERT INTO `django_migrations` VALUES (31, 'django_celery_beat', '0010_auto_20190429_0326', '2022-04-29 03:11:10.334534');
-INSERT INTO `django_migrations` VALUES (32, 'django_celery_beat', '0011_auto_20190508_0153', '2022-04-29 03:11:10.360921');
-INSERT INTO `django_migrations` VALUES (33, 'django_celery_beat', '0012_periodictask_expire_seconds', '2022-04-29 03:11:10.377178');
-INSERT INTO `django_migrations` VALUES (34, 'django_celery_beat', '0013_auto_20200609_0727', '2022-04-29 03:11:10.380156');
-INSERT INTO `django_migrations` VALUES (35, 'django_celery_beat', '0014_remove_clockedschedule_enabled', '2022-04-29 03:11:10.388992');
-INSERT INTO `django_migrations` VALUES (36, 'django_celery_beat', '0015_edit_solarschedule_events_choices', '2022-04-29 03:11:10.391237');
-INSERT INTO `django_migrations` VALUES (37, 'pgo_data_map', '0001_initial', '2022-04-29 03:11:10.428395');
-INSERT INTO `django_migrations` VALUES (38, 'pgo_data_map', '0002_initial', '2022-04-29 03:11:10.681529');
-INSERT INTO `django_migrations` VALUES (39, 'pgo_iac', '0001_initial', '2022-04-29 03:11:10.780532');
-INSERT INTO `django_migrations` VALUES (40, 'pgo_iac', '0002_initial', '2022-04-29 03:11:11.011562');
-INSERT INTO `django_migrations` VALUES (41, 'pgo_message_center', '0001_initial', '2022-04-29 03:11:11.067363');
-INSERT INTO `django_migrations` VALUES (42, 'pgo_message_center', '0002_initial', '2022-04-29 03:11:11.118595');
-INSERT INTO `django_migrations` VALUES (43, 'pgo_service_tree', '0001_initial', '2022-04-29 03:11:11.188500');
-INSERT INTO `django_migrations` VALUES (44, 'pgo_service_tree', '0002_initial', '2022-04-29 03:11:11.399649');
-INSERT INTO `django_migrations` VALUES (45, 'sessions', '0001_initial', '2022-04-29 03:11:11.407478');
-INSERT INTO `django_migrations` VALUES (46, 'pgo_data_map', '0003_alter_classify_icon', '2022-04-29 03:17:33.446714');
-INSERT INTO `django_migrations` VALUES (47, 'pgo_user', '0002_alter_userprofile_icon', '2022-04-29 03:17:33.465429');
-INSERT INTO `django_migrations` VALUES (48, 'pgo_data_map', '0004_alter_classify_icon', '2022-04-29 15:08:54.927133');
+INSERT INTO `django_migrations` VALUES (1, 'pgo_permission', '0001_initial', '2022-04-12 20:54:17.922244');
+INSERT INTO `django_migrations` VALUES (2, 'contenttypes', '0001_initial', '2022-04-12 20:54:17.933180');
+INSERT INTO `django_migrations` VALUES (3, 'contenttypes', '0002_remove_content_type_name', '2022-04-12 20:54:17.944150');
+INSERT INTO `django_migrations` VALUES (4, 'auth', '0001_initial', '2022-04-12 20:54:17.988695');
+INSERT INTO `django_migrations` VALUES (5, 'auth', '0002_alter_permission_name_max_length', '2022-04-12 20:54:17.997924');
+INSERT INTO `django_migrations` VALUES (6, 'auth', '0003_alter_user_email_max_length', '2022-04-12 20:54:18.000269');
+INSERT INTO `django_migrations` VALUES (7, 'auth', '0004_alter_user_username_opts', '2022-04-12 20:54:18.002369');
+INSERT INTO `django_migrations` VALUES (8, 'auth', '0005_alter_user_last_login_null', '2022-04-12 20:54:18.004459');
+INSERT INTO `django_migrations` VALUES (9, 'auth', '0006_require_contenttypes_0002', '2022-04-12 20:54:18.005162');
+INSERT INTO `django_migrations` VALUES (10, 'auth', '0007_alter_validators_add_error_messages', '2022-04-12 20:54:18.007160');
+INSERT INTO `django_migrations` VALUES (11, 'auth', '0008_alter_user_username_max_length', '2022-04-12 20:54:18.009893');
+INSERT INTO `django_migrations` VALUES (12, 'auth', '0009_alter_user_last_name_max_length', '2022-04-12 20:54:18.013061');
+INSERT INTO `django_migrations` VALUES (13, 'auth', '0010_alter_group_name_max_length', '2022-04-12 20:54:18.020051');
+INSERT INTO `django_migrations` VALUES (14, 'auth', '0011_update_proxy_permissions', '2022-04-12 20:54:18.024165');
+INSERT INTO `django_migrations` VALUES (15, 'auth', '0012_alter_user_first_name_max_length', '2022-04-12 20:54:18.026277');
+INSERT INTO `django_migrations` VALUES (16, 'pgo_user', '0001_initial', '2022-04-12 20:54:18.111122');
+INSERT INTO `django_migrations` VALUES (17, 'admin', '0001_initial', '2022-04-12 20:54:18.151448');
+INSERT INTO `django_migrations` VALUES (18, 'admin', '0002_logentry_remove_auto_add', '2022-04-12 20:54:18.156530');
+INSERT INTO `django_migrations` VALUES (19, 'admin', '0003_logentry_add_action_flag_choices', '2022-04-12 20:54:18.160220');
+INSERT INTO `django_migrations` VALUES (20, 'pgo_cmdb', '0001_initial', '2022-04-12 20:54:18.272138');
+INSERT INTO `django_migrations` VALUES (21, 'pgo_service_tree', '0001_initial', '2022-04-12 20:54:18.339586');
+INSERT INTO `django_migrations` VALUES (22, 'pgo_service_tree', '0002_initial', '2022-04-12 20:54:18.473458');
+INSERT INTO `django_migrations` VALUES (23, 'sessions', '0001_initial', '2022-04-12 20:54:18.481157');
+INSERT INTO `django_migrations` VALUES (35, 'django_celery_beat', '0001_initial', '2022-04-19 23:11:37.756024');
+INSERT INTO `django_migrations` VALUES (36, 'django_celery_beat', '0002_auto_20161118_0346', '2022-04-19 23:11:37.780473');
+INSERT INTO `django_migrations` VALUES (37, 'django_celery_beat', '0003_auto_20161209_0049', '2022-04-19 23:11:37.792800');
+INSERT INTO `django_migrations` VALUES (38, 'django_celery_beat', '0004_auto_20170221_0000', '2022-04-19 23:11:37.795738');
+INSERT INTO `django_migrations` VALUES (39, 'django_celery_beat', '0005_add_solarschedule_events_choices', '2022-04-19 23:11:37.798159');
+INSERT INTO `django_migrations` VALUES (40, 'django_celery_beat', '0006_auto_20180322_0932', '2022-04-19 23:11:37.830289');
+INSERT INTO `django_migrations` VALUES (41, 'django_celery_beat', '0007_auto_20180521_0826', '2022-04-19 23:11:37.872397');
+INSERT INTO `django_migrations` VALUES (42, 'django_celery_beat', '0008_auto_20180914_1922', '2022-04-19 23:11:37.880445');
+INSERT INTO `django_migrations` VALUES (43, 'django_celery_beat', '0006_auto_20180210_1226', '2022-04-19 23:11:37.886078');
+INSERT INTO `django_migrations` VALUES (44, 'django_celery_beat', '0006_periodictask_priority', '2022-04-19 23:11:37.899018');
+INSERT INTO `django_migrations` VALUES (45, 'django_celery_beat', '0009_periodictask_headers', '2022-04-19 23:11:37.914842');
+INSERT INTO `django_migrations` VALUES (46, 'django_celery_beat', '0010_auto_20190429_0326', '2022-04-19 23:11:37.962734');
+INSERT INTO `django_migrations` VALUES (47, 'django_celery_beat', '0011_auto_20190508_0153', '2022-04-19 23:11:37.984129');
+INSERT INTO `django_migrations` VALUES (48, 'django_celery_beat', '0012_periodictask_expire_seconds', '2022-04-19 23:11:37.999767');
+INSERT INTO `django_migrations` VALUES (49, 'django_celery_beat', '0013_auto_20200609_0727', '2022-04-19 23:11:38.002824');
+INSERT INTO `django_migrations` VALUES (50, 'django_celery_beat', '0014_remove_clockedschedule_enabled', '2022-04-19 23:11:38.010977');
+INSERT INTO `django_migrations` VALUES (51, 'django_celery_beat', '0015_edit_solarschedule_events_choices', '2022-04-19 23:11:38.013565');
+INSERT INTO `django_migrations` VALUES (52, 'django_celery_results', '0001_initial', '2022-04-20 00:25:06.733897');
+INSERT INTO `django_migrations` VALUES (53, 'django_celery_results', '0002_add_task_name_args_kwargs', '2022-04-20 00:25:06.751443');
+INSERT INTO `django_migrations` VALUES (54, 'django_celery_results', '0003_auto_20181106_1101', '2022-04-20 00:25:06.754143');
+INSERT INTO `django_migrations` VALUES (55, 'django_celery_results', '0004_auto_20190516_0412', '2022-04-20 00:25:06.809616');
+INSERT INTO `django_migrations` VALUES (56, 'django_celery_results', '0005_taskresult_worker', '2022-04-20 00:25:06.818806');
+INSERT INTO `django_migrations` VALUES (57, 'django_celery_results', '0006_taskresult_date_created', '2022-04-20 00:25:06.843892');
+INSERT INTO `django_migrations` VALUES (58, 'django_celery_results', '0007_remove_taskresult_hidden', '2022-04-20 00:25:06.853859');
+INSERT INTO `django_migrations` VALUES (59, 'django_celery_results', '0008_chordcounter', '2022-04-20 00:25:06.860628');
+INSERT INTO `django_migrations` VALUES (60, 'django_celery_results', '0009_groupresult', '2022-04-20 00:25:06.950528');
+INSERT INTO `django_migrations` VALUES (61, 'django_celery_results', '0010_remove_duplicate_indices', '2022-04-20 00:25:06.957269');
+INSERT INTO `django_migrations` VALUES (62, 'django_celery_results', '0011_taskresult_periodic_task_name', '2022-04-20 00:25:06.965733');
+INSERT INTO `django_migrations` VALUES (71, 'pgo_cmdb', '0002_auto_20220420_0433', '2022-04-20 04:33:44.429974');
+INSERT INTO `django_migrations` VALUES (73, 'pgo_permission', '0002_auto_20220420_0433', '2022-04-20 04:33:44.798444');
+INSERT INTO `django_migrations` VALUES (74, 'pgo_service_tree', '0003_auto_20220420_0433', '2022-04-20 04:33:44.935290');
+INSERT INTO `django_migrations` VALUES (75, 'pgo_user', '0002_auto_20220420_0433', '2022-04-20 04:33:44.962485');
+INSERT INTO `django_migrations` VALUES (99, 'pgo_iac', '0001_initial', '2022-04-26 14:21:28.716952');
+INSERT INTO `django_migrations` VALUES (102, 'pgo_message_center', '0001_initial', '2022-04-27 00:47:52.760701');
+INSERT INTO `django_migrations` VALUES (103, 'pgo_user', '0003_auto_20220427_0047', '2022-04-27 00:47:52.843602');
+INSERT INTO `django_migrations` VALUES (104, 'pgo_message_center', '0002_auto_20220428_0034', '2022-04-28 00:34:26.869618');
+INSERT INTO `django_migrations` VALUES (105, 'pgo_message_center', '0003_auto_20220428_0154', '2022-04-28 01:54:27.103060');
+INSERT INTO `django_migrations` VALUES (106, 'pgo_cmdb', '0003_auto_20220428_2020', '2022-04-28 20:20:46.254138');
+INSERT INTO `django_migrations` VALUES (107, 'pgo_message_center', '0004_alter_history_labels', '2022-04-28 20:20:46.263644');
+INSERT INTO `django_migrations` VALUES (108, 'pgo_cmdb', '0004_auto_20220428_2027', '2022-04-28 20:27:07.060608');
+INSERT INTO `django_migrations` VALUES (109, 'pgo_cmdb', '0005_auto_20220428_2230', '2022-04-28 22:30:27.008063');
+INSERT INTO `django_migrations` VALUES (110, 'pgo_iac', '0002_auto_20220428_2230', '2022-04-28 22:30:27.319812');
+INSERT INTO `django_migrations` VALUES (111, 'pgo_message_center', '0005_auto_20220428_2230', '2022-04-28 22:30:27.384613');
+INSERT INTO `django_migrations` VALUES (112, 'pgo_permission', '0003_auto_20220428_2230', '2022-04-28 22:30:27.427621');
+INSERT INTO `django_migrations` VALUES (113, 'pgo_service_tree', '0004_auto_20220428_2230', '2022-04-28 22:30:27.492645');
+INSERT INTO `django_migrations` VALUES (114, 'pgo_user', '0004_remove_department_deleted_at', '2022-04-28 22:30:27.504717');
+INSERT INTO `django_migrations` VALUES (115, 'pgo_message_center', '0006_history_is_at', '2022-04-29 01:00:39.746607');
 COMMIT;
 
 -- ----------------------------
@@ -840,8 +832,8 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `django_session`;
 CREATE TABLE `django_session` (
-  `session_key` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `session_data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `session_key` varchar(40) COLLATE utf8mb4_general_ci NOT NULL,
+  `session_data` longtext COLLATE utf8mb4_general_ci NOT NULL,
   `expire_date` datetime(6) NOT NULL,
   PRIMARY KEY (`session_key`),
   KEY `django_session_expire_date_a5c62663` (`expire_date`)
@@ -1656,25 +1648,45 @@ CREATE TABLE `pgo_data_map_classify` (
 -- ----------------------------
 BEGIN;
 INSERT INTO `pgo_data_map_classify` VALUES (1, '2021-07-12 00:00:50.408101', '服务器', NULL, '', 0, 0, NULL, '2022-04-14 23:03:22.931622', NULL, NULL);
-INSERT INTO `pgo_data_map_classify` VALUES (6, '2021-07-12 00:05:02.000027', '物理服务器', 'server', 'data_map/icon/2021/07/12/服务器_1.png', 1, 0, 1, '2022-04-14 23:03:22.931622', NULL, NULL);
-INSERT INTO `pgo_data_map_classify` VALUES (7, '2021-08-19 14:59:59.286713', '物理网卡', 'server_network', 'data_map/icon/2021/08/19/网卡.png', 0, 1, 1, '2022-04-14 23:03:22.931622', NULL, NULL);
-INSERT INTO `pgo_data_map_classify` VALUES (8, '2021-08-19 15:16:45.070058', '物理磁盘', 'server_disk', 'data_map/icon/2021/08/19/w_磁盘.png', 0, 1, 1, '2022-04-14 23:03:22.931622', NULL, NULL);
-INSERT INTO `pgo_data_map_classify` VALUES (9, '2021-08-19 15:18:39.750724', '物理内存', 'server_memory', 'data_map/icon/2021/08/19/内存-RAM.png', 0, 1, 1, '2022-04-14 23:03:22.931622', NULL, NULL);
+INSERT INTO `pgo_data_map_classify` VALUES (6, '2021-07-12 00:05:02.000027', '物理服务器', 'server', 'cmdb/icon/2021/07/12/服务器_1.png', 1, 0, 1, '2022-04-14 23:03:22.931622', NULL, NULL);
+INSERT INTO `pgo_data_map_classify` VALUES (7, '2021-08-19 14:59:59.286713', '物理网卡', 'server_network', 'cmdb/icon/2021/08/19/网卡.png', 0, 1, 1, '2022-04-14 23:03:22.931622', NULL, NULL);
+INSERT INTO `pgo_data_map_classify` VALUES (8, '2021-08-19 15:16:45.070058', '物理磁盘', 'server_disk', 'cmdb/icon/2021/08/19/w_磁盘.png', 0, 1, 1, '2022-04-14 23:03:22.931622', NULL, NULL);
+INSERT INTO `pgo_data_map_classify` VALUES (9, '2021-08-19 15:18:39.750724', '物理内存', 'server_memory', 'cmdb/icon/2021/08/19/内存-RAM.png', 0, 1, 1, '2022-04-14 23:03:22.931622', NULL, NULL);
 INSERT INTO `pgo_data_map_classify` VALUES (10, '2021-08-19 15:36:51.173266', '网络设备', NULL, '', 0, 0, NULL, '2022-04-14 23:03:22.931622', NULL, NULL);
 INSERT INTO `pgo_data_map_classify` VALUES (11, '2021-08-19 15:36:59.363369', '安全设备', NULL, '', 0, 0, NULL, '2022-04-14 23:03:22.931622', NULL, NULL);
 INSERT INTO `pgo_data_map_classify` VALUES (12, '2021-08-19 15:37:06.740596', '云资产', NULL, '', 0, 0, NULL, '2022-04-14 23:03:22.931622', NULL, NULL);
-INSERT INTO `pgo_data_map_classify` VALUES (13, '2021-08-19 15:47:05.566653', '路由器', 'router', 'data_map/icon/2021/08/19/路由器.png', 1, 1, 10, '2022-04-14 23:03:22.931622', NULL, NULL);
-INSERT INTO `pgo_data_map_classify` VALUES (14, '2021-08-19 15:47:45.022502', '交换机', 'switch', 'data_map/icon/2021/08/19/交换机.png', 1, 1, 10, '2022-04-14 23:03:22.931622', NULL, NULL);
-INSERT INTO `pgo_data_map_classify` VALUES (15, '2021-08-19 15:48:57.248390', '三层交换机', 'core_switch', 'data_map/icon/2021/08/19/三层交换机.png', 1, 1, 10, '2022-04-14 23:03:22.931622', NULL, NULL);
-INSERT INTO `pgo_data_map_classify` VALUES (16, '2021-08-19 15:49:49.054852', '负载均衡', 'load_balancing', 'data_map/icon/2021/08/19/物理图_负载均衡器.png', 1, 1, 10, '2022-04-14 23:03:22.931622', NULL, NULL);
-INSERT INTO `pgo_data_map_classify` VALUES (17, '2021-08-19 15:50:47.699029', '防火墙', 'firewalld', 'data_map/icon/2021/08/19/防火墙.png', 1, 1, 11, '2022-04-14 23:03:22.931622', NULL, NULL);
-INSERT INTO `pgo_data_map_classify` VALUES (18, '2021-08-19 15:52:12.219057', '入侵检测', 'physics_lds', 'data_map/icon/2021/08/19/网络入侵检测.png', 1, 1, 11, '2022-04-14 23:03:22.931622', NULL, NULL);
-INSERT INTO `pgo_data_map_classify` VALUES (19, '2021-08-19 15:53:09.096900', '阿里云服务器', 'aliyun_ecs', 'data_map/icon/2021/08/19/ecs_云服务器ECS.png', 1, 0, 12, '2022-04-14 23:03:22.931622', NULL, NULL);
-INSERT INTO `pgo_data_map_classify` VALUES (20, '2021-08-19 15:53:39.240290', '阿里云OSS', 'aliyun_oss', 'data_map/icon/2021/08/19/oss_对象存储.png', 1, 1, 12, '2022-04-14 23:03:22.931622', NULL, NULL);
-INSERT INTO `pgo_data_map_classify` VALUES (21, '2021-08-19 15:54:24.223998', '阿里云CDN', 'aliyun_cdn', 'data_map/icon/2021/08/19/cdn_CDN.png', 1, 1, 12, '2022-04-14 23:03:22.931622', NULL, NULL);
-INSERT INTO `pgo_data_map_classify` VALUES (22, '2021-08-19 15:54:53.841831', '阿里云RDS', 'aliyun_rds', 'data_map/icon/2021/08/19/drds_分布式关系型数据库服务.png', 1, 1, 12, '2022-04-14 23:03:22.931622', NULL, NULL);
-INSERT INTO `pgo_data_map_classify` VALUES (23, '2021-08-19 15:55:45.058934', '阿里云SLB', 'aliyun_slb', 'data_map/icon/2021/08/19/slb_负载均衡.png', 1, 1, 12, '2022-04-14 23:03:22.931622', NULL, NULL);
-INSERT INTO `pgo_data_map_classify` VALUES (24, '2021-08-19 15:58:35.155110', '域名', 'domain_name', 'data_map/icon/2021/08/19/域名.png', 1, 1, 12, '2022-04-14 23:03:22.931622', NULL, NULL);
+INSERT INTO `pgo_data_map_classify` VALUES (13, '2021-08-19 15:47:05.566653', '路由器', 'router', 'cmdb/icon/2021/08/19/路由器.png', 1, 1, 10, '2022-04-14 23:03:22.931622', NULL, NULL);
+INSERT INTO `pgo_data_map_classify` VALUES (14, '2021-08-19 15:47:45.022502', '交换机', 'switch', 'cmdb/icon/2021/08/19/交换机.png', 1, 1, 10, '2022-04-14 23:03:22.931622', NULL, NULL);
+INSERT INTO `pgo_data_map_classify` VALUES (15, '2021-08-19 15:48:57.248390', '三层交换机', 'core_switch', 'cmdb/icon/2021/08/19/三层交换机.png', 1, 1, 10, '2022-04-14 23:03:22.931622', NULL, NULL);
+INSERT INTO `pgo_data_map_classify` VALUES (16, '2021-08-19 15:49:49.054852', '负载均衡', 'load_balancing', 'cmdb/icon/2021/08/19/物理图_负载均衡器.png', 1, 1, 10, '2022-04-14 23:03:22.931622', NULL, NULL);
+INSERT INTO `pgo_data_map_classify` VALUES (17, '2021-08-19 15:50:47.699029', '防火墙', 'firewalld', 'cmdb/icon/2021/08/19/防火墙.png', 1, 1, 11, '2022-04-14 23:03:22.931622', NULL, NULL);
+INSERT INTO `pgo_data_map_classify` VALUES (18, '2021-08-19 15:52:12.219057', '入侵检测', 'physics_lds', 'cmdb/icon/2021/08/19/网络入侵检测.png', 1, 1, 11, '2022-04-14 23:03:22.931622', NULL, NULL);
+INSERT INTO `pgo_data_map_classify` VALUES (19, '2021-08-19 15:53:09.096900', '阿里云服务器', 'aliyun_ecs', 'cmdb/icon/2021/08/19/ecs_云服务器ECS.png', 1, 0, 12, '2022-04-14 23:03:22.931622', NULL, NULL);
+INSERT INTO `pgo_data_map_classify` VALUES (20, '2021-08-19 15:53:39.240290', '阿里云OSS', 'aliyun_oss', 'cmdb/icon/2021/08/19/oss_对象存储.png', 1, 1, 12, '2022-04-14 23:03:22.931622', NULL, NULL);
+INSERT INTO `pgo_data_map_classify` VALUES (21, '2021-08-19 15:54:24.223998', '阿里云CDN', 'aliyun_cdn', 'cmdb/icon/2021/08/19/cdn_CDN.png', 1, 1, 12, '2022-04-14 23:03:22.931622', NULL, NULL);
+INSERT INTO `pgo_data_map_classify` VALUES (22, '2021-08-19 15:54:53.841831', '阿里云RDS', 'aliyun_rds', 'cmdb/icon/2021/08/19/drds_分布式关系型数据库服务.png', 1, 1, 12, '2022-04-14 23:03:22.931622', NULL, NULL);
+INSERT INTO `pgo_data_map_classify` VALUES (23, '2021-08-19 15:55:45.058934', '阿里云SLB', 'aliyun_slb', 'cmdb/icon/2021/08/19/slb_负载均衡.png', 1, 1, 12, '2022-04-14 23:03:22.931622', NULL, NULL);
+INSERT INTO `pgo_data_map_classify` VALUES (24, '2021-08-19 15:58:35.155110', '域名', 'domain_name', 'cmdb/icon/2021/08/19/域名.png', 1, 1, 12, '2022-04-14 23:03:22.931622', NULL, NULL);
+INSERT INTO `pgo_data_map_classify` VALUES (26, '2022-04-28 20:29:06.619856', 'test', NULL, '', 0, 0, NULL, '2022-04-28 20:29:06.619875', NULL, NULL);
+INSERT INTO `pgo_data_map_classify` VALUES (27, '2022-04-28 20:34:50.818767', 'tes1t', NULL, '', 0, 0, NULL, '2022-04-28 20:34:50.818783', NULL, NULL);
+INSERT INTO `pgo_data_map_classify` VALUES (28, '2022-04-28 20:40:54.185867', 'te1s1t', NULL, '', 0, 0, NULL, '2022-04-28 20:40:54.185885', NULL, NULL);
+INSERT INTO `pgo_data_map_classify` VALUES (29, '2022-04-28 21:39:26.159892', 'te21s1t', NULL, '', 0, 0, NULL, '2022-04-28 21:39:26.163276', NULL, NULL);
+INSERT INTO `pgo_data_map_classify` VALUES (30, '2022-04-28 21:41:30.310312', 'te212s1t', NULL, '', 0, 0, NULL, '2022-04-28 21:41:30.311650', NULL, NULL);
+INSERT INTO `pgo_data_map_classify` VALUES (31, '2022-04-28 21:42:11.768666', 'te2212s1t', NULL, '', 0, 0, NULL, '2022-04-28 21:42:11.771866', NULL, NULL);
+INSERT INTO `pgo_data_map_classify` VALUES (32, '2022-04-28 21:43:05.820948', '1111', NULL, '', 0, 0, NULL, '2022-04-28 21:43:05.823525', NULL, NULL);
+INSERT INTO `pgo_data_map_classify` VALUES (33, '2022-04-28 21:46:13.871042', '1212', NULL, '', 0, 0, NULL, '2022-04-28 21:46:13.871064', NULL, NULL);
+INSERT INTO `pgo_data_map_classify` VALUES (34, '2022-04-28 21:46:38.075236', '2123', NULL, '', 0, 0, NULL, '2022-04-28 21:46:38.076676', NULL, NULL);
+INSERT INTO `pgo_data_map_classify` VALUES (35, '2022-04-28 21:47:58.573894', '122', NULL, '', 0, 0, NULL, '2022-04-28 21:47:58.575867', NULL, NULL);
+INSERT INTO `pgo_data_map_classify` VALUES (36, '2022-04-28 21:48:42.628942', '12s', NULL, '', 0, 0, NULL, '2022-04-28 21:48:42.632704', NULL, NULL);
+INSERT INTO `pgo_data_map_classify` VALUES (37, '2022-04-28 21:49:19.221230', '1s2s', NULL, '', 0, 0, NULL, '2022-04-28 21:49:19.223353', NULL, NULL);
+INSERT INTO `pgo_data_map_classify` VALUES (38, '2022-04-28 21:49:48.948974', '1ss2s', NULL, '', 0, 0, NULL, '2022-04-28 21:49:48.950648', NULL, NULL);
+INSERT INTO `pgo_data_map_classify` VALUES (39, '2022-04-28 21:50:33.088766', '1ass2s', NULL, '', 0, 0, NULL, '2022-04-28 21:50:33.091039', NULL, NULL);
+INSERT INTO `pgo_data_map_classify` VALUES (40, '2022-04-28 21:52:25.717609', '1assq2s', NULL, '', 0, 0, NULL, '2022-04-28 21:52:25.720597', NULL, NULL);
+INSERT INTO `pgo_data_map_classify` VALUES (41, '2022-04-28 21:53:05.388142', '1aassq2s', NULL, '', 0, 0, NULL, '2022-04-28 21:53:05.391190', NULL, NULL);
+INSERT INTO `pgo_data_map_classify` VALUES (42, '2022-04-28 21:57:28.066180', 'qqq', NULL, '', 0, 0, NULL, '2022-04-28 21:57:28.068486', 1, NULL);
+INSERT INTO `pgo_data_map_classify` VALUES (43, '2022-04-28 21:57:54.172210', 'qqqq', NULL, '', 0, 0, NULL, '2022-04-28 21:57:54.174131', 1, 1);
+INSERT INTO `pgo_data_map_classify` VALUES (44, '2022-04-28 22:01:35.234223', 'qqxqq', NULL, '', 0, 0, NULL, '2022-04-28 22:01:35.234248', 1, 1);
+INSERT INTO `pgo_data_map_classify` VALUES (45, '2022-04-28 22:03:59.609688', 'qqx21qq', NULL, '', 0, 0, NULL, '2022-04-28 22:09:27.431025', 1, 1);
 COMMIT;
 
 -- ----------------------------
@@ -2439,7 +2451,7 @@ CREATE TABLE `pgo_message_center_group` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `created_at` datetime(6) NOT NULL,
   `updated_at` datetime(6) NOT NULL,
-  `name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `name` varchar(32) COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -2483,17 +2495,17 @@ CREATE TABLE `pgo_message_center_history` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `created_at` datetime(6) NOT NULL,
   `updated_at` datetime(6) NOT NULL,
-  `app_name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `app_name` varchar(32) COLLATE utf8mb4_general_ci NOT NULL,
+  `name` varchar(32) COLLATE utf8mb4_general_ci NOT NULL,
   `status` int NOT NULL,
-  `instance` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `instance` varchar(1024) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `labels` json DEFAULT NULL,
-  `summary` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `summary` varchar(1024) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `description` longtext COLLATE utf8mb4_general_ci,
   `start_at` datetime(6) DEFAULT NULL,
   `end_at` datetime(6) DEFAULT NULL,
-  `duration` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `output_err` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `duration` varchar(64) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `output_err` longtext COLLATE utf8mb4_general_ci,
   `repetition_num` int NOT NULL,
   `is_all` tinyint(1) NOT NULL,
   `level_id` bigint NOT NULL,
@@ -2505,7 +2517,7 @@ CREATE TABLE `pgo_message_center_history` (
   KEY `pgo_message_center_h_user_id_2a52a0cc_fk_pgo_user_` (`user_id`),
   CONSTRAINT `pgo_message_center_h_level_id_8b163f40_fk_pgo_messa` FOREIGN KEY (`level_id`) REFERENCES `pgo_message_center_level` (`id`),
   CONSTRAINT `pgo_message_center_h_user_id_2a52a0cc_fk_pgo_user_` FOREIGN KEY (`user_id`) REFERENCES `pgo_user_userprofile` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of pgo_message_center_history
@@ -2539,7 +2551,6 @@ INSERT INTO `pgo_message_center_history` VALUES (25, '2022-04-29 01:23:29.316941
 INSERT INTO `pgo_message_center_history` VALUES (26, '2022-04-29 01:24:11.648869', '2022-04-29 01:24:11.649105', 'iac', '10秒执行一次', 0, NULL, '{\"forks\": 1, \"timeout\": 3600, \"playbook\": \"deploy.yaml\", \"inventory\": \"[\'127.0.0.1\', \'192.168.1.1\']\", \"repository\": \"helloworld\"}', '手动执行', NULL, '2022-04-29 01:24:09.918429', '2022-04-29 01:24:11.621522', '0:00:01.703093', NULL, 1, 0, 6, NULL, 2, 1);
 INSERT INTO `pgo_message_center_history` VALUES (27, '2022-04-29 02:36:19.110307', '2022-04-29 02:36:19.110492', 'iac', '10秒执行一次', 0, NULL, '{\"forks\": 1, \"timeout\": 3600, \"playbook\": \"deploy.yaml\", \"inventory\": \"[\'127.0.0.1\', \'192.168.1.1\']\", \"repository\": \"helloworld\"}', '手动执行', NULL, '2022-04-29 02:36:17.405763', '2022-04-29 02:36:19.089070', '0:00:01.683307', NULL, 1, 0, 6, NULL, 2, 1);
 INSERT INTO `pgo_message_center_history` VALUES (28, '2022-04-29 03:00:50.431863', '2022-04-29 03:00:50.432017', '测试', '测试', 0, '收拾收拾', '\"\"', 'sass啊', '', '2022-04-21 19:00:36.762000', '2022-04-28 19:00:39.000000', '00:00:99', NULL, 1, 0, 4, 1, 0, 0);
-INSERT INTO `pgo_message_center_history` VALUES (29, '2022-04-29 20:44:02.916673', '2022-04-29 20:44:02.916693', 'message_center', '通知测试-pgoops自动化运维平台', 0, '0.0.0.0', '{\"app\": \"message_center\", \"user\": \"闫世成\"}', '这是一条测试消息！', '这是来自: 闫世成,发起的测试消息。\n 官网地址: www.pgoops.com', '2022-04-29 20:44:02.916442', '2022-04-29 20:44:02.916448', '00:00:00', NULL, 1, 0, 3, 1, 2, 1);
 COMMIT;
 
 -- ----------------------------
@@ -2550,8 +2561,8 @@ CREATE TABLE `pgo_message_center_level` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `created_at` datetime(6) NOT NULL,
   `updated_at` datetime(6) NOT NULL,
-  `name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `cname` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `name` varchar(32) COLLATE utf8mb4_general_ci NOT NULL,
+  `cname` varchar(32) COLLATE utf8mb4_general_ci NOT NULL,
   `weight` int NOT NULL,
   `is_system` tinyint(1) NOT NULL,
   `group_id` bigint NOT NULL,
@@ -2588,8 +2599,8 @@ CREATE TABLE `pgo_message_center_provider` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `created_at` datetime(6) NOT NULL,
   `updated_at` datetime(6) NOT NULL,
-  `name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `provider_class` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `name` varchar(32) COLLATE utf8mb4_general_ci NOT NULL,
+  `provider_class` varchar(128) COLLATE utf8mb4_general_ci NOT NULL,
   `method` int NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `pgo_message_center_provider_name_provider_class_98169cfd_uniq` (`name`,`provider_class`)
@@ -2629,23 +2640,23 @@ CREATE TABLE `pgo_permission_menu` (
   PRIMARY KEY (`id`),
   KEY `pgo_permission_men_pid_id_109cf81a_fk_pgo_per` (`pid_id`),
   CONSTRAINT `pgo_permission_men_pid_id_109cf81a_fk_pgo_per` FOREIGN KEY (`pid_id`) REFERENCES `pgo_permission_menu` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of pgo_permission_menu
 -- ----------------------------
 BEGIN;
-INSERT INTO `pgo_permission_menu` VALUES (13, '2021-07-28 20:16:20.228708', 98, '/data-map', 'Layout', 'DATA-MAP', '数据字典', 'asset', NULL, NULL, 0, 1, 0, 0, 0, NULL, '2022-04-29 15:23:26.996817');
-INSERT INTO `pgo_permission_menu` VALUES (14, '2021-07-28 20:21:02.572345', 1, 'classify', '/data-map/tableClassify/tableManage', 'CmdbClassify', '字典管理', 'type', NULL, NULL, 0, 1, 0, 0, 0, 13, '2022-04-29 15:24:12.310744');
-INSERT INTO `pgo_permission_menu` VALUES (15, '2021-07-28 20:30:29.805331', 2, 'asset', '/data-map/assetsCenter/assetsCenter', 'CmdbAsset', '资产中心', 'assetc', NULL, NULL, 0, 1, 0, 0, 0, 13, '2022-04-29 15:21:53.262384');
-INSERT INTO `pgo_permission_menu` VALUES (16, '2021-07-28 20:32:17.591965', 3, 'asset/search', '/data-map/searchCenter/scList', 'CmdbAssetSearch', '查询中心', 'search', NULL, NULL, 0, 1, 0, 0, 0, 13, '2022-04-29 15:22:07.240050');
-INSERT INTO `pgo_permission_menu` VALUES (17, '2021-07-28 20:33:53.500284', 4, 'classify/info', '/data-map/tableClassify/tableInfo', 'CMDBClassifyInfo', '表数据详情', 'user', NULL, NULL, 1, 1, 0, 0, 0, 13, '2022-04-29 15:22:10.771286');
-INSERT INTO `pgo_permission_menu` VALUES (18, '2021-07-28 20:34:53.085828', 5, 'asset/info', '/data-map/searchCenter/searchInfo', 'CMDBAssetInfo', '字典详情', 'user', NULL, NULL, 1, 1, 0, 0, 0, 13, '2022-04-29 15:23:52.441774');
+INSERT INTO `pgo_permission_menu` VALUES (13, '2021-07-28 20:16:20.228708', 2, '/cmdb', 'Layout', 'CMDB', 'CMDB', 'asset', NULL, NULL, 0, 1, 0, 0, 0, NULL, '2022-04-14 23:03:23.072170');
+INSERT INTO `pgo_permission_menu` VALUES (14, '2021-07-28 20:21:02.572345', 1, 'classify', '/cmdb/tableClassify/tableManage', 'CmdbClassify', '类型管理', 'type', NULL, NULL, 0, 1, 0, 0, 0, 13, '2022-04-14 23:03:23.072170');
+INSERT INTO `pgo_permission_menu` VALUES (15, '2021-07-28 20:30:29.805331', 2, 'asset', '/cmdb/assetsCenter/assetsCenter', 'CmdbAsset', '资产中心', 'assetc', NULL, NULL, 0, 1, 0, 0, 0, 13, '2022-04-14 23:03:23.072170');
+INSERT INTO `pgo_permission_menu` VALUES (16, '2021-07-28 20:32:17.591965', 3, 'asset/search', '/cmdb/searchCenter/scList', 'CmdbAssetSearch', '查询中心', 'search', NULL, NULL, 0, 1, 0, 0, 0, 13, '2022-04-14 23:03:23.072170');
+INSERT INTO `pgo_permission_menu` VALUES (17, '2021-07-28 20:33:53.500284', 4, 'classify/info', '/cmdb/tableClassify/tableInfo', 'CMDBClassifyInfo', '表数据详情', 'user', NULL, NULL, 1, 1, 0, 0, 0, 13, '2022-04-14 23:03:23.072170');
+INSERT INTO `pgo_permission_menu` VALUES (18, '2021-07-28 20:34:53.085828', 5, 'asset/info', '/cmdb/searchCenter/searchInfo', 'CMDBAssetInfo', '资产详情', 'user', NULL, NULL, 1, 1, 0, 0, 0, 13, '2022-04-14 23:03:23.072170');
 INSERT INTO `pgo_permission_menu` VALUES (19, '2021-07-29 16:09:52.561170', 99, '/user', 'Layout', 'USER', '用户中心', 'user', NULL, NULL, 0, 1, 0, 0, 0, NULL, '2022-04-14 23:03:23.072170');
 INSERT INTO `pgo_permission_menu` VALUES (20, '2021-07-29 16:11:47.609372', 1, 'personal-center', '/users/personal-center', 'USERINFO', '个人中心', 'useri', NULL, NULL, 0, 1, 0, 0, 0, 19, '2022-04-14 23:03:23.072170');
 INSERT INTO `pgo_permission_menu` VALUES (21, '2021-07-29 16:12:15.384063', 2, 'department', '/users/department', 'USERDEP', '部门管理', 'department', NULL, NULL, 0, 1, 0, 0, 0, 19, '2022-04-14 23:03:23.072170');
 INSERT INTO `pgo_permission_menu` VALUES (22, '2021-07-29 16:13:10.062776', 3, 'user-management', '/users/user-management', 'USERManagement', '用户管理', 'users', NULL, '', 0, 1, 0, 0, 0, 19, '2022-04-14 23:03:23.072170');
-INSERT INTO `pgo_permission_menu` VALUES (23, '2021-07-29 16:16:32.617007', 97, '/permission', 'Layout', 'Permission', '权限管理', 'prem', NULL, NULL, 0, 1, 0, 0, 0, NULL, '2022-04-29 15:23:16.261090');
+INSERT INTO `pgo_permission_menu` VALUES (23, '2021-07-29 16:16:32.617007', 98, '/permission', 'Layout', 'Permission', '权限管理', 'prem', NULL, NULL, 0, 1, 0, 0, 0, NULL, '2022-04-14 23:03:23.072170');
 INSERT INTO `pgo_permission_menu` VALUES (24, '2021-07-29 16:19:41.723041', 1, 'roles', '/permission/roles/index', 'PermRoles', '角色管理', 'role', NULL, NULL, 0, 1, 0, 0, 0, 23, '2022-04-14 23:03:23.072170');
 INSERT INTO `pgo_permission_menu` VALUES (25, '2021-07-29 16:24:28.257448', 2, 'directive', '/permission/rules/index', 'PermDirective', 'API权限', 'rule_api', NULL, '', 0, 1, 0, 0, 0, 23, '2022-04-14 23:03:23.072170');
 INSERT INTO `pgo_permission_menu` VALUES (26, '2021-07-29 16:25:32.169458', 3, 'menu', '/permission/menus/index', 'PermMenus', '菜单管理', 'menus', NULL, NULL, 0, 1, 0, 0, 0, 23, '2022-04-14 23:03:23.072170');
@@ -2664,12 +2675,6 @@ INSERT INTO `pgo_permission_menu` VALUES (38, '2022-04-23 01:37:01.561890', 2, '
 INSERT INTO `pgo_permission_menu` VALUES (39, '2022-04-23 01:38:42.581331', 3, 'task', '/iac/task/index', 'IAC_TASK', '任务中心', 'minion', '', '', 0, 1, 0, 0, 0, 36, '2022-04-23 01:40:55.889113');
 INSERT INTO `pgo_permission_menu` VALUES (40, '2022-04-23 01:40:38.269502', 9, 'repository/detail', '/iac/repository/components/detail', 'IAC_REPOSITORY_DETAIL', '项目详情', 'taskinfo', '', '', 1, 1, 0, 0, 0, 36, '2022-04-23 01:40:38.269528');
 INSERT INTO `pgo_permission_menu` VALUES (41, '2022-04-23 01:42:16.059723', 10, 'task/detail', '/iac/task/components/detail', 'IAC_TASK_DETAIL', '任务详情', 'taskinfo', '', '', 1, 1, 0, 0, 0, 36, '2022-04-23 01:42:24.961344');
-INSERT INTO `pgo_permission_menu` VALUES (43, '2022-04-29 18:01:39.395379', 96, '/message-center', 'Layout', 'MESSAGE_CENTER', '消息中心', 'cmessage', '', '', 0, 1, 0, 0, 0, NULL, '2022-04-30 20:54:25.587992');
-INSERT INTO `pgo_permission_menu` VALUES (44, '2022-04-29 18:02:43.887346', 1, 'history', '/message_center/history/index', 'MESSAGE_CENTER_HISTORY', '消息历史', 'chistory', '', '', 0, 1, 0, 0, 0, 43, '2022-04-29 18:08:12.881035');
-INSERT INTO `pgo_permission_menu` VALUES (45, '2022-04-29 18:03:50.490999', 2, 'level', '/message_center/level/index', 'MESSAGE_CENTER_LEVEL', '级别管理', 'clevel', '', '', 0, 1, 0, 0, 0, 43, '2022-04-29 18:09:00.417025');
-INSERT INTO `pgo_permission_menu` VALUES (46, '2022-04-29 18:05:01.129431', 3, 'provider', '/message_center/provider/index', 'MESSAGE_CENTER_PROVIDER', '媒介管理', 'cmeijie', '', '', 0, 1, 0, 0, 0, 43, '2022-04-29 18:08:02.695323');
-INSERT INTO `pgo_permission_menu` VALUES (47, '2022-04-29 18:06:13.105412', 4, 'group', '/message_center/group/index', 'MESSAGE_CENTER_GROUP', '通告组', 'cgroup', '', '', 0, 1, 0, 0, 0, 43, '2022-04-29 18:08:47.013375');
-INSERT INTO `pgo_permission_menu` VALUES (48, '2022-04-29 18:07:20.236091', 6, 'history/detail', '/message_center/history/components/detail', 'MESSAGE_CENTER_HISTORY_DETAIL', '历史详情', 'chistory', '', '', 1, 1, 0, 0, 0, 43, '2022-04-29 18:11:32.959132');
 COMMIT;
 
 -- ----------------------------
@@ -2685,7 +2690,7 @@ CREATE TABLE `pgo_permission_menu_role` (
   KEY `pgo_permission_men_role_id_e2d77099_fk_pgo_per` (`role_id`),
   CONSTRAINT `pgo_permission_men_menu_id_02863086_fk_pgo_per` FOREIGN KEY (`menu_id`) REFERENCES `pgo_permission_menu` (`id`),
   CONSTRAINT `pgo_permission_men_role_id_e2d77099_fk_pgo_per` FOREIGN KEY (`role_id`) REFERENCES `pgo_permission_role` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of pgo_permission_menu_role
@@ -2750,18 +2755,6 @@ INSERT INTO `pgo_permission_menu_role` VALUES (70, 40, 1);
 INSERT INTO `pgo_permission_menu_role` VALUES (71, 40, 15);
 INSERT INTO `pgo_permission_menu_role` VALUES (72, 41, 1);
 INSERT INTO `pgo_permission_menu_role` VALUES (73, 41, 15);
-INSERT INTO `pgo_permission_menu_role` VALUES (76, 43, 1);
-INSERT INTO `pgo_permission_menu_role` VALUES (77, 43, 15);
-INSERT INTO `pgo_permission_menu_role` VALUES (78, 44, 1);
-INSERT INTO `pgo_permission_menu_role` VALUES (79, 44, 15);
-INSERT INTO `pgo_permission_menu_role` VALUES (84, 45, 1);
-INSERT INTO `pgo_permission_menu_role` VALUES (85, 45, 15);
-INSERT INTO `pgo_permission_menu_role` VALUES (80, 46, 1);
-INSERT INTO `pgo_permission_menu_role` VALUES (81, 46, 15);
-INSERT INTO `pgo_permission_menu_role` VALUES (82, 47, 1);
-INSERT INTO `pgo_permission_menu_role` VALUES (83, 47, 15);
-INSERT INTO `pgo_permission_menu_role` VALUES (86, 48, 1);
-INSERT INTO `pgo_permission_menu_role` VALUES (87, 48, 15);
 COMMIT;
 
 -- ----------------------------
@@ -2772,7 +2765,7 @@ CREATE TABLE `pgo_permission_role` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `created_at` datetime(6) NOT NULL,
   `updated_at` datetime(6) NOT NULL,
-  `name` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `name` varchar(128) COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
   UNIQUE KEY `pgo_permission_role_name_24c59e8a_uniq` (`name`)
@@ -2782,9 +2775,9 @@ CREATE TABLE `pgo_permission_role` (
 -- Records of pgo_permission_role
 -- ----------------------------
 BEGIN;
-INSERT INTO `pgo_permission_role` VALUES (1, '2022-04-12 20:55:25.806676', '2022-04-30 21:02:00.330583', 'admin');
-INSERT INTO `pgo_permission_role` VALUES (14, '2022-04-12 20:55:43.241249', '2022-04-30 21:01:43.584338', 'edit');
-INSERT INTO `pgo_permission_role` VALUES (15, '1900-01-20 16:35:12.970429', '2022-04-30 21:01:50.485195', 'pgo');
+INSERT INTO `pgo_permission_role` VALUES (1, '2022-04-12 20:55:25.806676', '2022-04-12 20:55:25.806756', 'admin');
+INSERT INTO `pgo_permission_role` VALUES (14, '2022-04-12 20:55:43.241249', '2022-04-12 20:55:43.241329', 'edit');
+INSERT INTO `pgo_permission_role` VALUES (15, '1900-01-20 16:35:12.970429', '1900-01-20 23:03:23.094005', 'pgo');
 COMMIT;
 
 -- ----------------------------
@@ -2800,18 +2793,12 @@ CREATE TABLE `pgo_permission_role_rule` (
   KEY `pgo_permission_rol_rule_id_64007a7d_fk_pgo_per` (`rule_id`),
   CONSTRAINT `pgo_permission_rol_role_id_91953b84_fk_pgo_per` FOREIGN KEY (`role_id`) REFERENCES `pgo_permission_role` (`id`),
   CONSTRAINT `pgo_permission_rol_rule_id_64007a7d_fk_pgo_per` FOREIGN KEY (`rule_id`) REFERENCES `pgo_permission_rules` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of pgo_permission_role_rule
 -- ----------------------------
 BEGIN;
-INSERT INTO `pgo_permission_role_rule` VALUES (43, 1, 54);
-INSERT INTO `pgo_permission_role_rule` VALUES (44, 1, 55);
-INSERT INTO `pgo_permission_role_rule` VALUES (42, 1, 56);
-INSERT INTO `pgo_permission_role_rule` VALUES (39, 14, 55);
-INSERT INTO `pgo_permission_role_rule` VALUES (41, 15, 55);
-INSERT INTO `pgo_permission_role_rule` VALUES (40, 15, 56);
 COMMIT;
 
 -- ----------------------------
@@ -2822,41 +2809,41 @@ CREATE TABLE `pgo_permission_rules` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `created_at` datetime(6) NOT NULL,
   `updated_at` datetime(6) NOT NULL,
-  `name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `path` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `method` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `name` varchar(64) COLLATE utf8mb4_general_ci NOT NULL,
+  `path` varchar(128) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `method` varchar(128) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `pid_id` bigint DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `pgo_permission_rules_pid_id_5f6ab9bb_fk_pgo_permission_rules_id` (`pid_id`),
   CONSTRAINT `pgo_permission_rules_pid_id_5f6ab9bb_fk_pgo_permission_rules_id` FOREIGN KEY (`pid_id`) REFERENCES `pgo_permission_rules` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of pgo_permission_rules
 -- ----------------------------
 BEGIN;
-INSERT INTO `pgo_permission_rules` VALUES (2, '1900-01-20 13:28:16.999268', '2022-04-30 20:52:35.335047', 'all', '/api/v1/data-map/*', '*', 9);
+INSERT INTO `pgo_permission_rules` VALUES (2, '1900-01-20 13:28:16.999268', '1900-01-20 23:03:23.112014', 'all', '/api/v1/cmdb/*', '*', 9);
 INSERT INTO `pgo_permission_rules` VALUES (3, '1900-01-20 13:38:01.458223', '1900-01-20 23:03:23.112014', 'all', '/api/v1/prem/*', '*', 10);
-INSERT INTO `pgo_permission_rules` VALUES (4, '1900-01-20 16:48:18.907675', '2022-04-30 20:52:39.248242', 'get classify', '/api/v1/data-map/classify/', 'GET', 9);
-INSERT INTO `pgo_permission_rules` VALUES (5, '1900-01-20 16:51:49.942402', '2022-04-30 20:52:44.636149', 'update classify', '/api/v1/data-map/classify/ID/', 'PUT', 9);
-INSERT INTO `pgo_permission_rules` VALUES (6, '1900-01-20 16:53:40.740096', '2022-04-30 20:52:48.589589', 'post classify', '/api/v1/data-map/classify/', 'POST', 9);
-INSERT INTO `pgo_permission_rules` VALUES (7, '1900-01-20 16:56:41.896674', '2022-04-30 20:52:53.091397', 'GET Classify Parent', '/api/v1/data-map/classify/parent/', 'GET', 9);
+INSERT INTO `pgo_permission_rules` VALUES (4, '1900-01-20 16:48:18.907675', '1900-01-20 23:03:23.112014', 'get classify', '/api/v1/cmdb/classify/', 'GET', 9);
+INSERT INTO `pgo_permission_rules` VALUES (5, '1900-01-20 16:51:49.942402', '1900-01-20 23:03:23.112014', 'update classify', '/api/v1/cmdb/classify/ID/', 'PUT', 9);
+INSERT INTO `pgo_permission_rules` VALUES (6, '1900-01-20 16:53:40.740096', '1900-01-20 23:03:23.112014', 'post classify', '/api/v1/cmdb/classify/', 'POST', 9);
+INSERT INTO `pgo_permission_rules` VALUES (7, '1900-01-20 16:56:41.896674', '1900-01-20 23:03:23.112014', 'GET Classify Parent', '/api/v1/cmdb/classify/parent/', 'GET', 9);
 INSERT INTO `pgo_permission_rules` VALUES (8, '1900-01-20 19:09:36.763280', '1900-01-20 23:03:23.112014', '服务树', NULL, NULL, NULL);
-INSERT INTO `pgo_permission_rules` VALUES (9, '1900-01-20 19:12:52.207094', '2022-04-30 20:52:06.098835', '数据字典', NULL, NULL, NULL);
+INSERT INTO `pgo_permission_rules` VALUES (9, '1900-01-20 19:12:52.207094', '1900-01-20 23:03:23.112014', 'CMDB', NULL, NULL, NULL);
 INSERT INTO `pgo_permission_rules` VALUES (10, '1900-01-20 19:14:24.355912', '1900-01-20 23:03:23.112014', '权限管理', NULL, NULL, NULL);
-INSERT INTO `pgo_permission_rules` VALUES (11, '1900-01-20 18:08:25.576785', '2022-04-30 20:52:57.002124', 'DELETE Classify', '/api/v1/data-map/classify/ID/', 'DELETE', 9);
-INSERT INTO `pgo_permission_rules` VALUES (12, '1900-01-20 18:09:49.552376', '2022-04-30 20:53:00.141558', 'GET Field', '/api/v1/data-map/field/', 'GET', 9);
-INSERT INTO `pgo_permission_rules` VALUES (13, '1900-01-20 18:10:09.369177', '2022-04-30 20:53:03.684248', 'POST Field', '/api/v1/data-map/field/', 'POST', 9);
-INSERT INTO `pgo_permission_rules` VALUES (14, '1900-01-20 18:10:28.062173', '2022-04-30 20:53:07.881999', 'PUT Field', '/api/v1/data-map/field/ID/', 'PUT', 9);
-INSERT INTO `pgo_permission_rules` VALUES (15, '1900-01-20 18:10:42.370868', '2022-04-30 20:53:11.355885', 'DELETE Field', '/api/v1/data-map/field/ID/', 'DELETE', 9);
-INSERT INTO `pgo_permission_rules` VALUES (16, '1900-01-20 18:12:36.627763', '2022-04-30 20:53:18.653089', 'Bind Classify', '/api/v1/data-map/classify/bind/', 'POST', 9);
-INSERT INTO `pgo_permission_rules` VALUES (17, '1900-01-20 18:13:04.725632', '2022-04-30 20:53:22.449152', 'UnBind Classify', '/api/v1/data-map/classify/un-bind/', 'POST', 9);
+INSERT INTO `pgo_permission_rules` VALUES (11, '1900-01-20 18:08:25.576785', '1900-01-20 23:03:23.112014', 'DELETE Classify', '/api/v1/cmdb/classify/ID/', 'DELETE', 9);
+INSERT INTO `pgo_permission_rules` VALUES (12, '1900-01-20 18:09:49.552376', '1900-01-20 23:03:23.112014', 'GET Field', '/api/v1/cmdb/field/', 'GET', 9);
+INSERT INTO `pgo_permission_rules` VALUES (13, '1900-01-20 18:10:09.369177', '1900-01-20 23:03:23.112014', 'POST Field', '/api/v1/cmdb/field/', 'POST', 9);
+INSERT INTO `pgo_permission_rules` VALUES (14, '1900-01-20 18:10:28.062173', '1900-01-20 23:03:23.112014', 'PUT Field', '/api/v1/cmdb/field/ID/', 'PUT', 9);
+INSERT INTO `pgo_permission_rules` VALUES (15, '1900-01-20 18:10:42.370868', '1900-01-20 23:03:23.112014', 'DELETE Field', '/api/v1/cmdb/field/ID/', 'DELETE', 9);
+INSERT INTO `pgo_permission_rules` VALUES (16, '1900-01-20 18:12:36.627763', '1900-01-20 23:03:23.112014', 'Bind Classify', '/api/v1/cmdb/classify/bind/', 'POST', 9);
+INSERT INTO `pgo_permission_rules` VALUES (17, '1900-01-20 18:13:04.725632', '1900-01-20 23:03:23.112014', 'UnBind Classify', '/api/v1/cmdb/classify/un-bind/', 'POST', 9);
 INSERT INTO `pgo_permission_rules` VALUES (18, '1900-01-20 18:27:09.263252', '1900-01-20 23:03:23.112014', '用户管理', NULL, NULL, NULL);
 INSERT INTO `pgo_permission_rules` VALUES (19, '1900-01-20 18:27:50.548873', '1900-01-20 23:03:23.112014', 'all', '/api/v1/user/*', '*', 18);
-INSERT INTO `pgo_permission_rules` VALUES (20, '1900-01-20 10:30:01.487213', '2022-04-30 20:53:26.534875', 'all get', '/api/v1/data-map/*', 'GET', 9);
+INSERT INTO `pgo_permission_rules` VALUES (20, '1900-01-20 10:30:01.487213', '1900-01-20 23:03:23.112014', 'all get', '/api/v1/cmdb/*', 'GET', 9);
 INSERT INTO `pgo_permission_rules` VALUES (21, '1900-01-20 10:30:16.185956', '1900-01-20 23:03:23.112014', 'all update', '/api/v1/cmdb/*', 'PUT', 9);
-INSERT INTO `pgo_permission_rules` VALUES (22, '1900-01-20 10:30:32.340751', '2022-04-30 20:53:29.862161', 'all create', '/api/v1/data-map/*', 'POST', 9);
-INSERT INTO `pgo_permission_rules` VALUES (23, '1900-01-20 10:30:41.887176', '2022-04-30 20:53:32.795778', 'all delete', '/api/v1/data-map/*', 'DELETE', 9);
+INSERT INTO `pgo_permission_rules` VALUES (22, '1900-01-20 10:30:32.340751', '1900-01-20 23:03:23.112014', 'all create', '/api/v1/cmdb/*', 'POST', 9);
+INSERT INTO `pgo_permission_rules` VALUES (23, '1900-01-20 10:30:41.887176', '1900-01-20 23:03:23.112014', 'all delete', '/api/v1/cmdb/*', 'DELETE', 9);
 INSERT INTO `pgo_permission_rules` VALUES (24, '1900-01-20 10:39:06.499097', '1900-01-20 23:03:23.112014', 'all get', '/api/v1/prem/*', 'GET', 10);
 INSERT INTO `pgo_permission_rules` VALUES (25, '1900-01-20 10:39:21.627595', '1900-01-20 23:03:23.112014', 'all update', '/api/v1/prem/*', 'PUT', 10);
 INSERT INTO `pgo_permission_rules` VALUES (26, '1900-01-20 10:39:33.036132', '1900-01-20 23:03:23.112014', 'all create', '/api/v1/prem/*', 'POST', 10);
@@ -2872,24 +2859,6 @@ INSERT INTO `pgo_permission_rules` VALUES (35, '1900-01-20 10:45:03.095498', '19
 INSERT INTO `pgo_permission_rules` VALUES (36, '1900-01-20 10:45:12.204132', '1900-01-20 23:03:23.112014', 'all create', '/api/v1/service-tree/*', 'POST', 8);
 INSERT INTO `pgo_permission_rules` VALUES (37, '1900-01-20 10:45:20.417171', '1900-01-20 23:03:23.112014', 'all delete', '/api/v1/service-tree/*', 'DELETE', 8);
 INSERT INTO `pgo_permission_rules` VALUES (38, '1900-01-20 12:32:29.453987', '1900-01-20 23:03:23.112014', '个人中心 get', '/api/v1/user/user-profile/:id/', 'GET', 18);
-INSERT INTO `pgo_permission_rules` VALUES (39, '2022-04-30 20:53:42.626814', '2022-04-30 20:53:42.626860', '代码平台', NULL, NULL, NULL);
-INSERT INTO `pgo_permission_rules` VALUES (40, '2022-04-30 20:55:49.917409', '2022-04-30 20:55:49.917486', '消息中心', NULL, NULL, NULL);
-INSERT INTO `pgo_permission_rules` VALUES (41, '2022-04-30 20:56:00.923384', '2022-04-30 20:56:13.309859', '全局(v1)', NULL, NULL, NULL);
-INSERT INTO `pgo_permission_rules` VALUES (42, '2022-04-30 20:57:48.747003', '2022-04-30 20:57:48.747062', 'all', 'v1/iac/*', '*', 39);
-INSERT INTO `pgo_permission_rules` VALUES (43, '2022-04-30 20:57:55.880079', '2022-04-30 20:57:55.880109', 'all get', 'v1/iac/*', 'GET', 39);
-INSERT INTO `pgo_permission_rules` VALUES (44, '2022-04-30 20:58:02.487889', '2022-04-30 20:58:02.487927', 'all post', 'v1/iac/*', 'POST', 39);
-INSERT INTO `pgo_permission_rules` VALUES (45, '2022-04-30 20:58:16.421837', '2022-04-30 20:58:16.421874', 'all put', 'v1/iac/*', 'PUT', 39);
-INSERT INTO `pgo_permission_rules` VALUES (46, '2022-04-30 20:58:27.940495', '2022-04-30 20:58:27.940540', 'all delete', 'v1/iac/*', 'DELETE', 39);
-INSERT INTO `pgo_permission_rules` VALUES (47, '2022-04-30 20:58:38.622589', '2022-04-30 20:58:38.622643', 'all path', 'v1/iac/*', 'PATH', 39);
-INSERT INTO `pgo_permission_rules` VALUES (48, '2022-04-30 20:59:21.849058', '2022-04-30 20:59:35.042280', 'all', '/api/v1/message-center/*', '*', 40);
-INSERT INTO `pgo_permission_rules` VALUES (49, '2022-04-30 20:59:31.162058', '2022-04-30 20:59:31.162121', 'all get', '/api/v1/message-center/*', 'GET', 40);
-INSERT INTO `pgo_permission_rules` VALUES (50, '2022-04-30 20:59:48.266417', '2022-04-30 20:59:52.885585', 'all post', '/api/v1/message-center/*', 'POST', 40);
-INSERT INTO `pgo_permission_rules` VALUES (51, '2022-04-30 20:59:59.190003', '2022-04-30 20:59:59.190038', 'all put', '/api/v1/message-center/*', 'PUT', 40);
-INSERT INTO `pgo_permission_rules` VALUES (52, '2022-04-30 21:00:06.062179', '2022-04-30 21:00:06.062234', 'all delete', '/api/v1/message-center/*', 'DELETE', 40);
-INSERT INTO `pgo_permission_rules` VALUES (53, '2022-04-30 21:00:21.128475', '2022-04-30 21:00:21.128512', 'all path', '/api/v1/message-center/*', 'PATH', 40);
-INSERT INTO `pgo_permission_rules` VALUES (54, '2022-04-30 21:00:46.158376', '2022-04-30 21:00:46.158502', 'gloab all api', '/api/v1/*', '*', 41);
-INSERT INTO `pgo_permission_rules` VALUES (55, '2022-04-30 21:00:58.852349', '2022-04-30 21:00:58.852384', 'gloab all get', '/api/v1/*', 'GET', 41);
-INSERT INTO `pgo_permission_rules` VALUES (56, '2022-04-30 21:01:10.326330', '2022-04-30 21:01:10.326393', 'gloab all post', '/api/v1/*', 'POST', 41);
 COMMIT;
 
 -- ----------------------------
@@ -2900,10 +2869,10 @@ CREATE TABLE `pgo_service_tree` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `created_at` datetime(6) NOT NULL,
   `updated_at` datetime(6) NOT NULL,
-  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `name_cn` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `abspath` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `appkey` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `name` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `name_cn` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `abspath` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
+  `appkey` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
   `lft` int unsigned NOT NULL,
   `rght` int unsigned NOT NULL,
   `tree_id` int unsigned NOT NULL,
@@ -3046,7 +3015,7 @@ CREATE TABLE `pgo_service_tree_node_tag` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `created_at` datetime(6) NOT NULL,
   `updated_at` datetime(6) NOT NULL,
-  `key` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `key` varchar(32) COLLATE utf8mb4_general_ci NOT NULL,
   `value` json NOT NULL,
   `node_id` bigint NOT NULL,
   PRIMARY KEY (`id`),
@@ -3069,7 +3038,7 @@ CREATE TABLE `pgo_user_department` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `created_at` datetime(6) NOT NULL,
   `updated_at` datetime(6) NOT NULL,
-  `name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `name` varchar(32) COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -3086,38 +3055,36 @@ COMMIT;
 DROP TABLE IF EXISTS `pgo_user_userprofile`;
 CREATE TABLE `pgo_user_userprofile` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `password` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(128) COLLATE utf8mb4_general_ci NOT NULL,
   `last_login` datetime(6) DEFAULT NULL,
   `is_superuser` tinyint(1) NOT NULL,
-  `username` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `first_name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `last_name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `username` varchar(150) COLLATE utf8mb4_general_ci NOT NULL,
+  `first_name` varchar(150) COLLATE utf8mb4_general_ci NOT NULL,
+  `last_name` varchar(150) COLLATE utf8mb4_general_ci NOT NULL,
   `is_staff` tinyint(1) NOT NULL,
   `is_active` tinyint(1) NOT NULL,
   `date_joined` datetime(6) NOT NULL,
-  `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `icon` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `position` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `name` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `icon` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `position` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `staff_id` int DEFAULT NULL,
   `job_status` tinyint(1) NOT NULL,
-  `phone` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `remarks` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `phone` varchar(32) COLLATE utf8mb4_general_ci NOT NULL,
+  `remarks` longtext COLLATE utf8mb4_general_ci,
   `department_id` bigint DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   KEY `pgo_user_userprofile_department_id_d42ff7eb_fk_pgo_user_` (`department_id`),
   CONSTRAINT `pgo_user_userprofile_department_id_d42ff7eb_fk_pgo_user_` FOREIGN KEY (`department_id`) REFERENCES `pgo_user_department` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of pgo_user_userprofile
 -- ----------------------------
 BEGIN;
-INSERT INTO `pgo_user_userprofile` VALUES (1, 'pbkdf2_sha256$260000$GKUik2aCmFpOLwAP2Qsvum$FS7j4PU/I5xHgG8S8J57FzmtUTX9/FA1giaicQHWZps=', '2022-04-20 01:34:00.000000', 1, 'devops', '', '', 1, 1, '2022-04-12 20:54:00.000000', '闫世成', 'icon/user/2022/04/17/未标题-3_画板_1.png', 'yans121@sina.com', NULL, NULL, 1, '18888888888', '', 1);
-INSERT INTO `pgo_user_userprofile` VALUES (2, 'super', NULL, 0, 'super', '', '', 0, 1, '2022-04-25 01:25:00.000000', 'super', '', '252215476@qq.com', NULL, NULL, 1, '19000001111', '', 1);
-INSERT INTO `pgo_user_userprofile` VALUES (3, 'pbkdf2_sha256$260000$a6kHSp99eWcH9jFLlK0cUu$nMsFhD2q6ZqrdYe7ge4e+POXLZI2e6LB2KLDlqWAc0E=', NULL, 1, 'pgoops', '', '', 1, 1, '2022-04-30 02:58:43.000000', 'pgoops', 'icon/user/2022/04/17/pgoops.png', 'pgoops@163.com', NULL, NULL, 1, '17000000101', NULL, 1);
-INSERT INTO `pgo_user_userprofile` VALUES (4, 'pbkdf2_sha256$260000$hYLEUPd4gNM8jgXTq2yEVn$4gyFZGFBiB7wP7ATqNdyb2mInZghxIf1NykS9Lec6uU=', NULL, 0, 'edit', '', '', 0, 1, '2022-04-30 21:12:02.000000', 'edit', 'icon/user/2022/04/17/pgoops.png', 'edit@pgoops.com', NULL, NULL, 1, '19999000099', NULL, 1);
+INSERT INTO `pgo_user_userprofile` VALUES (1, 'pbkdf2_sha256$260000$GKUik2aCmFpOLwAP2Qsvum$FS7j4PU/I5xHgG8S8J57FzmtUTX9/FA1giaicQHWZps=', '2022-04-20 01:34:00.000000', 1, 'devops', '', '', 1, 1, '2022-04-12 20:54:00.000000', '闫世成', 'icon/user/2022/04/17/未标题-3_画板_1.png', 'yans121@sina.com', NULL, NULL, 1, '15810719981', '', NULL);
+INSERT INTO `pgo_user_userprofile` VALUES (2, 'super', NULL, 0, 'super', '', '', 0, 1, '2022-04-25 01:25:00.000000', 'super', '', '252215476@qq.com', NULL, NULL, 1, '17692110501', '', NULL);
 COMMIT;
 
 -- ----------------------------
@@ -3154,7 +3121,7 @@ CREATE TABLE `pgo_user_userprofile_role` (
   KEY `pgo_user_userprofile_role_id_003f5e81_fk_pgo_permi` (`role_id`),
   CONSTRAINT `pgo_user_userprofile_role_id_003f5e81_fk_pgo_permi` FOREIGN KEY (`role_id`) REFERENCES `pgo_permission_role` (`id`),
   CONSTRAINT `pgo_user_userprofile_userprofile_id_d455eed5_fk_pgo_user_` FOREIGN KEY (`userprofile_id`) REFERENCES `pgo_user_userprofile` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of pgo_user_userprofile_role
@@ -3163,8 +3130,6 @@ BEGIN;
 INSERT INTO `pgo_user_userprofile_role` VALUES (1, 1, 1);
 INSERT INTO `pgo_user_userprofile_role` VALUES (2, 2, 14);
 INSERT INTO `pgo_user_userprofile_role` VALUES (3, 2, 15);
-INSERT INTO `pgo_user_userprofile_role` VALUES (4, 3, 1);
-INSERT INTO `pgo_user_userprofile_role` VALUES (5, 4, 14);
 COMMIT;
 
 -- ----------------------------

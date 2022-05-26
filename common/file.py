@@ -90,15 +90,15 @@ class File(object):
         """读取文件内容"""
         file_obj = pathlib.Path(abs_file)
         file_obj.write_text()
-        return file_obj.read_text(encoding='utf-8')
+        return file_obj.read_text(encoding="utf-8")
 
     @staticmethod
     def write_file(abs_file, content):
-        """ 写入内容至文件 """
+        """写入内容至文件"""
         file_obj = pathlib.Path(abs_file)
         if not file_obj.is_file():
             file_obj.touch(mode=0o744)
-        file_obj.write_text(content, encoding='utf-8')
+        file_obj.write_text(content, encoding="utf-8")
 
     @staticmethod
     def rename_dir(dir_name, new_dir_name):

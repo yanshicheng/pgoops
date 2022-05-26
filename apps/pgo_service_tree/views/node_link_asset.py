@@ -13,9 +13,16 @@ class NodeLinkAssetViewSet(StandardModelViewSet):
     ordering_fields = ("id",)
     filter_fields = (
         "id",
-        "node_link",
+        # "node_link",
     )
-    search_fields = ("asset__data",)
+    search_fields = ("asset",)
+
+    def create(self, request, *args, **kwargs):
+        # 校验字段
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer, request)
+        return api_ok_response(serializer.data)
 
     def list(self, request, *args, **kwargs):
         try:

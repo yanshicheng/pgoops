@@ -48,7 +48,7 @@ class FieldsViewSet(StandardModelViewSet):
             return api_error_response(f"数据校验出错: {str(e)}")
 
         partial = kwargs.pop("partial", False)
-        instance = self.get_object()
+        instance: Fields = self.get_object()
         serializer = self.get_serializer(instance, data=data, partial=partial)
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)

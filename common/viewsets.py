@@ -18,13 +18,13 @@ class StandardModelViewSet(ModelViewSet):
         return api_ok_response(serializer.data)
 
     def update(self, request, *args, **kwargs):
-        partial = kwargs.pop('partial', False)
+        partial = kwargs.pop("partial", False)
         instance = self.get_object()
         serializer = self.get_serializer(instance, data=request.data, partial=partial)
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer, request)
 
-        if getattr(instance, '_prefetched_objects_cache', None):
+        if getattr(instance, "_prefetched_objects_cache", None):
             # If 'prefetch_related' has been applied to a queryset, we need to
             # forcibly invalidate the prefetch cache on the instance.
             instance._prefetched_objects_cache = {}
@@ -33,9 +33,9 @@ class StandardModelViewSet(ModelViewSet):
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
-        if hasattr(self, 'is_system'):
+        if hasattr(self, "is_system"):
             if self.is_system:
-                return api_error_response('Built-in data cannot be deleted')
+                return api_error_response("Built-in data cannot be deleted")
         instance.delete()
         return api_ok_response()
 
@@ -83,19 +83,26 @@ class StandardOpenModelViewSet(ModelViewSet):
     """
     视图集合基类
     """
+
     authentication_classes = []
     permission_classes = []
 
     def create(self, request, *args, **kwargs):
-        response = super(StandardOpenModelViewSet, self).create(request, *args, **kwargs)
+        response = super(StandardOpenModelViewSet, self).create(
+            request, *args, **kwargs
+        )
         return api_ok_response(response.data)
 
     def update(self, request, *args, **kwargs):
-        response = super(StandardOpenModelViewSet, self).update(request, *args, **kwargs)
+        response = super(StandardOpenModelViewSet, self).update(
+            request, *args, **kwargs
+        )
         return api_ok_response(response.data)
 
     def destroy(self, request, *args, **kwargs):
-        response = super(StandardOpenModelViewSet, self).destroy(request, *args, **kwargs)
+        response = super(StandardOpenModelViewSet, self).destroy(
+            request, *args, **kwargs
+        )
         return api_ok_response(response.data)
 
     def list(self, request, *args, **kwargs):

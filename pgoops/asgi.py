@@ -13,13 +13,13 @@ from channels.routing import URLRouter, ProtocolTypeRouter
 from django.core.asgi import get_asgi_application
 from django.utils.module_loading import import_string
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'pgoops.settings')
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "pgoops.settings")
 
 # application = get_asgi_application()
 
-application = ProtocolTypeRouter({
-    "http": get_asgi_application(),
-    "websocket": URLRouter(
-        import_string('pgoops.routing.websocket_urlpatterns')
-    ),
-})
+application = ProtocolTypeRouter(
+    {
+        "http": get_asgi_application(),
+        "websocket": URLRouter(import_string("pgoops.routing.websocket_urlpatterns")),
+    }
+)

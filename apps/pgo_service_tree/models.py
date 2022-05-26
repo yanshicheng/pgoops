@@ -143,9 +143,9 @@ class NodeLinkAsset(StandardModelMixin):
     """
 
     node_link = models.ForeignKey(
-        to=ServiceTree, on_delete=models.CASCADE, verbose_name="关联表"
+        to=NodeLinkClassify, on_delete=models.CASCADE, verbose_name="关联表"
     )
-    asset = models.ForeignKey(
+    asset = models.OneToOneField(
         to=Asset, blank=True, on_delete=models.CASCADE, related_name="link_asset"
     )
 

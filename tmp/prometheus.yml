@@ -1,0 +1,46 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  scrape_timeout: 10s
+  query_log_file: /var/log/prometheus_query_log
+  external_labels:
+    account: huawei-main
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets:
+      - 10.211.55.11:9093
+rule_files:
+- /usr/local/prometheus/alerting_rules/rules.yml
+scrape_configs:
+- job_name: prometheus
+  static_configs:
+  - targets:
+    - localhost:9090
+- job_name: node_export
+  consul_sd_configs:
+  - server: 10.211.55.11:8500
+    services:
+    - node_export_ops11.super-ops.top
+  relabel_configs:
+  - action: labelmap
+    regex: __meta_consul_service_metadata_(.*)
+    replacement: $1
+- job_name: nginx_export
+  consul_sd_configs:
+  - server: 10.211.55.11:8500
+    services:
+    - nginx_export_ops11.super-ops.top
+  relabel_configs:
+  - action: labelmap
+    regex: __meta_consul_service_metadata_(.*)
+    replacement: $1
+- job_name: mysql_export
+  consul_sd_configs:
+  - server: 10.211.55.11:8500
+    services:
+    - mysql_export_ops11.super-ops.top
+  relabel_configs:
+  - action: labelmap
+    regex: __meta_consul_service_metadata_(.*)
+    replacement: $1

@@ -18,10 +18,9 @@ class WeChatPub:
         try:
             data = {
                 "msgtype": "text",
-
                 "text": {
                     "content": content,
-                    "mentioned_mobile_list": mentioned_mobile_list
+                    "mentioned_mobile_list": mentioned_mobile_list,
                 },
             }
             response = self.session.post(self.webhook, data=json.dumps(data))
@@ -44,7 +43,7 @@ class WeChatPub:
                 "msgtype": "markdown",
                 "markdown": {
                     "content": content,
-                    "mentioned_mobile_list": mentioned_mobile_list
+                    "mentioned_mobile_list": mentioned_mobile_list,
                 },
             }
             response = self.session.post(self.webhook, data=json.dumps(data))

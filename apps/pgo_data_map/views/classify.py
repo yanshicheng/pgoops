@@ -137,9 +137,7 @@ class ClassifyViewSet(StandardModelViewSet):
         child_classify_id = data["child_classify_id"]
 
         if not parent_classify_id or not child_classify_id:
-            return api_error_response(
-                "parent_classify_id and child_classify_id 是必传参数."
-            )
+            return api_error_response("parent_classify_id and child_classify_id 是必传参数.")
 
         parent_classify = OperateInstance.get_classify(parent_classify_id)
         child_classify = OperateInstance.get_classify(child_classify_id)
@@ -185,9 +183,7 @@ class ClassifyViewSet(StandardModelViewSet):
         child_classify_id = data["child_classify_id"]
 
         if not parent_classify_id or not child_classify_id:
-            return api_error_response(
-                "parent_classify_id and child_classify_id 是必传参数."
-            )
+            return api_error_response("parent_classify_id and child_classify_id 是必传参数.")
 
         classify_relation_obj = OperateInstance.get_classify_bind(
             parent_classify_id, child_classify_id

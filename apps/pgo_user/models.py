@@ -24,10 +24,13 @@ class Department(StandardModelMixin, models.Model):
 
 class UserProfile(AbstractUser):
     name = models.CharField(max_length=20, default="", verbose_name="中文姓名")
-    icon = models.ImageField(upload_to="icon/user/%Y/%m/%d/", default='icon/user/2022/04/17/pgoops.png', blank=True,
-                             null=True)
-    email = models.EmailField(
-        verbose_name="邮箱", max_length=255)
+    icon = models.ImageField(
+        upload_to="icon/user/%Y/%m/%d/",
+        default="icon/user/2022/04/17/pgoops.png",
+        blank=True,
+        null=True,
+    )
+    email = models.EmailField(verbose_name="邮箱", max_length=255)
     position = models.CharField(max_length=50, null=True, blank=True, verbose_name="职位")
     department = models.ForeignKey(
         verbose_name="部门",

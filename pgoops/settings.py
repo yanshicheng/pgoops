@@ -16,6 +16,7 @@ import os
 from pathlib import Path
 
 from kombu import Exchange, Queue
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 from common.config_dispose import ConfigDispose
@@ -28,70 +29,71 @@ os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-kt)1(r2inw-0t=n2d%0xrg3fx4&1*8^@!46fei2cdl)l)(+g(r'
+SECRET_KEY = "django-insecure-kt)1(r2inw-0t=n2d%0xrg3fx4&1*8^@!46fei2cdl)l)(+g(r"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = ConfigDispose.get_bool_val('pgoops', 'debug')
+DEBUG = ConfigDispose.get_bool_val("pgoops", "debug")
 
 # 防止黑客入侵
-ALLOWED_HOSTS = ConfigDispose.get_default('allowed_hosts', 'list')
+ALLOWED_HOSTS = ConfigDispose.get_default("allowed_hosts", "list")
 
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
     # 内置app
-    'apps.pgo_user.apps.PgoUserConfig',
-    'apps.pgo_permission.apps.PgoPermissionConfig',
-    'apps.pgo_data_map.apps.PgoDataMapConfig',
-    'apps.pgo_service_tree.apps.PgoServiceTreeConfig',
-    'apps.pgo_iac.apps.PgoIacConfig',
-    'apps.pgo_message_center.apps.PgoMessageCenterConfig',
+    "apps.pgo_user.apps.PgoUserConfig",
+    "apps.pgo_permission.apps.PgoPermissionConfig",
+    "apps.pgo_data_map.apps.PgoDataMapConfig",
+    "apps.pgo_service_tree.apps.PgoServiceTreeConfig",
+    "apps.pgo_iac.apps.PgoIacConfig",
+    "apps.pgo_message_center.apps.PgoMessageCenterConfig",
+    "apps.pgo_openapi.apps.PgoOpenapiConfig",
+    "apps.pgo_monitor.apps.PgoMonitorConfig",
     # 第三方
-    'channels',
+    "channels",
     "rest_framework",
     "rest_framework_jwt",
     "django_filters",
-    'corsheaders',
-    'django_celery_beat',
-
+    "corsheaders",
+    "django_celery_beat",
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',  # 跨域添加响应头
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
+    "corsheaders.middleware.CorsMiddleware",  # 跨域添加响应头
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
     # 'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
-ROOT_URLCONF = 'pgoops.urls'
+ROOT_URLCONF = "pgoops.urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
             ],
         },
     },
 ]
 
 # WSGI_APPLICATION = 'pgoops.wsgi.application'
-ASGI_APPLICATION = 'pgoops.asgi.application'
+ASGI_APPLICATION = "pgoops.asgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
@@ -101,16 +103,16 @@ ASGI_APPLICATION = 'pgoops.asgi.application'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
 
@@ -127,12 +129,12 @@ USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = ConfigDispose.get_default('static_url')
+STATIC_URL = ConfigDispose.get_default("static_url")
 STATIC_ROOT = "static"
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # CORS组的配置信息
 # 默认全不允许不是用白名单
@@ -184,7 +186,7 @@ CORS_ALLOW_HEADERS = [
 
 REST_FRAMEWORK = {
     # 自定义异常
-    "EXCEPTION_HANDLER": "common.exception.custom_exception_handler",
+    # "EXCEPTION_HANDLER": "common.exception.custom_exception_handler",
     # 验证
     "DEFAULT_PERMISSION_CLASSES": (
         "rest_framework.permissions.IsAuthenticated",
@@ -208,14 +210,16 @@ REST_FRAMEWORK = {
 }
 JWT_AUTH = {
     "JWT_AUTH_HEADER_PREFIX": "Bearer",
-    "JWT_EXPIRATION_DELTA": datetime.timedelta(seconds=ConfigDispose.get_default('jwt_expiration_delta', 'int')),
+    "JWT_EXPIRATION_DELTA": datetime.timedelta(
+        seconds=ConfigDispose.get_default("jwt_expiration_delta", "int")
+    ),
     "JWT_REFRESH_EXPIRATION_DELTA": datetime.timedelta(days=1),
-    'JWT_RESPONSE_PAYLOAD_HANDLER': 'common.jwt_json_web_token.jwt_response_payload_handler',
+    "JWT_RESPONSE_PAYLOAD_HANDLER": "common.jwt_json_web_token.jwt_response_payload_handler",
 }
 
 # 注意此处不要写成列表或元组的形式
-MEDIA_ROOT = ConfigDispose.get_default('media_root')
-IAC_WORK_DIR = ConfigDispose.get_default('iac_work_dir')
+MEDIA_ROOT = ConfigDispose.get_default("media_root")
+IAC_WORK_DIR = ConfigDispose.get_default("iac_work_dir")
 # 配置 MEDIA_URL 作为公用 URL，指向上传文件的基本路径
 MEDIA_URL = "/media/"
 AUTH_USER_MODEL = "pgo_user.UserProfile"
@@ -223,12 +227,12 @@ AUTH_USER_MODEL = "pgo_user.UserProfile"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": ConfigDispose.get_mysql('name'),
-        "HOST": ConfigDispose.get_mysql('host'),
-        "PORT": ConfigDispose.get_mysql('port'),
-        "USER": ConfigDispose.get_mysql('user'),
-        "PASSWORD": ConfigDispose.get_mysql('password'),
-        "OPTIONS": ConfigDispose.get_mysql('options'),
+        "NAME": ConfigDispose.get_mysql("name"),
+        "HOST": ConfigDispose.get_mysql("host"),
+        "PORT": ConfigDispose.get_mysql("port"),
+        "USER": ConfigDispose.get_mysql("user"),
+        "PASSWORD": ConfigDispose.get_mysql("password"),
+        "OPTIONS": ConfigDispose.get_mysql("options"),
     }
 }
 
@@ -247,24 +251,25 @@ CACHES = {
             # 开启压缩，默认不开始
             "COMPRESSOR": "django_redis.compressors.lzma.LzmaCompressor",
         },
-        "KEY_PREFIX": 'pgoops' + ":django",
+        "KEY_PREFIX": "pgoops" + ":django",
     },
 }
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "default"
 
 CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
             "hosts": [
-                f'redis://:{ConfigDispose.get_redis("password")}@{ConfigDispose.get_redis("host")}:{ConfigDispose.get_redis("port")}/1'],
+                f'redis://:{ConfigDispose.get_redis("password")}@{ConfigDispose.get_redis("host")}:{ConfigDispose.get_redis("port")}/1'
+            ],
         },
     },
 }
 # celery
 CELERY_BROKER_URL = f'redis://:{ConfigDispose.get_redis("password")}@{ConfigDispose.get_redis("host")}:{ConfigDispose.get_redis("port")}/2'
-CELERY_CACHE_BACKEND = 'django-cache'
+CELERY_CACHE_BACKEND = "django-cache"
 CELERYD_MAX_TASKS_PER_CHILD = 20  # 每个 worker 最多执行3个任务就会被销毁，可防止内存泄露
 CELERY_RESULT_BACKEND = f'redis://:{ConfigDispose.get_redis("password")}@{ConfigDispose.get_redis("host")}:{ConfigDispose.get_redis("port")}/2'
 CELERY_ACCEPT_CONTENT = ["application/json"]
@@ -273,21 +278,28 @@ CELERY_TASK_SERIALIZER = "json"
 CELERY_TIMEZONE = "Asia/Shanghai"
 CELERY_ENABLE_UTC = False
 DJANGO_CELERY_BEAT_TZ_AWARE = False
-CELERY_DEFAULT_QUEUE = 'default'  # 设置默认的路由
-CELERY_DEFAULT_EXCHANGE = 'default'
-CELERY_DEFAULT_ROUTING_KEY = 'default'
+CELERY_DEFAULT_QUEUE = "default"  # 设置默认的路由
+CELERY_DEFAULT_EXCHANGE = "default"
+CELERY_DEFAULT_ROUTING_KEY = "default"
 # CELERY_TASK_ROUTES = {'iac.tasks.*'USE_TZ: {"queue": "iac-1"}}
 CELERY_TASK_QUEUES = (
     Queue("default", Exchange("default"), routing_key="default"),  # 默认队列
     # 定义队列feed_tasks,从交换接口:default接收，并且过滤路由的key,主要演示手动路由的机制
-    Queue("iac_task_queue", Exchange("compute_node"), routing_key="iac_task"),  # 定义队列:add_queue,绑定交换机:compute_node
+    Queue(
+        "iac_task_queue", Exchange("compute_node"), routing_key="iac_task"
+    ),  # 定义队列:add_queue,绑定交换机:compute_node
     Queue("iac_message_queue", Exchange("compute_node"), routing_key="message_task"),
     # 定义队列:add_queue,绑定交换机:compute_node
-    Queue("add_queue", Exchange("compute_node"), routing_key="mul_task"),  # 定义队列:mul_queue,绑定交换机:compute_node
+    Queue(
+        "add_queue", Exchange("compute_node"), routing_key="mul_task"
+    ),  # 定义队列:mul_queue,绑定交换机:compute_node
 )
 CELERY_TASK_ROUTES = {
-    'apps.pgo_iac.tasks.*': {"queue": "iac_task_queue", 'routing_key': 'iac_task'},
-    'apps.pgo_message_center.tasks.*': {"queue": "iac_message_queue", 'routing_key': 'message_task'}
+    "apps.pgo_iac.tasks.*": {"queue": "iac_task_queue", "routing_key": "iac_task"},
+    "apps.pgo_message_center.tasks.*": {
+        "queue": "iac_message_queue",
+        "routing_key": "message_task",
+    },
 }
 # celery -A django_celery_project worker -P eventlet -l info -n celery
 

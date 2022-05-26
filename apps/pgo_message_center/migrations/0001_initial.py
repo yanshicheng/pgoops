@@ -9,87 +9,227 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Group',
+            name="Group",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='创建时间')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name='更新时间')),
-                ('name', models.CharField(max_length=32, unique=True, verbose_name='告警组')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="创建时间"),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="更新时间"),
+                ),
+                (
+                    "name",
+                    models.CharField(max_length=32, unique=True, verbose_name="告警组"),
+                ),
             ],
             options={
-                'verbose_name': '通知组',
-                'verbose_name_plural': '通知组',
-                'db_table': 'pgo_message_center_group',
+                "verbose_name": "通知组",
+                "verbose_name_plural": "通知组",
+                "db_table": "pgo_message_center_group",
             },
         ),
         migrations.CreateModel(
-            name='Provider',
+            name="Provider",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='创建时间')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name='更新时间')),
-                ('name', models.CharField(max_length=32, verbose_name='类型名称')),
-                ('provider_class', models.CharField(max_length=128, validators=[apps.pgo_message_center.models.message_provider_class])),
-                ('method', models.IntegerField(choices=[(0, 'send_text_msg'), (1, 'send_markdown_msg'), (2, 'send_html_msg'), (3, 'send_file_msg'), (4, 'send_link_msg'), (5, 'send_image_msg')], default=1)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="创建时间"),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="更新时间"),
+                ),
+                ("name", models.CharField(max_length=32, verbose_name="类型名称")),
+                (
+                    "provider_class",
+                    models.CharField(
+                        max_length=128,
+                        validators=[
+                            apps.pgo_message_center.models.message_provider_class
+                        ],
+                    ),
+                ),
+                (
+                    "method",
+                    models.IntegerField(
+                        choices=[
+                            (0, "send_text_msg"),
+                            (1, "send_markdown_msg"),
+                            (2, "send_html_msg"),
+                            (3, "send_file_msg"),
+                            (4, "send_link_msg"),
+                            (5, "send_image_msg"),
+                        ],
+                        default=1,
+                    ),
+                ),
             ],
             options={
-                'verbose_name': '通知方式',
-                'verbose_name_plural': '通知方式',
-                'db_table': 'pgo_message_center_provider',
-                'unique_together': {('name', 'provider_class')},
+                "verbose_name": "通知方式",
+                "verbose_name_plural": "通知方式",
+                "db_table": "pgo_message_center_provider",
+                "unique_together": {("name", "provider_class")},
             },
         ),
         migrations.CreateModel(
-            name='Level',
+            name="Level",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='创建时间')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name='更新时间')),
-                ('name', models.CharField(max_length=32, unique=True, verbose_name='告警级别名')),
-                ('cname', models.CharField(max_length=32, unique=True)),
-                ('weight', models.IntegerField(unique=True)),
-                ('is_system', models.BooleanField(default=False)),
-                ('group', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='pgo_message_center.group')),
-                ('provider', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='pgo_message_center.provider')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="创建时间"),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="更新时间"),
+                ),
+                (
+                    "name",
+                    models.CharField(max_length=32, unique=True, verbose_name="告警级别名"),
+                ),
+                ("cname", models.CharField(max_length=32, unique=True)),
+                ("weight", models.IntegerField(unique=True)),
+                ("is_system", models.BooleanField(default=False)),
+                (
+                    "group",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="pgo_message_center.group",
+                    ),
+                ),
+                (
+                    "provider",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="pgo_message_center.provider",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': '通知级别',
-                'verbose_name_plural': '通知级别',
-                'db_table': 'pgo_message_center_level',
+                "verbose_name": "通知级别",
+                "verbose_name_plural": "通知级别",
+                "db_table": "pgo_message_center_level",
             },
         ),
         migrations.CreateModel(
-            name='History',
+            name="History",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='创建时间')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name='更新时间')),
-                ('app_name', models.CharField(max_length=32, verbose_name='应  用')),
-                ('name', models.CharField(max_length=32, verbose_name='通告主题')),
-                ('type', models.IntegerField(choices=[(0, '告警'), (1, '告警恢复'), (2, '通 知')], default=2, verbose_name='通告类型')),
-                ('status', models.IntegerField(choices=[(0, '成功'), (1, '失败')], default=0, verbose_name='发送状态')),
-                ('instance', models.CharField(blank=True, max_length=1024, null=True, verbose_name='实例地址')),
-                ('labels', models.JSONField(blank=True, null=True, verbose_name='扩展信息')),
-                ('summary', models.CharField(blank=True, max_length=1024, null=True, verbose_name='概要信息')),
-                ('description', models.TextField(blank=True, null=True, verbose_name='描述信息')),
-                ('start_at', models.DateTimeField(blank=True, null=True, verbose_name='开始时间')),
-                ('end_at', models.DateTimeField(blank=True, null=True, verbose_name='结束时间')),
-                ('duration', models.CharField(blank=True, max_length=64, null=True, verbose_name='持续时间')),
-                ('output_err', models.TextField(blank=True, null=True)),
-                ('repetition_num', models.IntegerField(default=1, verbose_name='重复次数')),
-                ('is_all', models.BooleanField(default=False)),
-                ('is_at', models.BooleanField(default=True)),
-                ('level', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='pgo_message_center.level', verbose_name='通告级别')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="创建时间"),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="更新时间"),
+                ),
+                ("app_name", models.CharField(max_length=32, verbose_name="应  用")),
+                ("name", models.CharField(max_length=32, verbose_name="通告主题")),
+                (
+                    "type",
+                    models.IntegerField(
+                        choices=[(0, "告警"), (1, "告警恢复"), (2, "通 知")],
+                        default=2,
+                        verbose_name="通告类型",
+                    ),
+                ),
+                (
+                    "status",
+                    models.IntegerField(
+                        choices=[(0, "成功"), (1, "失败")], default=0, verbose_name="发送状态"
+                    ),
+                ),
+                (
+                    "instance",
+                    models.CharField(
+                        blank=True, max_length=1024, null=True, verbose_name="实例地址"
+                    ),
+                ),
+                (
+                    "labels",
+                    models.JSONField(blank=True, null=True, verbose_name="扩展信息"),
+                ),
+                (
+                    "summary",
+                    models.CharField(
+                        blank=True, max_length=1024, null=True, verbose_name="概要信息"
+                    ),
+                ),
+                (
+                    "description",
+                    models.TextField(blank=True, null=True, verbose_name="描述信息"),
+                ),
+                (
+                    "start_at",
+                    models.DateTimeField(blank=True, null=True, verbose_name="开始时间"),
+                ),
+                (
+                    "end_at",
+                    models.DateTimeField(blank=True, null=True, verbose_name="结束时间"),
+                ),
+                (
+                    "duration",
+                    models.CharField(
+                        blank=True, max_length=64, null=True, verbose_name="持续时间"
+                    ),
+                ),
+                ("output_err", models.TextField(blank=True, null=True)),
+                ("repetition_num", models.IntegerField(default=1, verbose_name="重复次数")),
+                ("is_all", models.BooleanField(default=False)),
+                ("is_at", models.BooleanField(default=True)),
+                (
+                    "level",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="pgo_message_center.level",
+                        verbose_name="通告级别",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': '通知历史',
-                'verbose_name_plural': '通知历史',
-                'db_table': 'pgo_message_center_history',
+                "verbose_name": "通知历史",
+                "verbose_name_plural": "通知历史",
+                "db_table": "pgo_message_center_history",
             },
         ),
     ]

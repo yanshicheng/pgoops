@@ -6,7 +6,7 @@ from ..serializers import ProviderSerializers
 
 
 class ProviderModelViewSet(StandardModelViewSet):
-    queryset = Provider.objects.filter().order_by('-id')
+    queryset = Provider.objects.filter().order_by("-id")
     serializer_class = ProviderSerializers
     ordering_fields = ("-id",)
     filter_fields = ("name",)

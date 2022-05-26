@@ -15,13 +15,15 @@ class TaskPeriodicModelViewSet(StandardModelViewSet):
     serializer_class = TaskPeriodicSerializer
     ordering_fields = ("id",)
     filter_class = TaskPeriodicFilter
-    search_fields = ("name")
+    search_fields = "name"
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         try:
-            instance = serializer.save(created_by=get_user(request), updated_by=get_user(request))
+            instance = serializer.save(
+                created_by=get_user(request), updated_by=get_user(request)
+            )
             return api_ok_response(self.serializer_class(instance).data)
         except Exception as e:
             return api_error_response(str(e))
@@ -41,5 +43,3 @@ class TaskPeriodicModelViewSet(StandardModelViewSet):
         instance.updated_by = get_user(request)
         instance.save()
         return api_ok_response(self.serializer_class(instance).data)
-
-

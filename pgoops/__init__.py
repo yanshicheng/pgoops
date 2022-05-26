@@ -1,5 +1,6 @@
 import pymysql
 from .celery import pgoops_celery_app as celery_app
+
 # celery_app.autodiscover_tasks(
 #     [
 #         "apps.pgo_message_center",

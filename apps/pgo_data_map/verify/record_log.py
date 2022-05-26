@@ -128,7 +128,7 @@ class Record:
 
     def record_save(self, d_id, title, detail, operator):
         record_obj = ChangeRecord.objects.create(
-            asset_id=d_id, title=title, detail=detail, operator=operator
+            asset_id=d_id, title=title, detail=detail
         )
         record_obj.save()
 

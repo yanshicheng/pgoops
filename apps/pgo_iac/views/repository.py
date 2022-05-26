@@ -28,32 +28,44 @@ class RepositoryModelViewSet(StandardModelViewSet):
         serializer.is_valid(raise_exception=True)
         try:
             package_name = PrepareHandler(code_package).create()
-            instance = serializer.save(created_by=get_user(request), updated_by=get_user(request), name=package_name)
+            instance = serializer.save(
+                created_by=get_user(request),
+                updated_by=get_user(request),
+                name=package_name,
+            )
             return api_ok_response(self.serializer_class(instance).data)
         except Exception as e:
-            name = code_package.name.split('.')[0]
+            name = code_package.name.split(".")[0]
             if not self.queryset.filter(name=name).first():
-                if File.if_dir_exists(os.path.join(settings.MEDIA_ROOT, settings.IAC_WORK_DIR, name)):
-                    File.rm_dirs(os.path.join(settings.MEDIA_ROOT, settings.IAC_WORK_DIR, name))
+                if File.if_dir_exists(
+                    os.path.join(settings.MEDIA_ROOT, settings.IAC_WORK_DIR, name)
+                ):
+                    File.rm_dirs(
+                        os.path.join(settings.MEDIA_ROOT, settings.IAC_WORK_DIR, name)
+                    )
             return api_error_response(str(e))
 
     def update(self, request, *args, **kwargs):
         request.POST._mutable = True
         re_data = request.data
         code_package = re_data.pop("code_package", False)[0]
-        partial = kwargs.pop('partial', False)
+        partial = kwargs.pop("partial", False)
         instance = self.get_object()
-        if code_package and code_package != 'undefined':
+        if code_package and code_package != "undefined":
             PrepareHandler(code_package).update()
-            name = code_package.name.split('.')[0]
+            name = code_package.name.split(".")[0]
             if instance.name != name:
-                return api_error_response(f'包名不同请重新上传,新包名: {name}, 旧包名: {instance.name}')
+                return api_error_response(
+                    f"包名不同请重新上传,新包名: {name}, 旧包名: {instance.name}"
+                )
 
         serializer = self.get_serializer(instance, data=re_data, partial=partial)
         serializer.is_valid(raise_exception=True)
-        instance = serializer.save(created_by=get_user(request), updated_by=get_user(request))
+        instance = serializer.save(
+            created_by=get_user(request), updated_by=get_user(request)
+        )
 
-        if getattr(instance, '_prefetched_objects_cache', None):
+        if getattr(instance, "_prefetched_objects_cache", None):
             # If 'prefetch_related' has been applied to a queryset, we need to
             # forcibly invalidate the prefetch cache on the instance.
             instance._prefetched_objects_cache = {}
@@ -64,28 +76,30 @@ class RepositoryModelViewSet(StandardModelViewSet):
     def download(self, request, *args, **kwargs):
         instance: Repository = self.get_object()
         if not File.if_dir_exists(instance.get_package_path()):
-            return api_error_response(f'项目文件找不到，请联系管理员，项目: {instance.name}')
-        self._tar(os.path.join(settings.MEDIA_ROOT, settings.IAC_WORK_DIR), instance.name)
-        download_url = f'{request.scheme}://{request.get_host()}{settings.MEDIA_URL}{settings.IAC_WORK_DIR}/iac_download/{instance.name}.tar.xz'
-        return api_ok_response(data={'download_url': download_url})
+            return api_error_response(f"项目文件找不到，请联系管理员，项目: {instance.name}")
+        self._tar(
+            os.path.join(settings.MEDIA_ROOT, settings.IAC_WORK_DIR), instance.name
+        )
+        download_url = f"{request.scheme}://{request.get_host()}{settings.MEDIA_URL}{settings.IAC_WORK_DIR}/iac_download/{instance.name}.tar.xz"
+        return api_ok_response(data={"download_url": download_url})
 
-    @action(methods=["get"], url_path='main-info', detail=True)
+    @action(methods=["get"], url_path="main-info", detail=True)
     def main_info(self, request, *args, **kwargs):
         instance: Repository = self.get_object()
         abs_file = instance.get_main_file()
         if not File.if_file_exists(abs_file):
-            return api_error_response(f'入口文件找不到: {abs_file}')
-        with open(abs_file, 'r', encoding='utf-8') as f:
-            return api_ok_response(data={'main_info': f.read()})
+            return api_error_response(f"入口文件找不到: {abs_file}")
+        with open(abs_file, "r", encoding="utf-8") as f:
+            return api_ok_response(data={"main_info": f.read()})
 
     def _tar(self, base_dir, project):
         try:
             path = os.getcwd()
             os.chdir(base_dir)
-            File.rm_dirs('iac_download')
-            if not File.if_dir_exists('iac_download'):
-                File.create_dir('iac_download')
-            tar_abs_name = os.path.join('iac_download', f'{project}.tar.xz')
+            File.rm_dirs("iac_download")
+            if not File.if_dir_exists("iac_download"):
+                File.create_dir("iac_download")
+            tar_abs_name = os.path.join("iac_download", f"{project}.tar.xz")
             t = tarfile.open(tar_abs_name, "w:xz")
             for root, dir, files in os.walk(project):
                 for file in files:
@@ -102,7 +116,9 @@ class RepositoryModelViewSet(StandardModelViewSet):
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
-        task_periodic_query = TaskPeriodic.objects.filter(repository=instance, )
+        task_periodic_query = TaskPeriodic.objects.filter(
+            repository=instance,
+        )
         if task_periodic_query:
-            return api_error_response('无法删除项目，任务调度依赖')
-        return super(RepositoryModelViewSet, self).destroy( request, *args, **kwargs)
+            return api_error_response("无法删除项目，任务调度依赖")
+        return super(RepositoryModelViewSet, self).destroy(request, *args, **kwargs)

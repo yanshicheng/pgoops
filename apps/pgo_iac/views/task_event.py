@@ -8,5 +8,5 @@ class TaskEventModelViewSet(StandardModelViewSet):
     queryset = TaskEvent.objects.filter().order_by("-id")
     serializer_class = TaskEventSerializer
     ordering_fields = ("id",)
-    filter_fields = ("host",'task_record')
+    filter_fields = ("host", "task_record")
     search_fields = ("host",)

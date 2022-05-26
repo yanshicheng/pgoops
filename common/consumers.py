@@ -7,7 +7,7 @@ from apps.pgo_iac.models import Task
 class StandardAsyncJsonModelChangedConsumer(AsyncJsonWebsocketConsumer):
     model = None
     serializer_class = None
-    url_route_name = 'pk'
+    url_route_name = "pk"
 
     def __init__(self, *args, **kwargs):
         super(StandardAsyncJsonModelChangedConsumer, self).__init__(*args, **kwargs)
@@ -42,6 +42,7 @@ class StandardAsyncJsonModelChangedConsumer(AsyncJsonWebsocketConsumer):
             data = await self.encode_object(instance)
             await self.send_json(data)
             if instance.state != 1 and instance.state != 2:
-                await self.disconnect('code')
+                await self.disconnect("code")
+
 
 # /connect ws://127.0.0.1:8000/ws/iac/task/1/

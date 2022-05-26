@@ -15,5 +15,5 @@ def api_ok_response(data="success"):
     return api_response(code=0, data=data, message=None)
 
 
-def api_error_response(message, status=HTTP_200_OK):
+def api_error_response(message="error", status=HTTP_200_OK):
     return api_response(code=-1, data=None, message=message, status=status)

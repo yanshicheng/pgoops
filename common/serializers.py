@@ -16,7 +16,7 @@ class AuthorModelMixinModelSerializer(serializers.ModelSerializer):
 
 class StandardModelSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
-        request = validated_data.pop('request', False)
+        request = validated_data.pop("request", False)
         """
         We have a bit of extra checking around this in order to provide
         descriptive messages when something goes wrong, but this method is
@@ -37,7 +37,7 @@ class StandardModelSerializer(serializers.ModelSerializer):
         If you want to support writable nested relationships you'll need
         to write an explicit `.create()` method.
         """
-        raise_errors_on_nested_writes('create', self, validated_data)
+        raise_errors_on_nested_writes("create", self, validated_data)
 
         ModelClass = self.Meta.model
 
@@ -52,28 +52,28 @@ class StandardModelSerializer(serializers.ModelSerializer):
 
         try:
             if request:
-                if hasattr(ModelClass, 'created_by'):
-                    validated_data['created_by'] = get_user(request)
-                if hasattr(ModelClass, 'updated_by'):
-                    validated_data['updated_by'] = get_user(request)
+                if hasattr(ModelClass, "created_by"):
+                    validated_data["created_by"] = get_user(request)
+                if hasattr(ModelClass, "updated_by"):
+                    validated_data["updated_by"] = get_user(request)
             instance = ModelClass._default_manager.create(**validated_data)
         except TypeError:
             tb = traceback.format_exc()
             msg = (
-                    'Got a `TypeError` when calling `%s.%s.create()`. '
-                    'This may be because you have a writable field on the '
-                    'serializer class that is not a valid argument to '
-                    '`%s.%s.create()`. You may need to make the field '
-                    'read-only, or override the %s.create() method to handle '
-                    'this correctly.\nOriginal exception was:\n %s' %
-                    (
-                        ModelClass.__name__,
-                        ModelClass._default_manager.name,
-                        ModelClass.__name__,
-                        ModelClass._default_manager.name,
-                        self.__class__.__name__,
-                        tb
-                    )
+                "Got a `TypeError` when calling `%s.%s.create()`. "
+                "This may be because you have a writable field on the "
+                "serializer class that is not a valid argument to "
+                "`%s.%s.create()`. You may need to make the field "
+                "read-only, or override the %s.create() method to handle "
+                "this correctly.\nOriginal exception was:\n %s"
+                % (
+                    ModelClass.__name__,
+                    ModelClass._default_manager.name,
+                    ModelClass.__name__,
+                    ModelClass._default_manager.name,
+                    self.__class__.__name__,
+                    tb,
+                )
             )
             raise TypeError(msg)
 
@@ -86,12 +86,12 @@ class StandardModelSerializer(serializers.ModelSerializer):
         return instance
 
     def update(self, instance, validated_data):
-        request = validated_data.pop('request', False)
+        request = validated_data.pop("request", False)
         if request:
-            if hasattr(instance, 'updated_by'):
-                validated_data['updated_by'] = get_user(request)
+            if hasattr(instance, "updated_by"):
+                validated_data["updated_by"] = get_user(request)
 
-        raise_errors_on_nested_writes('update', self, validated_data)
+        raise_errors_on_nested_writes("update", self, validated_data)
         info = model_meta.get_field_info(instance)
 
         # Simply set each attribute on the instance, and then save it.
@@ -117,9 +117,17 @@ class StandardModelSerializer(serializers.ModelSerializer):
         return instance
 
     def to_representation(self, instance):
-        representation = super(StandardModelSerializer, self).to_representation(instance)
-        representation["created_by"] = instance.created_by.name if hasattr(instance,
-                                                                           'created_by') and instance.created_by else None
-        representation["updated_by"] = instance.updated_by.name if hasattr(instance,
-                                                                           'updated_by') and instance.updated_by else None
+        representation = super(StandardModelSerializer, self).to_representation(
+            instance
+        )
+        representation["created_by"] = (
+            instance.created_by.name
+            if hasattr(instance, "created_by") and instance.created_by
+            else None
+        )
+        representation["updated_by"] = (
+            instance.updated_by.name
+            if hasattr(instance, "updated_by") and instance.updated_by
+            else None
+        )
         return representation

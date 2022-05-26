@@ -167,6 +167,6 @@ def jwt_response_payload_handler(token, user=None, request=None):
     :param request:
     :return:
     """
-    data = {"code": 0, "data": {'token': token}, "message": ""}
+    data = {"code": 0, "data": {"token": token}, "message": ""}
 
     return data

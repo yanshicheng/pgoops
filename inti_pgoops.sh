@@ -51,6 +51,7 @@ checkUser() {
     successMsg  "2. check the user"
 }
 
+
 editFile() {
     echo "3. edit the file "
     sed -i "s@^chdir.*@chdir = '${BASE_DIR}'@g" ${BASE_DIR}/config/pgoops.py

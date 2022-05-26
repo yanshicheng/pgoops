@@ -6,10 +6,8 @@ from ..serializers import GroupSerializers
 
 
 class GroupModelViewSet(StandardModelViewSet):
-    queryset = Group.objects.filter().order_by('-id')
+    queryset = Group.objects.filter().order_by("-id")
     serializer_class = GroupSerializers
     ordering_fields = ("-id",)
     filter_fields = ("name",)
     search_fields = ("host",)
-
-

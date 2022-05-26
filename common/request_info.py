@@ -1,6 +1,7 @@
 from django.conf import settings
 from apps.pgo_user.models import UserProfile
 
+
 def get_user(request):
     if settings.DEBUG:
         try:
@@ -13,7 +14,6 @@ def get_user(request):
             u_id = request.user.id
             return UserProfile.objects.filter(id=u_id).first()
         except Exception as e:
-            print(e)
             raise Exception("无法获取用户地址，请先登录")
 
 
@@ -22,7 +22,7 @@ def get_user_name(request):
         if request.user:
             return request.user.name
         else:
-            return 'agent'
+            return "agent"
     else:
         if request.user:
             return request.user.name

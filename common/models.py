@@ -13,8 +13,8 @@ from django.core.exceptions import PermissionDenied
 
 
 class DateTimeModelMixin(models.Model):
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')
-    updated_at = models.DateTimeField(auto_now=True, verbose_name='更新时间')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="更新时间")
 
     class Meta:
         abstract = True
@@ -23,13 +23,15 @@ class DateTimeModelMixin(models.Model):
 
 class StandardModelMixin(DateTimeModelMixin):
     def delete(self, using=None, keep_parents=False):
-        if hasattr(self, 'is_system'):
+        if hasattr(self, "is_system"):
             if self.is_system:
-                raise Exception('Built-in deletion is prohibited')
+                raise Exception("Built-in deletion is prohibited")
         using = using or router.db_for_write(self.__class__, instance=self)
-        assert self.pk is not None, (
-                "%s object can't be deleted because its %s attribute is set to None." %
-                (self._meta.object_name, self._meta.pk.attname)
+        assert (
+            self.pk is not None
+        ), "%s object can't be deleted because its %s attribute is set to None." % (
+            self._meta.object_name,
+            self._meta.pk.attname,
         )
 
         collector = Collector(using=using)
@@ -70,8 +72,8 @@ class BulkCreateModelMixin(CreateModelMixin):
 
 class BroadcastModelMixin:
     __group_name_prefix__ = None
-    __group_name_field__ = 'pk'
-    __handler_name__ = 'on_changed'
+    __group_name_field__ = "pk"
+    __handler_name__ = "on_changed"
 
     @classmethod
     @database_sync_to_async
@@ -79,9 +81,9 @@ class BroadcastModelMixin:
         group_name_prefix = cls.__group_name_prefix__
         if not group_name_prefix:
             content_type = ContentType.objects.get_for_model(cls())
-            group_name_prefix = f'{content_type.app_label}'
+            group_name_prefix = f"{content_type.app_label}"
         if pk:
-            return f'{group_name_prefix}_{pk}'
+            return f"{group_name_prefix}_{pk}"
         return group_name_prefix
 
     @async_to_sync
@@ -89,9 +91,11 @@ class BroadcastModelMixin:
         channel_layer = get_channel_layer()
         pk = getattr(self, self.__group_name_field__)
         group_name = await self.channel_layer_group_name(pk)
-        await channel_layer.group_send(group_name, {"type": self.__handler_name__, "data": pk})
+        await channel_layer.group_send(
+            group_name, {"type": self.__handler_name__, "data": pk}
+        )
 
 
 def model_changed(sender, **kwargs):
     if issubclass(sender, BroadcastModelMixin):
-        kwargs['instance'].handle_changed()
+        kwargs["instance"].handle_changed()

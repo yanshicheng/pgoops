@@ -5,7 +5,7 @@ from .models import UserProfile, Department
 class UserProfileSerializer(StandardModelSerializer):
     class Meta:
         model = UserProfile
-        exclude = ('password',)
+        exclude = ("password",)
 
     def to_representation(self, instance):
         representation = super(UserProfileSerializer, self).to_representation(instance)

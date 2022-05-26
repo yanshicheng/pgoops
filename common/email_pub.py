@@ -4,7 +4,9 @@ from email.mime.text import MIMEText
 
 
 class EmailPub:
-    def __init__(self, host, port, msg_from, secret, title='pgoops', domain_name='www.pgoops.com'):
+    def __init__(
+        self, host, port, msg_from, secret, title="pgoops", domain_name="www.pgoops.com"
+    ):
         """
         :param host: SMTP 地址
         :param port: SMTP 号
@@ -13,7 +15,7 @@ class EmailPub:
         :param title: 系统名称
         :param domain_name: 系统域名
         """
-        self.data_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        self.data_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         self.msg_from = msg_from
         self.title = title
         self.domain_name = domain_name
@@ -29,16 +31,17 @@ class EmailPub:
         :return:
         """
         contents = self.__html_template(content)
-        msg = MIMEText(contents, _subtype='html', _charset="utf8")
+        msg = MIMEText(contents, _subtype="html", _charset="utf8")
         from email.header import Header
+
         to_users = ",".join(to_user)
-        msg["From"] = Header(self.title, 'utf-8')
-        msg["To"] = Header(to_users, 'utf-8')
-        msg["subject"] = Header(subject, 'utf-8')
+        msg["From"] = Header(self.title, "utf-8")
+        msg["To"] = Header(to_users, "utf-8")
+        msg["subject"] = Header(subject, "utf-8")
         self.smtp_s.send_message(msg, from_addr=self.msg_from, to_addrs=to_user)
 
     def __html_template(self, content: str) -> str:
-        return f'''
+        return f"""
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -103,4 +106,4 @@ class EmailPub:
 </div>
 </body>
 </html>
-        '''
+        """

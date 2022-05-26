@@ -5,5 +5,3 @@ from .views.asset import AssetViewSet
 from .views.record import ChangeRecordViewSet
 
 # from .views.table_relation import SchemaRelationViewSet
-
-

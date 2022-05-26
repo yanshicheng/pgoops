@@ -10,19 +10,26 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('pgo_message_center', '0001_initial'),
+        ("pgo_message_center", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='history',
-            name='user',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
+            model_name="history",
+            name="user",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
         migrations.AddField(
-            model_name='group',
-            name='user',
-            field=models.ManyToManyField(to=settings.AUTH_USER_MODEL, verbose_name='分组人员'),
+            model_name="group",
+            name="user",
+            field=models.ManyToManyField(
+                to=settings.AUTH_USER_MODEL, verbose_name="分组人员"
+            ),
         ),
     ]

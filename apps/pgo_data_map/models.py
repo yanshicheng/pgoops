@@ -20,8 +20,12 @@ class Classify(StandardModelMixin, AuthorModelMixin):
     alias = models.CharField(
         max_length=32, unique=True, verbose_name="别名", null=True, blank=True
     )
-    icon = models.ImageField(upload_to="data_map/icon/%Y/%m/%d/", default='data_map/icon/2021/08/19/pgoops.png', blank=True,
-                             null=True)
+    icon = models.ImageField(
+        upload_to="data_map/icon/%Y/%m/%d/",
+        default="data_map/icon/2021/08/19/pgoops.png",
+        blank=True,
+        null=True,
+    )
     record_log = models.BooleanField(default=False, verbose_name="是否记录日志")
     ban_bind = models.BooleanField(default=False, verbose_name="是否允许绑定")
     pid = models.ForeignKey(
@@ -35,6 +39,13 @@ class Classify(StandardModelMixin, AuthorModelMixin):
         db_table = "pgo_data_map_classify"
         verbose_name = "表分类"
         verbose_name_plural = verbose_name
+
+    def get_unique_fields(self):
+        fields_dic = self.fields.fields
+        for k, v in fields_dic.items():
+            if v["guid"] == True:
+                return k
+        return None
 
 
 class Fields(StandardModelMixin, AuthorModelMixin):
@@ -77,6 +88,20 @@ class Asset(StandardModelMixin, AuthorModelMixin):
         db_table = "pgo_data_map_asset"
         verbose_name = "表数据"
         verbose_name_plural = verbose_name
+
+    def get_unique_data(self):
+        try:
+            unique_field = self.classify.get_unique_fields()
+            return self.data[unique_field]
+        except Exception:
+            return None
+
+    def get_service_tree_env(self):
+        if hasattr(self, "link_asset") and self.link_asset:
+            key_list = self.link_asset.node_link.node.appkey.split(".")
+            return {"project": key_list[-2], "env": key_list[-1]}
+        else:
+            return {"project": "default", "env": "default"}
 
 
 class ClassifyBind(StandardModelMixin):

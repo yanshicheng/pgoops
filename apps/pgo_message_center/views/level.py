@@ -5,7 +5,7 @@ from ..serializers import LevelSerializers
 
 
 class LevelModelViewSet(StandardModelViewSet):
-    queryset = Level.objects.filter().order_by('-id')
+    queryset = Level.objects.filter().order_by("-id")
     serializer_class = LevelSerializers
     ordering_fields = ("-id",)
     filter_fields = ("name", "cname")

@@ -1,52 +1,46 @@
-[DEFAULT]
-mode = dev
-debug = false
-
 [pgoops]
+debug = true
 allowed_hosts = ['*']
 static_url = static/
-jwt_expiration_delta = 3600
+jwt_expiration_delta = 36000
 media_root = upload/
 iac_work_dir = iac
+consul_addr = 10.211.55.11
+consul_port = 8500
+consul_token =
+id_rsa_path = /root/.ssh/id_rsa
 
-
-[db.mysql.prod]
+[db.mysql]
 host = 127.0.0.1
 port = 3306
-name = pgoops
-user = pgoops
+name = pgoops1
+user = root
 password = 123456
 options = {"charset": "utf8mb4"}
 
-[db.mysql.dev]
-host = 127.0.0.1
-port = 3306
-name = pgoops
-user = pgoops
-password = 123456
-options = {"charset": "utf8mb4"}
-
-[db.redis.prod]
+[db.redis]
 host = 127.0.0.1
 port = 6379
 password = 123456
 
-[db.redis.dev]
-host = 127.0.0.1
-port = 6379
-password = 123456
+[monitoring]
+prometheus_url = http://10.211.55.11:9090
+grafana_url = http://10.211.55.11:3000
+alertmanager_url = http://10.211.55.11:9093
+grafana_node_uri = /d/aka/fu-wu-qi-xin-xi-mian-ban
+grafana_all_node_uri = /d/5E3gu5_nz/fu-wu-qi-fu-wu-qi-zi-yuan-zong-lan-biao
 
-[alert.provider.dingtok]
-webhook = https://oapi.dingtalk.com/robot/send?access_token=7cb703263bf4d1403dXXXXXXXXXX898d8ada713c87d85a8c0
-secret = SECbe53060bed5581c0db6b7f31304934XXXXXXXXX8fdce6ace1d8678
-
-[alert.provider.wechat]
-webhook = https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=6d446448-XXXXXXXdf38f21533c1
-
-[alert.provider.email]
-host = smtp.163.com
-port = 465
-msg_from = pgoops@163.com
-secret = WMEXXXXXXXVLPB
-title = pgoops
-domain_name = www.pgoops.com
+[alert.provider]
+dingtalk_webhook = https://oapi.dingtalk.com/robot/send?access_token=7cb703263b****************98d8ada713c87d85a8c0
+dingtalk_secret = SECbe53060bed558*********************dce6ace1d8678
+wechat_webhook = https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=6d4464*********************
+email_smtp_host = smtp.163.com
+email_smtp_port = 465
+email_msg_from = pgoops@163.com
+email_secret = *********************
+email_title = pgoops
+email_domain_name = www.pgoops.com
+lark_webhook = https://open.feishu.cn/open-apis/bot/v2/hook/fe85b*********************
+lark_secret = *********************
+lark_app_id = *********************
+lark_app_secret = *********************

@@ -6,13 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pgo_data_map', '0002_initial'),
+        ("pgo_data_map", "0002_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='classify',
-            name='icon',
-            field=models.ImageField(blank=True, default='cmdb/icon/2021/08/19/pgoops.png', null=True, upload_to='cmdb/icon/%Y/%m/%d/'),
+            model_name="classify",
+            name="icon",
+            field=models.ImageField(
+                blank=True,
+                default="cmdb/icon/2021/08/19/pgoops.png",
+                null=True,
+                upload_to="cmdb/icon/%Y/%m/%d/",
+            ),
         ),
     ]

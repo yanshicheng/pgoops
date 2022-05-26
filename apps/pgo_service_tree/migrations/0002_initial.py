@@ -10,53 +10,86 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('pgo_service_tree', '0001_initial'),
+        ("pgo_service_tree", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('pgo_data_map', '0002_initial'),
+        ("pgo_data_map", "0002_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='nodelinkoperapermission',
-            name='read_member',
-            field=models.ManyToManyField(blank=True, related_name='read_member', to=settings.AUTH_USER_MODEL, verbose_name='read 成员'),
+            model_name="nodelinkoperapermission",
+            name="read_member",
+            field=models.ManyToManyField(
+                blank=True,
+                related_name="read_member",
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="read 成员",
+            ),
         ),
         migrations.AddField(
-            model_name='nodelinkoperapermission',
-            name='write_member',
-            field=models.ManyToManyField(blank=True, related_name='write_member', to=settings.AUTH_USER_MODEL, verbose_name='write 成员'),
+            model_name="nodelinkoperapermission",
+            name="write_member",
+            field=models.ManyToManyField(
+                blank=True,
+                related_name="write_member",
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="write 成员",
+            ),
         ),
         migrations.AddField(
-            model_name='nodelinkclassify',
-            name='classify',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='link_classify', to='pgo_data_map.classify'),
+            model_name="nodelinkclassify",
+            name="classify",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="link_classify",
+                to="pgo_data_map.classify",
+            ),
         ),
         migrations.AddField(
-            model_name='nodelinkclassify',
-            name='node',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='pgo_service_tree.servicetree', verbose_name='节点'),
+            model_name="nodelinkclassify",
+            name="node",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to="pgo_service_tree.servicetree",
+                verbose_name="节点",
+            ),
         ),
         migrations.AddField(
-            model_name='nodelinkasset',
-            name='asset',
-            field=models.ForeignKey(blank=True, on_delete=django.db.models.deletion.CASCADE, related_name='link_asset', to='pgo_data_map.asset'),
+            model_name="nodelinkasset",
+            name="asset",
+            field=models.ForeignKey(
+                blank=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="link_asset",
+                to="pgo_data_map.asset",
+            ),
         ),
         migrations.AddField(
-            model_name='nodelinkasset',
-            name='node_link',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='pgo_service_tree.servicetree', verbose_name='关联表'),
+            model_name="nodelinkasset",
+            name="node_link",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to="pgo_service_tree.servicetree",
+                verbose_name="关联表",
+            ),
         ),
         migrations.AddField(
-            model_name='nodejointag',
-            name='node',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='pgo_service_tree.servicetree', verbose_name='节点'),
+            model_name="nodejointag",
+            name="node",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to="pgo_service_tree.servicetree",
+                verbose_name="节点",
+            ),
         ),
         migrations.AlterUniqueTogether(
-            name='nodelinkclassify',
-            unique_together={('node', 'classify')},
+            name="nodelinkclassify",
+            unique_together={("node", "classify")},
         ),
         migrations.AlterUniqueTogether(
-            name='nodelinkasset',
-            unique_together={('node_link', 'asset')},
+            name="nodelinkasset",
+            unique_together={("node_link", "asset")},
         ),
     ]

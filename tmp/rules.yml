@@ -1,0 +1,27 @@
+groups:
+- name: node
+  rules:
+  - alert: 主机离线
+    annotations: {description: 主机宕机时长超过十秒钟，请理解检查。, summary: '{{$labels.nodename}}
+        主机宕机!'}
+    expr: up == 0
+    for: 10s
+    labels: {severity: emergency}
+  - alert: 主机内存不足
+    annotations: {description: 主机内存使用率超过70%，持续超过五分钟。, summary: '{{$labels.nodename}}
+        主机内存不足。'}
+    expr: node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes * 100 < 80
+    for: 300s
+    labels: {severity: warning}
+- name: mysql
+  rules:
+  - alert: 测试规则
+    annotations: {description: '', summary: test}
+    expr: node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes * 100 < 20
+    for: 60s
+    labels: {severity: warning}
+  - alert: test2
+    annotations: {description: '', summary: test}
+    expr: node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes * 100 < 25
+    for: 60s
+    labels: {severity: warning}
