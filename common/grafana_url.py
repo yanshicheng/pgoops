@@ -27,7 +27,7 @@ def explain_url(
             url,
             dashboard_dic[ds],
         )
-        grafana_url = grafana_url + "?theme=light&kiosk=tv"
+        grafana_url = grafana_url + "?theme=light&kiosk=tv&to=now&refresh=5s&from=now-30m"
 
     try:
         status_req = requests.get(grafana_url, timeout=2)
