@@ -41,7 +41,7 @@ class ApplicationModelViewSet(StandardModelViewSet):
             instance.group.grafana_path, f"{s_d}:{instance.port}"
         )
         return api_ok_response(
-            {"url": grafana_url, "title": f"[{s_d}]  {instance.group.name}信息面板"}
+            {"url": grafana_url, "title": f"[{s_d}]  {instance.group.name}信息面板", 'status': ok,}
         )
 
     @action(methods=["post"], detail=False, url_path="consul")
@@ -58,5 +58,7 @@ class ApplicationModelViewSet(StandardModelViewSet):
         return api_ok_response(
             {
                 "url": grafana_url,
+                "status": ok,
+                'msg': grafana_url
             }
         )

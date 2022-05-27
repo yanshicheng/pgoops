@@ -23,7 +23,7 @@ class RulesModelViewSet(StandardModelViewSet):
     @action(methods=["post"], detail=False, url_path="execute")
     def execute(self, request, *args, **kwargs):
         query = request.data.get("query")
-        ok, result = PrometheusApi.execute(query=query)
+        result, ok = PrometheusApi.execute(query=query)
         if not ok:
-            return api_error_response(result)
+            return api_error_response(f'Prometheus连接查询失败，错误信息:{result}')
         return api_ok_response(data=result)

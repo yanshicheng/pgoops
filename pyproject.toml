@@ -36,7 +36,6 @@ python-consul2 = "^0.1.5"
 mmh3 = "^3.0.0"
 paramiko = "^2.11.0"
 "ruamel.yaml" = "^0.17.21"
-djangorestframework-simplejwt = "^5.2.0"
 
 [tool.poetry.dev-dependencies]
 black = "^22.3.0"

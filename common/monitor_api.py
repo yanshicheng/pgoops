@@ -17,8 +17,7 @@ class PrometheusApi:
         response = self.session.post(url, data=json.dumps({"query": query}))
         if response.status_code == 200:
             return (
-                True,
-                simplejson.loads(response.content.decode("utf-8"))["data"]["result"],
+                simplejson.loads(response.content.decode("utf-8"))["data"]["result"], True
             )
         else:
             return self.connect_error()
@@ -28,12 +27,12 @@ class PrometheusApi:
         url = f"{scheme}://{addr}:{port}/-/reload"
         response = cls().session.post(url)
         if response.status_code == 200:
-            return True, ""
+            return "", True
         else:
             return cls().connect_error()
 
     def connect_error(self):
-        return False, "连接Prometheus服务器错误，请在系统设置中进行修改。"
+        return "连接Prometheus服务器错误，请在系统设置中进行修改。", False
 
 
 PrometheusApi = PrometheusApi(ConfigDispose.get_value("monitoring", "prometheus_url"))

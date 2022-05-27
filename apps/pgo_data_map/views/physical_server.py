@@ -78,11 +78,11 @@ class PhysicalServerViewSet(StandardModelViewSet):
         s_d = instance.get_unique_data()
         grafana_url, ok = explain_url("physical_server")
         if not ok:
-            return api_error_response(grafana_url)
+            return api_error_response({"url": grafana_url, "title": f"[{s_d}]  主机信息面板", 'status': ok})
         if ipv4_addr_check(s_d):
             s_d = f"{s_d}:9100"
             url = f"{grafana_url}&var-instance={s_d}"
         else:
             url = f"{grafana_url}&var-nodename={s_d}"
 
-        return api_ok_response({"url": url, "title": f"[{s_d}]  主机信息面板"})
+        return api_ok_response({"url": url, "title": f"[{s_d}]  主机信息面板", 'status': ok})

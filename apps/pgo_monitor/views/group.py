@@ -82,9 +82,11 @@ class GroupModelViewSet(StandardModelViewSet):
             desc_path = node.get_rules_path()
             client.file_upload(config_path, desc_path)
             try:
-                PrometheusApi.reload(
+                res, ok = PrometheusApi.reload(
                     scheme=node.get_scheme_display(), addr=unique_name, port=node.port
                 )
+                if not ok:
+                    return api_error_response(f"prometheus 重启失败:{str(res)}")
             except Exception as e:
                 return api_error_response(f"prometheus 重启失败:{str(e)}")
         return api_ok_response("ok")
