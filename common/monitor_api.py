@@ -13,7 +13,7 @@ class PrometheusApi:
         self.session.headers = {"Content-Type": "application/json;charset=utf-8"}
 
     def execute(self, query):
-        url = f"{self.url}api/v1/query?query={query}"
+        url = f"{self.url}/api/v1/query?query={query}"
         response = self.session.post(url, data=json.dumps({"query": query}))
         if response.status_code == 200:
             return (
