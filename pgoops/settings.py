@@ -186,7 +186,7 @@ CORS_ALLOW_HEADERS = [
 
 REST_FRAMEWORK = {
     # 自定义异常
-    # "EXCEPTION_HANDLER": "common.exception.custom_exception_handler",
+    "EXCEPTION_HANDLER": "common.exception.custom_exception_handler",
     # 验证
     "DEFAULT_PERMISSION_CLASSES": (
         "rest_framework.permissions.IsAuthenticated",
@@ -301,10 +301,4 @@ CELERY_TASK_ROUTES = {
         "routing_key": "message_task",
     },
 }
-# celery -A django_celery_project worker -P eventlet -l info -n celery
 
-
-# celery -A pgoops worker -l info -n pgoops_celery_worker@%h
-
-
-# celery -A pgoops beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler
