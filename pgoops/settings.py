@@ -59,7 +59,6 @@ INSTALLED_APPS = [
     "channels",
     "rest_framework",
     'rest_framework_simplejwt',
-    "rest_framework_jwt",
     "django_filters",
     "corsheaders",
     "django_celery_beat",
@@ -187,7 +186,7 @@ CORS_ALLOW_HEADERS = [
 
 REST_FRAMEWORK = {
     # 自定义异常
-    # "EXCEPTION_HANDLER": "common.exception.custom_exception_handler",
+    "EXCEPTION_HANDLER": "common.exception.custom_exception_handler",
     # 验证
     "DEFAULT_PERMISSION_CLASSES": (
         "rest_framework.permissions.IsAuthenticated",
