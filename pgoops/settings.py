@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     # 第三方
     "channels",
     "rest_framework",
+    'rest_framework_simplejwt',
     "rest_framework_jwt",
     "django_filters",
     "corsheaders",
@@ -186,7 +187,7 @@ CORS_ALLOW_HEADERS = [
 
 REST_FRAMEWORK = {
     # 自定义异常
-    "EXCEPTION_HANDLER": "common.exception.custom_exception_handler",
+    # "EXCEPTION_HANDLER": "common.exception.custom_exception_handler",
     # 验证
     "DEFAULT_PERMISSION_CLASSES": (
         "rest_framework.permissions.IsAuthenticated",
@@ -194,10 +195,11 @@ REST_FRAMEWORK = {
     ),
     # JWT 全局认证
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework_jwt.authentication.JSONWebTokenAuthentication",
+        'common.jwt_auth.JWTAuthentication',
         "rest_framework.authentication.SessionAuthentication",
         "rest_framework.authentication.BasicAuthentication",
     ),
+
     "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.AutoSchema",
     # 自定义分页
     "DEFAULT_PAGINATION_CLASS": "common.pagination.StandardResultSetPagination",
@@ -208,13 +210,30 @@ REST_FRAMEWORK = {
     ),
     "DATETIME_FORMAT": "%Y-%m-%d %H:%M:%S",
 }
-JWT_AUTH = {
-    "JWT_AUTH_HEADER_PREFIX": "Bearer",
-    "JWT_EXPIRATION_DELTA": datetime.timedelta(
-        seconds=ConfigDispose.get_default("jwt_expiration_delta", "int")
+
+AUTHENTICATION_BACKENDS = (
+    "common.jwt_auth.CustomBackend",
+)
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(seconds=ConfigDispose.get_default("jwt_expiration_delta", "int")),
+    'REFRESH_TOKEN_LIFETIME': datetime.timedelta(seconds=ConfigDispose.get_default("jwt_expiration_delta", "int")),
+    "AUTHENTICATION_BACKENDS": (
+        "common.jwt_backend.CustomBackend",
     ),
-    "JWT_REFRESH_EXPIRATION_DELTA": datetime.timedelta(days=1),
-    "JWT_RESPONSE_PAYLOAD_HANDLER": "common.jwt_json_web_token.jwt_response_payload_handler",
+    'ROTATE_REFRESH_TOKENS': False,
+    'BLACKLIST_AFTER_ROTATION': True,
+
+    'ALGORITHM': 'HS256',
+    'SIGNING_KEY': SECRET_KEY,
+    'VERIFYING_KEY': None,
+    'AUDIENCE': None,
+    'ISSUER': None,
+
+    'AUTH_HEADER_TYPES': ('Bearer',),
+    'AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION',
+    'USER_ID_FIELD': 'id',
+    'USER_ID_CLAIM': 'user_id',
 }
 
 # 注意此处不要写成列表或元组的形式
@@ -257,6 +276,7 @@ CACHES = {
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "default"
 
+# channel redis
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
@@ -267,6 +287,7 @@ CHANNEL_LAYERS = {
         },
     },
 }
+
 # celery
 CELERY_BROKER_URL = f'redis://:{ConfigDispose.get_redis("password")}@{ConfigDispose.get_redis("host")}:{ConfigDispose.get_redis("port")}/2'
 CELERY_CACHE_BACKEND = "django-cache"
@@ -301,4 +322,3 @@ CELERY_TASK_ROUTES = {
         "routing_key": "message_task",
     },
 }
-

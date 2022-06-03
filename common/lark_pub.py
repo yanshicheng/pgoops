@@ -43,7 +43,6 @@ class LarkPub:
             )
             data = {"app_id": self.app_id, "app_secret": self.app_secret}
             response = self.session.post(tenant_url, data=simplejson.dumps(data)).json()
-            print("kkk", response)
             if response["code"] == 0:
                 tenant_access_token = response["tenant_access_token"]
                 cache.set("lark_tenant_access_token", tenant_access_token, timeout=7200)
@@ -68,17 +67,12 @@ class LarkPub:
         else:
             new_mobil_list = mobil_list
         if new_mobil_list:
-            print(new_mobil_list)
-            print(self.get_tenant_access_token())
             self.session.headers = {
                 "Content-Type": "application/json;charset=utf-8;",
                 "Authorization": f"Bearer {self.get_tenant_access_token()}",
             }
-            print(123)
             data = {"mobiles": new_mobil_list}
-            print(456)
             response = self.session.post(url, data=json.dumps(data)).json()
-            print(response)
             if response["code"] == 0:
                 for uid in response["data"]["user_list"]:
                     if "user_id" in uid:
@@ -159,7 +153,6 @@ class LarkPub:
                 },
             }
             response = self.session.post(self.webhook, data=json.dumps(data)).json()
-            print(response)
             if "StatusCode" in response and response["StatusCode"] == 0:
                 return True, "消息已发送"
             else:

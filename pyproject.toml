@@ -10,7 +10,6 @@ license = "MIT"
 [tool.poetry.dependencies]
 python = "^3.10"
 django = "^3.2.13"
-djangorestframework-jwt = "^1.11.0"
 djangorestframework = "^3.13.1"
 django-filter = "^21.1"
 casbin = "^1.15.4"
@@ -36,6 +35,8 @@ python-consul2 = "^0.1.5"
 mmh3 = "^3.0.0"
 paramiko = "^2.11.0"
 "ruamel.yaml" = "^0.17.21"
+pycryptodome = "^3.14.1"
+djangorestframework-simplejwt = "^5.2.0"
 
 [tool.poetry.dev-dependencies]
 black = "^22.3.0"

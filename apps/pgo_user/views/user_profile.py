@@ -1,6 +1,8 @@
 from django.contrib import auth
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from rest_framework.decorators import action
+
+from common.jwt_auth import MyTokenSerializer
 from common.viewsets import StandardModelViewSet
 from common.views import StandardOpenApiView, StandardApiView
 from common.response import api_ok_response, api_error_response
@@ -104,3 +106,21 @@ class UserLogoutApiView(StandardOpenApiView):
 
     def post(self, request, *args, **kwargs):
         return api_ok_response(data="ok")
+
+from rest_framework_simplejwt.views import TokenViewBase
+# 自定义的登陆视图
+class UserLogIntApiView(TokenViewBase):
+    serializer_class = MyTokenSerializer  # 使用刚刚编写的序列化类
+    authentication_classes = []
+    permission_classes = []
+
+    # post方法对应post请求，登陆时post请求在这里处理
+    def post(self, request, *args, **kwargs):
+        # 使用刚刚编写时序列化处理登陆验证及数据响应
+        serializer = self.get_serializer(data=request.data)
+        try:
+            serializer.is_valid(raise_exception=True)
+        except Exception as e:
+            return api_error_response(str(e))
+
+        return api_ok_response(serializer.validated_data)

@@ -52,7 +52,6 @@ def grafana_proxy(request, url, requests_args=None):
     proxy_response.headers["X-Frame-Options"] = "sameorigin"
     if auth:
         proxy_response.headers["AUTHORIZATION"] = auth
-    print(proxy_response.headers)
 
     for key, value in response.headers.items():
         if key.lower() in excluded_headers:
