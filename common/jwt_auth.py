@@ -28,14 +28,14 @@ class CustomBackend(ModelBackend):
                 try:
                     user = get_user_model().objects.get(Q(username=username) | Q(email=username))
                 except Exception as e:
-                    raise ValueError(f'用户或密码错误: {username}')
+                    raise serializers.ValidationError(f'用户或密码错误,请检查后重新登陆！')
 
                 if user.check_password(password):
                     return user
                 else:
                     # 如果不想密码登录也可以验证码在这里写
                     # 这里做验证码的操作
-                    raise serializers.ValidationError(f'用户或密码错误: {username}')
+                    raise serializers.ValidationError(f'用户或密码错误,请检查后重新登陆！')
             else:
                 # ldap 方式登陆
                 pass
